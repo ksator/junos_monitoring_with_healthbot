@@ -1,0 +1,19 @@
+{
+    "authentication": {
+        "password": {
+            "password": "Embe1mpls",
+            "username": "root"
+        }
+    },
+    "description": "vmx104",
+    "device-id": "vmx104",
+    "host": "10.49.126.56",
+    "iAgent": {
+        "port": 830
+    },
+    "open-config": {
+        "port": 32768
+    },
+    "system-id": "vmx104"
+}
+
