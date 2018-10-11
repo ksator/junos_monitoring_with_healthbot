@@ -3,6 +3,7 @@ server: "10.49.126.46"
 authuser: "Embe1mpls"
 authpwd: "Embe1mpls"
 
+# network devices details
 devices_list: 
     - name: vmx101
       ip: 10.49.126.63
