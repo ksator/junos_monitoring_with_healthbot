@@ -14,6 +14,7 @@
 # This block indicates the various imports
 ###################################################
 
+import os
 import json
 import yaml
 import requests
@@ -33,12 +34,16 @@ def import_variables_from_file():
     my_variables_file.close()
     return my_variables_in_yaml
 
+def create_directory(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
 def generate_healthbot_configuration_for_new_device():
     f=open('devices.j2')
     my_template = Template(f.read())
     f.close()
     for dev in my_variables_in_yaml['devices_list']: 
-        f=open('device_' + dev["name"],'w')
+        f=open('devices/device_' + dev["name"],'w')
         f.write(my_template.render(dev))
         f.close()
         print 'generated healthbot configuration for device_' + dev["name"]
@@ -103,10 +108,12 @@ get_devices_name_in_running_configuration()
 
 print "adding devices to healthbot"
 
+create_directory("devices")
+
 generate_healthbot_configuration_for_new_device()
 
 for dev in my_variables_in_yaml['devices_list']:
-    payload_file = open('device_' + dev["name"], 'r')
+    payload_file = open('devices/device_' + dev["name"], 'r')
     payload = payload_file.read()
     payload_file.close()
     add_device(dev)
