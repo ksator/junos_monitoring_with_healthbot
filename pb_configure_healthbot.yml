@@ -1,0 +1,31 @@
+---
+
+ - name: make rest calls to healthbot
+   hosts: server
+   gather_facts: no
+
+   tasks: 
+
+    - name: create device directory
+      local_action:
+       module: file
+       path: "{{playbook_dir}}/devices"
+       state: directory
+
+    - name: make rest call to healthbot
+      local_action:
+       module: uri
+       url: "https://{{ansible_host}}:8080/api/v1/device/{{item}}/"
+       method: POST
+       user: "{{ authuser }}"
+       password: "{{ authpwd }}"
+       HEADER_Content-Type: "application/json"
+       HEADER_Accept: "application/json"
+       force_basic_auth: yes
+       validate_certs: no
+       body: "{{ lookup('file','{{playbook_dir}}/devices/device_' + item) }}"
+       body_format: json
+      with_items: 
+       - vmx105
+       - vmx104
+
