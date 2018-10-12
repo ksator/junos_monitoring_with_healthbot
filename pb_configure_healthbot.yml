@@ -16,40 +16,37 @@
          - render 
          - output
 
- - name: render healthbot configuration for devices
+ - name: render healthbot configuration for devices, and update healthbot candidate configuration
    hosts: junos_devices
    gather_facts: no
    
    tasks: 
       
-     - name: render
+     - name: render healthbot configuration for devices
        local_action:
         module: template
         src: "{{playbook_dir}}/templates/devices.j2" 
-        dest: "{{playbook_dir}}/render/device_{{ name }}"
+        dest: "{{playbook_dir}}/render/device_{{ name }}" 
 
- - name: make rest calls to healthbot to add devices
+     - name: make rest calls to healthbot to add devices
+       local_action:
+        module: uri
+        url: "https://{{ hostvars['healthbot_server']['ansible_host'] }}:8080/api/v1/device/{{name}}/"
+        method: POST
+        user: "{{ hostvars['healthbot_server']['authuser'] }}"
+        password: "{{ hostvars['healthbot_server']['authpwd'] }}"
+        HEADER_Content-Type: "application/json"
+        HEADER_Accept: "application/json"
+        force_basic_auth: yes
+        validate_certs: no
+        body: "{{ lookup('file','{{playbook_dir}}/render/device_{{name}}') }}"
+        body_format: json
+
+ - name: commit candidate configuration and verify running configuration
    hosts: healthbot_server
    gather_facts: no
    
-   tasks: 
-
-    - name: make rest calls to healthbot to add devices
-      local_action:
-       module: uri
-       url: "https://{{ansible_host}}:8080/api/v1/device/{{item}}/"
-       method: POST
-       user: "{{ authuser }}"
-       password: "{{ authpwd }}"
-       HEADER_Content-Type: "application/json"
-       HEADER_Accept: "application/json"
-       force_basic_auth: yes
-       validate_certs: no
-       body: "{{ lookup('file','{{playbook_dir}}/render/device_' + item) }}"
-       body_format: json
-      with_items: 
-       - vmx105
-       - vmx104
+   tasks:
 
     - name: make rest call to healthbot to commit configuration
       local_action:

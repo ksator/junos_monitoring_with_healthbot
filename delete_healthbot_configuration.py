@@ -40,7 +40,7 @@ def get_devices_name_in_running_configuration():
     r = requests.get(url + '/device/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     print "here's the list of devices in the running configuration"
     pprint(r.json())
-    return r.status_code
+    return r.json()
 
 def get_devices_details_in_running_configuration():
     r = requests.get(url + '/devices/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
@@ -66,8 +66,8 @@ def commit():
     return r.status_code
 
 def delete_device(dev):
-    r = requests.delete(url + '/device/' + dev['name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
-    print 'deleted the healthbot configuration for device_' + dev["name"]
+    r = requests.delete(url + '/device/' + dev + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    print 'deleted the healthbot configuration for device_' + dev
     return r.status_code
 
 ######################################################
@@ -87,11 +87,11 @@ headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 # This block is to remove devices from healthbot
 ######################################################
 
-get_devices_name_in_running_configuration()
+devices_name_in_running_configuration = get_devices_name_in_running_configuration()
 
 print "removing devices from healthbot"
 
-for dev in my_variables_in_yaml['devices_list']: 
+for dev in devices_name_in_running_configuration:
     delete_device(dev)
 
 get_devices_name_in_candidate_configuration()
