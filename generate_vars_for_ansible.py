@@ -14,7 +14,7 @@ def create_directory(directory):
         os.makedirs(directory)
 
 def generate_junos_vars_for_ansible():
-    f=open('devices_yml.j2')
+    f=open('templates/devices_yml.j2')
     my_template = Template(f.read())
     f.close()
     for dev in my_variables_in_yaml['devices_list']:
@@ -24,7 +24,7 @@ def generate_junos_vars_for_ansible():
     return('done')
 
 def generate_healthbot_vars_for_ansible():
-    f=open('healthbot_server_yml.j2')
+    f=open('templates/healthbot_server_yml.j2')
     my_template = Template(f.read())
     f.close()
     f=open('host_vars/healthbot_server/generated_vars.yml','w')
@@ -34,9 +34,8 @@ def generate_healthbot_vars_for_ansible():
 
 my_variables_in_yaml=import_variables_from_file()
 
-create_directory("host_vars")
-
-create_directory("host_vars/healthbot_server")
+for item in ["host_vars", "host_vars/healthbot_server"]: 
+    create_directory(item)
 
 for dev in my_variables_in_yaml['devices_list']:
     create_directory("host_vars/" + dev["name"])
@@ -44,5 +43,6 @@ for dev in my_variables_in_yaml['devices_list']:
 generate_junos_vars_for_ansible()
 
 generate_healthbot_vars_for_ansible()
+
 
 

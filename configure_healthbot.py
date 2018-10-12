@@ -41,11 +41,11 @@ def create_directory(directory):
         os.makedirs(directory)
 
 def generate_healthbot_configuration_for_new_device():
-    f=open('devices.j2')
+    f=open('templates/devices.j2')
     my_template = Template(f.read())
     f.close()
     for dev in my_variables_in_yaml['devices_list']: 
-        f=open('devices/device_' + dev["name"],'w')
+        f=open('render/device_' + dev["name"],'w')
         f.write(my_template.render(dev))
         f.close()
         print 'generated healthbot configuration for device_' + dev["name"]
@@ -106,12 +106,13 @@ get_devices_name_in_running_configuration()
 
 print "adding devices to healthbot"
 
-create_directory("devices")
+for item in ["render"]:
+    create_directory(item)
 
 generate_healthbot_configuration_for_new_device()
 
 for dev in my_variables_in_yaml['devices_list']:
-    payload_file = open('devices/device_' + dev["name"], 'r')
+    payload_file = open('render/device_' + dev["name"], 'r')
     payload = payload_file.read()
     payload_file.close()
     add_device(dev)

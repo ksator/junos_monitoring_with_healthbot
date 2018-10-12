@@ -1,38 +1,16 @@
 ---
 
- - name: create directories on your laptop
+ - name: make rest calls to healthbot
    hosts: healthbot_server
    gather_facts: no
 
    tasks: 
 
-    - name: create directories on your laptop
+    - name: create device directory on your laptop
       local_action:
        module: file
-       path: "{{playbook_dir}}/{{item}}"
+       path: "{{playbook_dir}}/devices"
        state: directory
-      with_items: 
-         - devices
-         - render 
-         - output
-
- - name: render healthbot configuration for devices
-   hosts: junos_devices
-   gather_facts: no
-   
-   tasks: 
-      
-     - name: render
-       local_action:
-        module: template
-        src: "{{playbook_dir}}/templates/devices.j2" 
-        dest: "{{playbook_dir}}/render/device_{{ name }}"
-
- - name: make rest calls to healthbot to add devices
-   hosts: healthbot_server
-   gather_facts: no
-   
-   tasks: 
 
     - name: make rest calls to healthbot to add devices
       local_action:
@@ -45,7 +23,7 @@
        HEADER_Accept: "application/json"
        force_basic_auth: yes
        validate_certs: no
-       body: "{{ lookup('file','{{playbook_dir}}/render/device_' + item) }}"
+       body: "{{ lookup('file','{{playbook_dir}}/devices/device_' + item) }}"
        body_format: json
       with_items: 
        - vmx105
@@ -73,7 +51,7 @@
        HEADER_Accept: "application/json"
        force_basic_auth: yes
        validate_certs: no
-       dest: "{{playbook_dir}}/output/healthbot_running_config_for_devices.json"
+       dest: "{{playbook_dir}}/devices/healthbot_running_config_for_devices.json"
 
 
 

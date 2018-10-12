@@ -5,15 +5,16 @@
             "username": "root"
         }
     },
-    "description": "vmx102",
-    "device-id": "vmx102",
-    "host": "10.49.126.61",
+    "description": "vmx106",
+    "device-id": "vmx106",
+    "host": "10.49.126.52",
     "iAgent": {
         "port": 830
     },
     "open-config": {
         "port": 32768
     },
-    "system-id": "vmx102"
+    "system-id": "vmx106"
 }
+
 

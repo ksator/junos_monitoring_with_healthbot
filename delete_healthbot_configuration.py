@@ -36,22 +36,6 @@ def import_variables_from_file():
     my_variables_file.close()
     return my_variables_in_yaml
 
-def create_directory(directory):
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-def generate_healthbot_configuration_for_new_device():
-    f=open('devices.j2')
-    my_template = Template(f.read())
-    f.close()
-    for dev in my_variables_in_yaml['devices_list']: 
-        f=open('devices/device_' + dev["name"],'w')
-        f.write(my_template.render(dev))
-        f.close()
-        print 'generated healthbot configuration for device_' + dev["name"]
-    return('done')
-
-
 def get_devices_name_in_running_configuration():
     r = requests.get(url + '/device/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     print "here's the list of devices in the running configuration"

@@ -1,4 +1,8 @@
 [healthbot]
 healthbot_server 
 
+[junos_devices]
+vmx10[1:7]
+
+
 
