@@ -1,7 +1,7 @@
 ---
 
  - name: make rest calls to healthbot
-   hosts: server
+   hosts: healthbot_server
    gather_facts: no
 
    tasks: 
