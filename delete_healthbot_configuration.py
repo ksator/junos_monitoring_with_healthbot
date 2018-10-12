@@ -9,7 +9,7 @@
 ###################################################
 # usage:
 # vi variable.yml
-# python ./delete_heathbot_configuration
+# python ./delete_healthbot_configuration
 ###################################################
 
 ###################################################
