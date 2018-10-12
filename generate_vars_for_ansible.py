@@ -1,0 +1,48 @@
+import os
+import yaml
+from jinja2 import Template
+
+def import_variables_from_file():
+    my_variables_file=open('variables.yml', 'r')
+    my_variables_in_string=my_variables_file.read()
+    my_variables_in_yaml=yaml.load(my_variables_in_string)
+    my_variables_file.close()
+    return my_variables_in_yaml
+
+def create_directory(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+def generate_junos_vars_for_ansible():
+    f=open('devices_yml.j2')
+    my_template = Template(f.read())
+    f.close()
+    for dev in my_variables_in_yaml['devices_list']:
+        f=open('host_vars/' + dev["name"] + '/generated_vars.yml','w')
+        f.write(my_template.render(dev))
+        f.close()
+    return('done')
+
+def generate_healthbot_vars_for_ansible():
+    f=open('healthbot_server_yml.j2')
+    my_template = Template(f.read())
+    f.close()
+    f=open('host_vars/healthbot_server/generated_vars.yml','w')
+    f.write(my_template.render(ansible_host = my_variables_in_yaml['server'], authuser = my_variables_in_yaml['authuser'], authpwd = my_variables_in_yaml['authpwd']))
+    f.close()
+    return('done')
+
+my_variables_in_yaml=import_variables_from_file()
+
+create_directory("host_vars")
+
+create_directory("host_vars/healthbot_server")
+
+for dev in my_variables_in_yaml['devices_list']:
+    create_directory("host_vars/" + dev["name"])
+
+generate_junos_vars_for_ansible()
+
+generate_healthbot_vars_for_ansible()
+
+

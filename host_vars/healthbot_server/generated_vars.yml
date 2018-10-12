@@ -1,0 +1,4 @@
+---
+ansible_host: 10.49.126.46 
+authuser: Embe1mpls 
+authpwd: Embe1mpls

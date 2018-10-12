@@ -1,0 +1,7 @@
+---
+name: vmx105
+ip: 10.49.126.54
+username: root 
+password: Embe1mpls
+openconfig_port: 32768
+netconf_port: 830
