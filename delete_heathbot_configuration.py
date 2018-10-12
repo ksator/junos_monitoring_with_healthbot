@@ -1,5 +1,5 @@
 ###################################################
-# Workflow: create devices, create topics, create rules, create playbooks, create notitications, create device-groups
+# Workflow: delete devices
 ###################################################
 
 ###################################################
@@ -7,9 +7,9 @@
 ###################################################
 
 ###################################################
-# usage: 
-# vi variables.yml
-# python ./configure_healthbot.py
+# usage:
+# vi variable.yml
+# python ./delete_heathbot_configuration
 ###################################################
 
 ###################################################
@@ -51,10 +51,6 @@ def generate_healthbot_configuration_for_new_device():
         print 'generated healthbot configuration for device_' + dev["name"]
     return('done')
 
-def add_device(dev):
-    r = requests.post(url + '/device/' + dev["name"] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
-    print 'loaded the healthbot configuration for device_' + dev["name"]
-    return r.status_code
 
 def get_devices_name_in_running_configuration():
     r = requests.get(url + '/device/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
@@ -85,6 +81,10 @@ def commit():
     print 'healthbot configuration commited'
     return r.status_code
 
+def delete_device(dev):
+    r = requests.delete(url + '/device/' + dev['name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    print 'deleted the healthbot configuration for device_' + dev["name"]
+    return r.status_code
 
 ######################################################
 # Below blocks are REST calls to configure healthbot
@@ -98,30 +98,21 @@ authpwd = my_variables_in_yaml['authpwd']
 url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
+
 ######################################################
-# This block is to add devices to helathbot
+# This block is to remove devices from healthbot
 ######################################################
 
 get_devices_name_in_running_configuration()
 
-print "adding devices to healthbot"
+print "removing devices from healthbot"
 
-create_directory("devices")
-
-generate_healthbot_configuration_for_new_device()
-
-for dev in my_variables_in_yaml['devices_list']:
-    payload_file = open('devices/device_' + dev["name"], 'r')
-    payload = payload_file.read()
-    payload_file.close()
-    add_device(dev)
+for dev in my_variables_in_yaml['devices_list']: 
+    delete_device(dev)
 
 get_devices_name_in_candidate_configuration()
 
 commit()
 
 get_devices_name_in_running_configuration()
-
-#get_devices_details_in_running_configuration()
-
 
