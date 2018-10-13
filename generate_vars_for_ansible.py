@@ -1,3 +1,9 @@
+#############################################
+# usage: 
+# vi variables.yml
+# python ./generate_vars_for_ansible.py
+#############################################
+
 import os
 import yaml
 from jinja2 import Template
