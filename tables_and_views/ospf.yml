@@ -1,0 +1,16 @@
+---
+OspfNeighborTable:
+  rpc: get-ospf-neighbor-information
+  args:
+    extensive: True
+  item: ospf-neighbor
+  key:
+    - neighbor-address
+  view: OspfNeighborView
+
+OspfNeighborView:
+  fields:
+    ospf_neighbor_state: ospf-neighbor-state
+    neighbor_address: neighbor-address
+    interface_name: interface-name
+    

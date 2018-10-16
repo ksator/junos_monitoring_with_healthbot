@@ -1,5 +1,5 @@
 ###################################################
-# Workflow: create devices, create topics, create rules, create playbooks, create notitications, create device-groups
+# Workflow: create devices, add tables and views, create topics, create rules, create playbooks, create notitications, create device-groups
 ###################################################
 
 ###################################################
@@ -85,6 +85,33 @@ def commit():
     print 'healthbot configuration commited'
     return r.status_code
 
+def get_tables_and_views(table):
+    files = {'up_file': open('tables_and_views/' + table,'r')}
+    r=requests.get(url + '/files/helper-files/' + table, auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json', 'Content-Type': 'multipart/form-data' }, verify=False)
+    print r.content
+    return r.status_code
+
+def add_tables_and_views(table):
+    files = {'up_file': open('tables_and_views/' + table,'r')}
+    r=requests.post(url + '/files/helper-files/' + table, auth=HTTPBasicAuth('admin', 'Embe1mpls'), headers={ 'Accept' : 'application/json' }, verify=False, files=files)
+    print "added table " + table 
+    return r.status_code
+
+#def add_device_group(group):
+#    r = requests.post(url + '/device-group/' + group + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+#    print 'loaded the healthbot device group ' + group['name']
+#    return r.status_code
+
+def get_device_group(group):
+    r = requests.get(url + '/device-group/'+ group + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    pprint (r.json())
+    return r.status_code
+
+def get_device_groups():
+    r = requests.get(url + '/device-group/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    pprint (r.json())
+    return r.status_code
+
 
 ######################################################
 # Below blocks are REST calls to configure healthbot
@@ -123,6 +150,12 @@ commit()
 
 get_devices_name_in_running_configuration()
 
-#get_devices_details_in_running_configuration()
+get_devices_details_in_running_configuration()
 
+for item in my_variables_in_yaml['tables_and_views']:
+    add_tables_and_views(item)
+    get_tables_and_views(item)
+
+#for group in my_variables_in_yaml['device_groups']:
+#    add_device_group(dev)
 

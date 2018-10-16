@@ -3,6 +3,11 @@ server: "10.49.102.129"
 authuser: "admin"
 authpwd: "Embe1mpls"
 
+# tables and views to load on healthbot (from tables_adn_views directory)
+tables_and_views: 
+    - bgp.yml
+    - ospf.yml
+
 # network devices details
 devices_list: 
     - name: vmx101
@@ -47,3 +52,23 @@ devices_list:
       password: "Embe1mpls"
       openconfig_port: 32768
       netconf_port: 830
+
+# device groups details
+# device_groups:
+#    - device-group-name: group1
+#      devices: 
+#          - vmx101 
+#          - vmx102
+#      playbooks: 
+#          - bgp
+#      variable: 
+#    - device-group-name: group2 
+#      devices: 
+#          - vmx103
+#          - vmx104 
+#      playbooks: 
+#          - bgp 
+#      variable:
+
+
+
