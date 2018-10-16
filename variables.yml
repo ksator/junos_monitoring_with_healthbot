@@ -54,21 +54,19 @@ devices_list:
       netconf_port: 830
 
 # device groups details
-# device_groups:
-#    - device-group-name: group1
-#      devices: 
-#          - vmx101 
-#          - vmx102
-#      playbooks: 
-#          - bgp
-#      variable: 
-#    - device-group-name: group2 
-#      devices: 
-#          - vmx103
-#          - vmx104 
-#      playbooks: 
-#          - bgp 
-#      variable:
+device_groups:
+    - description: Group1
+      device-group-name: Group1
+      devices: 
+           - vmx101
+           - vmx102
+    - description: Group2
+      device-group-name: Group2
+      devices:
+           - vmx103
+           - vmx104
+
+
 
 
 

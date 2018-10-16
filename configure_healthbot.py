@@ -93,14 +93,14 @@ def get_tables_and_views(table):
 
 def add_tables_and_views(table):
     files = {'up_file': open('tables_and_views/' + table,'r')}
-    r=requests.post(url + '/files/helper-files/' + table, auth=HTTPBasicAuth('admin', 'Embe1mpls'), headers={ 'Accept' : 'application/json' }, verify=False, files=files)
+    r=requests.post(url + '/files/helper-files/' + table, auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json' }, verify=False, files=files)
     print "added table " + table 
     return r.status_code
 
-#def add_device_group(group):
-#    r = requests.post(url + '/device-group/' + group + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
-#    print 'loaded the healthbot device group ' + group['name']
-#    return r.status_code
+def add_device_group(group):
+    r = requests.post(url + '/device-group/' + group + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+    print 'loaded the healthbot device group ' + group
+    return r.status_code
 
 def get_device_group(group):
     r = requests.get(url + '/device-group/'+ group + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
@@ -126,7 +126,7 @@ url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
 ######################################################
-# This block is to add devices to helathbot
+# This block is to add devices to healthbot
 ######################################################
 
 get_devices_name_in_running_configuration()
@@ -150,12 +150,31 @@ commit()
 
 get_devices_name_in_running_configuration()
 
-get_devices_details_in_running_configuration()
+# get_devices_details_in_running_configuration()
+
+######################################################
+# This block is to add tables (tables and views) to healthbot
+######################################################
 
 for item in my_variables_in_yaml['tables_and_views']:
     add_tables_and_views(item)
     get_tables_and_views(item)
 
-#for group in my_variables_in_yaml['device_groups']:
-#    add_device_group(dev)
+######################################################
+# This block is to add device groups to healtbot
+######################################################
+
+get_device_groups()
+
+for item in my_variables_in_yaml['device_groups']: 
+    payload=json.dumps(item)
+    add_device_group(item['device-group-name'])
+
+commit()
+
+for item in my_variables_in_yaml['device_groups']:
+    payload=json.dumps(item)
+    get_device_group(item['device-group-name'])
+
+get_device_groups()
 
