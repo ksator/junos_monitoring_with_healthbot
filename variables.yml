@@ -60,6 +60,11 @@ device_groups:
       devices: 
            - vmx101
            - vmx102
+           - vmx103
+           - vmx104
+           - vmx105
+           - vmx106
+           - vmx107
     - description: Group2
       device-group-name: Group2
       devices:
