@@ -65,6 +65,14 @@ device_groups:
            - vmx105
            - vmx106
            - vmx107
+      playbooks: 
+           - ast
+      notification: 
+          major: 
+              - heathbot_to_saltstack
+              - another_notification 
+          minor: 
+              - another_notification
     - description: Group2
       device-group-name: Group2
       devices:
@@ -77,8 +85,8 @@ notifications:
       description: "heathbot to saltstack webhook notifications"
       http-post:
           url: http://10.49.102.129:5001/healthbot
-    - notification-name: heathbot_to_saltstack2
-      description: "heathbot to saltstack webhook notifications"
+    - notification-name: another_notification
+      description: another_notification
       http-post:
           url: http://10.49.102.129:5001/healthbot
 

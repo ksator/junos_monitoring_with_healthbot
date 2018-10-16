@@ -1,5 +1,5 @@
 ###################################################
-# Workflow: delete device groups, delete devices
+# Workflow: delete device groups, delete notifications, delete devices
 ###################################################
 
 ###################################################
@@ -8,7 +8,6 @@
 
 ###################################################
 # usage:
-# vi variable.yml
 # python ./delete_healthbot_configuration
 ###################################################
 
@@ -92,6 +91,12 @@ def delete_notification(notification):
     return r.status_code
 
 
+def delete_table(table):
+    r = requests.delete(url + '/files/helper-files/' + table + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    return r.status_code
+
+
+
 ######################################################
 # Below blocks are REST calls to configure healthbot
 ######################################################
@@ -105,8 +110,20 @@ url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
 
+
 ######################################################
-# This block is to remove device groups from healthbot
+# This block is to remove your own tables and views from healthbot
+######################################################
+
+print '########### Removing your tables and views  ############'
+
+for item in my_variables_in_yaml['tables_and_views']:
+     print "removing table " + item
+     delete_table(item)
+
+
+######################################################
+# This block is to remove all device groups from healthbot
 ######################################################
 
 print '########### Removing device groups  ############'
@@ -125,7 +142,7 @@ get_device_groups()
 
 
 ######################################################
-# This block is to remove notifications from healthbot
+# This block is to remove all notifications from healthbot
 ######################################################
 
 print '###########  Removing notifications  ############'
@@ -143,7 +160,7 @@ get_notifications()
 
 
 ######################################################
-# This block is to remove devices from healthbot
+# This block is to remove all devices from healthbot
 ######################################################
 
 print '###########  Removing devices  ############'
