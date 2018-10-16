@@ -1,48 +1,48 @@
 # healtbot host and credentials 
-server: "10.49.126.46"
-authuser: "Embe1mpls"
+server: "10.49.102.129"
+authuser: "admin"
 authpwd: "Embe1mpls"
 
 # network devices details
 devices_list: 
     - name: vmx101
-      ip: 10.49.126.63
+      ip: 10.49.102.160
       username: "root"
       password: "Embe1mpls"
       openconfig_port: 32768
       netconf_port: 830
     - name: vmx102
-      ip: 10.49.126.61
+      ip: 10.49.102.157
       username: "root"
       password: "Embe1mpls"
       openconfig_port: 32768
       netconf_port: 830
     - name: vmx103
-      ip: 10.49.126.6
+      ip: 10.49.102.151
       username: "root"
       password: "Embe1mpls"
       openconfig_port: 32768
       netconf_port: 830
     - name: vmx104
-      ip: 10.49.126.56
+      ip: 10.49.102.148
       username: "root"
       password: "Embe1mpls"
       openconfig_port: 32768
       netconf_port: 830
     - name: vmx105
-      ip: 10.49.126.54
+      ip: 10.49.102.142
       username: "root"
       password: "Embe1mpls"
       openconfig_port: 32768
       netconf_port: 830
     - name: vmx106
-      ip: 10.49.126.52
+      ip: 10.49.102.140
       username: "root"
       password: "Embe1mpls"
       openconfig_port: 32768
       netconf_port: 830
     - name: vmx107
-      ip: 10.49.126.50
+      ip: 10.49.102.136
       username: "root"
       password: "Embe1mpls"
       openconfig_port: 32768

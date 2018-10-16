@@ -7,7 +7,7 @@
     },
     "description": "vmx106",
     "device-id": "vmx106",
-    "host": "10.49.126.52",
+    "host": "10.49.102.140",
     "iAgent": {
         "port": 830
     },
