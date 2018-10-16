@@ -80,6 +80,17 @@ def delete_device_group(group):
     r = requests.delete(url + '/device-group/'+ group + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     return r.status_code
 
+def get_notifications():
+    r = requests.get(url + '/notification/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    print "here's the notifications in the ruuning configuration "
+    pprint (r.json())
+    return (r.json())
+
+
+def delete_notification(notification):
+    r = requests.delete(url + '/notification/' + notification + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    return r.status_code
+
 
 ######################################################
 # Below blocks are REST calls to configure healthbot
@@ -98,6 +109,8 @@ headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 # This block is to remove device groups from healthbot
 ######################################################
 
+print '########### Removing device groups  ############'
+
 
 device_group_in_running_configuration = get_device_groups()
 
@@ -110,11 +123,31 @@ commit ()
 
 get_device_groups()
 
-print "#########################################"
+
+######################################################
+# This block is to remove notifications from healthbot
+######################################################
+
+print '###########  Removing notifications  ############'
+
+
+notifications_in_running_configuration = get_notifications()
+
+for item in notifications_in_running_configuration: 
+    delete_notification(item)
+
+commit()
+
+get_notifications()
+
+
 
 ######################################################
 # This block is to remove devices from healthbot
 ######################################################
+
+print '###########  Removing devices  ############'
+
 
 devices_name_in_running_configuration = get_devices_name_in_running_configuration()
 

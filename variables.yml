@@ -71,6 +71,24 @@ device_groups:
            - vmx103
            - vmx104
 
+# notifications
+notifications: 
+    - notification-name: heathbot_to_saltstack
+      description: "heathbot to saltstack webhook notifications"
+      http-post:
+          url: http://10.49.102.129:5001/healthbot
+    - notification-name: heathbot_to_saltstack2
+      description: "heathbot to saltstack webhook notifications"
+      http-post:
+          url: http://10.49.102.129:5001/healthbot
+
+
+
+
+
+
+
+   
 
 
 

@@ -1,5 +1,5 @@
 ###################################################
-# Workflow: create devices, add tables and views, create topics, create rules, create playbooks, create notitications, create device-groups
+# Workflow: create devices, add tables and views, add notifications, create topics, create rules, create playbooks, create device-groups
 ###################################################
 
 ###################################################
@@ -112,6 +112,16 @@ def get_device_groups():
     pprint (r.json())
     return r.status_code
 
+def add_notification(notification):
+    r = requests.post(url + '/notification/' + notification + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+    print 'loaded the healthbot notification ' + notification
+    return r.status_code
+
+def get_notifications():
+    r = requests.get(url + '/notification/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    pprint (r.json())
+    return r.status_code
+
 
 ######################################################
 # Below blocks are REST calls to configure healthbot
@@ -125,9 +135,14 @@ authpwd = my_variables_in_yaml['authpwd']
 url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
+
+
 ######################################################
 # This block is to add devices to healthbot
 ######################################################
+
+print '###########  Adding devices  ############'
+
 
 get_devices_name_in_running_configuration()
 
@@ -152,23 +167,44 @@ get_devices_name_in_running_configuration()
 
 # get_devices_details_in_running_configuration()
 
-print '##############################'
 
 ######################################################
 # This block is to add tables (tables and views) to healthbot
 ######################################################
 
+print '###########  Adding tables and views  ############'
+
+
 for item in my_variables_in_yaml['tables_and_views']:
     add_tables_and_views(item)
     get_tables_and_views(item)
 
-print '##############################'
+
+######################################################
+# This block is to add notifications to healtbot
+######################################################
+
+print '###########  Adding notifications  ############'
+
+
+get_notifications()
+
+for item in my_variables_in_yaml['notifications']:
+    payload=json.dumps(item)
+    add_notification(item['notification-name'])
+
+commit()
+
+get_notifications()
 
 
 
 ######################################################
 # This block is to add device groups to healtbot
 ######################################################
+
+print '###########  Adding device groups  ############'
+
 
 get_device_groups()
 
@@ -184,6 +220,5 @@ for item in my_variables_in_yaml['device_groups']:
 
 get_device_groups()
 
-print '##############################'
 
 
