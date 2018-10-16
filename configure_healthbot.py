@@ -152,6 +152,8 @@ get_devices_name_in_running_configuration()
 
 # get_devices_details_in_running_configuration()
 
+print '##############################'
+
 ######################################################
 # This block is to add tables (tables and views) to healthbot
 ######################################################
@@ -159,6 +161,10 @@ get_devices_name_in_running_configuration()
 for item in my_variables_in_yaml['tables_and_views']:
     add_tables_and_views(item)
     get_tables_and_views(item)
+
+print '##############################'
+
+
 
 ######################################################
 # This block is to add device groups to healtbot
@@ -177,4 +183,7 @@ for item in my_variables_in_yaml['device_groups']:
     get_device_group(item['device-group-name'])
 
 get_device_groups()
+
+print '##############################'
+
 

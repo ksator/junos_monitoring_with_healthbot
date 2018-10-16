@@ -1,5 +1,5 @@
 ###################################################
-# Workflow: delete devices
+# Workflow: delete device groups, delete devices
 ###################################################
 
 ###################################################
@@ -70,6 +70,17 @@ def delete_device(dev):
     print 'deleted the healthbot configuration for device_' + dev
     return r.status_code
 
+def get_device_groups():
+    r = requests.get(url + '/device-group/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    print "here's the list of device groups in the running configuration"
+    pprint (r.json())
+    return (r.json())
+
+def delete_device_group(group):
+    r = requests.delete(url + '/device-group/'+ group + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    return r.status_code
+
+
 ######################################################
 # Below blocks are REST calls to configure healthbot
 ######################################################
@@ -82,6 +93,24 @@ authpwd = my_variables_in_yaml['authpwd']
 url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
+
+######################################################
+# This block is to remove device groups from healthbot
+######################################################
+
+
+device_group_in_running_configuration = get_device_groups()
+
+print "removing device groups from healthbot"
+
+for item in device_group_in_running_configuration:
+     delete_device_group(item)
+
+commit ()
+
+get_device_groups()
+
+print "#########################################"
 
 ######################################################
 # This block is to remove devices from healthbot
