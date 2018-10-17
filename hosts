@@ -2,7 +2,11 @@
 healthbot_server 
 
 [junos_devices]
-vmx10[1:7]
-
-
+vmx101
+vmx102
+vmx103
+vmx104
+vmx105
+vmx106
+vmx107
 

@@ -1,0 +1,8 @@
+[healthbot]
+healthbot_server 
+
+[junos_devices]
+{% for item in devices_list -%}
+{{ item['device_id'] }}
+{% endfor %}
+
