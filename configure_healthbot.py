@@ -40,20 +40,10 @@ def create_directory(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-def generate_healthbot_configuration_for_new_device():
-    f=open('templates/devices.j2')
-    my_template = Template(f.read())
-    f.close()
-    for dev in my_variables_in_yaml['devices_list']: 
-        f=open('render/device_' + dev["name"],'w')
-        f.write(my_template.render(dev))
-        f.close()
-        print 'generated healthbot configuration for device_' + dev["name"]
-    return('done')
-
 def add_device(dev):
-    r = requests.post(url + '/device/' + dev + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
-    print 'loaded the healthbot configuration for device_' + dev
+    payload=json.dumps(dev)
+    r = requests.post(url + '/device/' + dev['device-id'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+    print 'loaded the healthbot configuration for device ' + dev['device-id']
     return r.status_code
 
 def get_devices_name_in_running_configuration():
@@ -98,12 +88,14 @@ def add_tables_and_views(table):
     return r.status_code
 
 def add_device_group(group):
-    r = requests.post(url + '/device-group/' + group + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
-    print 'loaded the healthbot device group ' + group
+    payload=json.dumps(group)
+    r = requests.post(url + '/device-group/' + group['device-group-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+    print 'loaded the healthbot device group ' + group['device-group-name']
     return r.status_code
 
 def get_device_group(group):
-    r = requests.get(url + '/device-group/'+ group + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    payload=json.dumps(group)
+    r = requests.get(url + '/device-group/'+ group['device-group-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     pprint (r.json())
     return r.status_code
 
@@ -113,8 +105,9 @@ def get_device_groups():
     return r.status_code
 
 def add_notification(notification):
-    r = requests.post(url + '/notification/' + notification + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
-    print 'loaded the healthbot notification ' + notification
+    payload=json.dumps(notification)
+    r = requests.post(url + '/notification/' + notification['notification-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+    print 'loaded the healthbot notification ' + notification['notification-name']
     return r.status_code
 
 def get_notifications():
@@ -149,8 +142,7 @@ get_devices_name_in_running_configuration()
 print "adding devices to healthbot"
 
 for item in my_variables_in_yaml['devices_list']:
-    payload=json.dumps(item)
-    add_device(item['device-id'])
+    add_device(item)
 
 get_devices_name_in_candidate_configuration()
 
@@ -179,12 +171,10 @@ for item in my_variables_in_yaml['tables_and_views']:
 
 print '###########  Adding notifications  ############'
 
-
 get_notifications()
 
 for item in my_variables_in_yaml['notifications']:
-    payload=json.dumps(item)
-    add_notification(item['notification-name'])
+    add_notification(item)
 
 commit()
 
@@ -198,20 +188,15 @@ get_notifications()
 
 print '###########  Adding device groups  ############'
 
-
 get_device_groups()
 
 for item in my_variables_in_yaml['device_groups']: 
-    payload=json.dumps(item)
-    add_device_group(item['device-group-name'])
+    add_device_group(item)
 
 commit()
-
-for item in my_variables_in_yaml['device_groups']:
-    payload=json.dumps(item)
-    get_device_group(item['device-group-name'])
 
 get_device_groups()
 
 
-
+for item in my_variables_in_yaml['device_groups']:
+    get_device_group(item)

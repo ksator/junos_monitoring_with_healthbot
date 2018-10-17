@@ -66,7 +66,6 @@ def commit():
 
 def delete_device(dev):
     r = requests.delete(url + '/device/' + dev + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
-    print 'deleted the healthbot configuration for device_' + dev
     return r.status_code
 
 def get_device_groups():
@@ -150,6 +149,9 @@ print '###########  Removing notifications  ############'
 
 notifications_in_running_configuration = get_notifications()
 
+print 'removing notifications from healthbot'
+
+
 for item in notifications_in_running_configuration: 
     delete_notification(item)
 
@@ -165,7 +167,6 @@ get_notifications()
 
 print '###########  Removing devices  ############'
 
-
 devices_name_in_running_configuration = get_devices_name_in_running_configuration()
 
 print "removing devices from healthbot"
@@ -173,7 +174,7 @@ print "removing devices from healthbot"
 for dev in devices_name_in_running_configuration:
     delete_device(dev)
 
-get_devices_name_in_candidate_configuration()
+#get_devices_name_in_candidate_configuration()
 
 commit()
 
