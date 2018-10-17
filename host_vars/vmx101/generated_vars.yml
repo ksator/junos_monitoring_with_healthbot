@@ -1,6 +1,6 @@
 ---
 name: vmx101
-ip: 10.49.126.63
+ip: 10.49.102.160
 username: root 
 password: Embe1mpls
 openconfig_port: 32768

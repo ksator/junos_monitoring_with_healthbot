@@ -7,42 +7,8 @@
           "username": "root"
         }
       },
-      "device-id": "vmx104",
-      "host": "10.49.126.56",
-      "iAgent": {
-        "port": 830
-      },
-      "open-config": {
-        "port": 32768
-      },
-      "system-id": "vmx104"
-    },
-    {
-      "authentication": {
-        "password": {
-          "password": "Embe1mpls",
-          "username": "root"
-        }
-      },
-      "device-id": "vmx105",
-      "host": "10.49.126.54",
-      "iAgent": {
-        "port": 830
-      },
-      "open-config": {
-        "port": 32768
-      },
-      "system-id": "vmx105"
-    },
-    {
-      "authentication": {
-        "password": {
-          "password": "Embe1mpls",
-          "username": "root"
-        }
-      },
       "device-id": "vmx101",
-      "host": "10.49.126.63",
+      "host": "10.49.102.160",
       "iAgent": {
         "port": 830
       },
@@ -59,7 +25,7 @@
         }
       },
       "device-id": "vmx102",
-      "host": "10.49.126.61",
+      "host": "10.49.102.157",
       "iAgent": {
         "port": 830
       },
@@ -76,7 +42,7 @@
         }
       },
       "device-id": "vmx103",
-      "host": "10.49.126.6",
+      "host": "10.49.102.151",
       "iAgent": {
         "port": 830
       },
@@ -92,8 +58,42 @@
           "username": "root"
         }
       },
+      "device-id": "vmx104",
+      "host": "10.49.102.148",
+      "iAgent": {
+        "port": 830
+      },
+      "open-config": {
+        "port": 32768
+      },
+      "system-id": "vmx104"
+    },
+    {
+      "authentication": {
+        "password": {
+          "password": "Embe1mpls",
+          "username": "root"
+        }
+      },
+      "device-id": "vmx105",
+      "host": "10.49.102.142",
+      "iAgent": {
+        "port": 830
+      },
+      "open-config": {
+        "port": 32768
+      },
+      "system-id": "vmx105"
+    },
+    {
+      "authentication": {
+        "password": {
+          "password": "Embe1mpls",
+          "username": "root"
+        }
+      },
       "device-id": "vmx106",
-      "host": "10.49.126.52",
+      "host": "10.49.102.140",
       "iAgent": {
         "port": 830
       },
@@ -110,7 +110,7 @@
         }
       },
       "device-id": "vmx107",
-      "host": "10.49.126.50",
+      "host": "10.49.102.136",
       "iAgent": {
         "port": 830
       },
