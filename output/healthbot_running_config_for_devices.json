@@ -3,59 +3,8 @@
     {
       "authentication": {
         "password": {
-          "password": "Embe1mpls",
-          "username": "root"
-        }
-      },
-      "device-id": "vmx101",
-      "host": "10.49.102.160",
-      "iAgent": {
-        "port": 830
-      },
-      "open-config": {
-        "port": 32768
-      },
-      "system-id": "vmx101"
-    },
-    {
-      "authentication": {
-        "password": {
-          "password": "Embe1mpls",
-          "username": "root"
-        }
-      },
-      "device-id": "vmx102",
-      "host": "10.49.102.157",
-      "iAgent": {
-        "port": 830
-      },
-      "open-config": {
-        "port": 32768
-      },
-      "system-id": "vmx102"
-    },
-    {
-      "authentication": {
-        "password": {
-          "password": "Embe1mpls",
-          "username": "root"
-        }
-      },
-      "device-id": "vmx103",
-      "host": "10.49.102.151",
-      "iAgent": {
-        "port": 830
-      },
-      "open-config": {
-        "port": 32768
-      },
-      "system-id": "vmx103"
-    },
-    {
-      "authentication": {
-        "password": {
-          "password": "Embe1mpls",
-          "username": "root"
+          "password": "root",
+          "username": "Embe1mpls"
         }
       },
       "device-id": "vmx104",
@@ -71,8 +20,8 @@
     {
       "authentication": {
         "password": {
-          "password": "Embe1mpls",
-          "username": "root"
+          "password": "root",
+          "username": "Embe1mpls"
         }
       },
       "device-id": "vmx105",
@@ -88,8 +37,8 @@
     {
       "authentication": {
         "password": {
-          "password": "Embe1mpls",
-          "username": "root"
+          "password": "root",
+          "username": "Embe1mpls"
         }
       },
       "device-id": "vmx106",
@@ -105,8 +54,59 @@
     {
       "authentication": {
         "password": {
-          "password": "Embe1mpls",
-          "username": "root"
+          "password": "root",
+          "username": "Embe1mpls"
+        }
+      },
+      "device-id": "vmx103",
+      "host": "10.49.102.151",
+      "iAgent": {
+        "port": 830
+      },
+      "open-config": {
+        "port": 32768
+      },
+      "system-id": "vmx103"
+    },
+    {
+      "authentication": {
+        "password": {
+          "password": "root",
+          "username": "Embe1mpls"
+        }
+      },
+      "device-id": "vmx101",
+      "host": "10.49.102.160",
+      "iAgent": {
+        "port": 830
+      },
+      "open-config": {
+        "port": 32768
+      },
+      "system-id": "vmx101"
+    },
+    {
+      "authentication": {
+        "password": {
+          "password": "root",
+          "username": "Embe1mpls"
+        }
+      },
+      "device-id": "vmx102",
+      "host": "10.49.102.157",
+      "iAgent": {
+        "port": 830
+      },
+      "open-config": {
+        "port": 32768
+      },
+      "system-id": "vmx102"
+    },
+    {
+      "authentication": {
+        "password": {
+          "password": "root",
+          "username": "Embe1mpls"
         }
       },
       "device-id": "vmx107",

@@ -12,7 +12,6 @@
        path: "{{playbook_dir}}/{{item}}"
        state: directory
       with_items: 
-         - devices
          - render 
          - output
 

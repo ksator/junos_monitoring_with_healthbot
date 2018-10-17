@@ -52,8 +52,8 @@ def generate_healthbot_configuration_for_new_device():
     return('done')
 
 def add_device(dev):
-    r = requests.post(url + '/device/' + dev["name"] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
-    print 'loaded the healthbot configuration for device_' + dev["name"]
+    r = requests.post(url + '/device/' + dev + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+    print 'loaded the healthbot configuration for device_' + dev
     return r.status_code
 
 def get_devices_name_in_running_configuration():
@@ -148,16 +148,9 @@ get_devices_name_in_running_configuration()
 
 print "adding devices to healthbot"
 
-for item in ["render"]:
-    create_directory(item)
-
-generate_healthbot_configuration_for_new_device()
-
-for dev in my_variables_in_yaml['devices_list']:
-    payload_file = open('render/device_' + dev["name"], 'r')
-    payload = payload_file.read()
-    payload_file.close()
-    add_device(dev)
+for item in my_variables_in_yaml['devices_list']:
+    payload=json.dumps(item)
+    add_device(item['device-id'])
 
 get_devices_name_in_candidate_configuration()
 

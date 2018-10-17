@@ -1,5 +1,5 @@
 #############################################
-# usage: 
+# usage:
 # vi variables.yml
 # python ./generate_vars_for_ansible.py
 #############################################
@@ -11,6 +11,9 @@ from jinja2 import Template
 def import_variables_from_file():
     my_variables_file=open('variables.yml', 'r')
     my_variables_in_string=my_variables_file.read()
+    my_variables_in_string=my_variables_in_string.replace('device-id', 'device_id')
+    my_variables_in_string=my_variables_in_string.replace('open-config', 'open_config')
+    my_variables_in_string=my_variables_in_string.replace('system-id', 'system_id')
     my_variables_in_yaml=yaml.load(my_variables_in_string)
     my_variables_file.close()
     return my_variables_in_yaml
@@ -24,7 +27,7 @@ def generate_junos_vars_for_ansible():
     my_template = Template(f.read())
     f.close()
     for dev in my_variables_in_yaml['devices_list']:
-        f=open('host_vars/' + dev["name"] + '/generated_vars.yml','w')
+        f=open('host_vars/' + dev["device_id"] + '/generated_vars.yml','w')
         f.write(my_template.render(dev))
         f.close()
     return('done')
@@ -40,15 +43,12 @@ def generate_healthbot_vars_for_ansible():
 
 my_variables_in_yaml=import_variables_from_file()
 
-for item in ["host_vars", "host_vars/healthbot_server"]: 
+for item in ["host_vars", "host_vars/healthbot_server"]:
     create_directory(item)
 
 for dev in my_variables_in_yaml['devices_list']:
-    create_directory("host_vars/" + dev["name"])
+    create_directory("host_vars/" + dev["device_id"])
 
 generate_junos_vars_for_ansible()
 
 generate_healthbot_vars_for_ansible()
-
-
-

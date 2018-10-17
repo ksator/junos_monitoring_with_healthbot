@@ -1,8 +1,8 @@
 ---
-name: {{ name }}
-ip: {{ ip }}
-username: {{ username }} 
-password: {{ password }}
-openconfig_port: {{ openconfig_port }}
-netconf_port: {{ netconf_port }}
+name: {{ device_id }}
+ip: {{ host }}
+username: {{ authentication.password.username }} 
+password: {{ authentication.password.password }}
+openconfig_port: {{ open_config.port }}
+netconf_port: {{ iAgent.port }}
 

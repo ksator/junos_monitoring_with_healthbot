@@ -1,63 +1,105 @@
-# healtbot host and credentials 
+# healtbot host and credentials
 server: "10.49.102.129"
 authuser: "admin"
 authpwd: "Embe1mpls"
 
 # tables and views to load on healthbot (from tables_adn_views directory)
-tables_and_views: 
+tables_and_views:
     - bgp.yml
     - ospf.yml
 
 # network devices details
-devices_list: 
-    - name: vmx101
-      ip: 10.49.102.160
-      username: "root"
-      password: "Embe1mpls"
-      openconfig_port: 32768
-      netconf_port: 830
-    - name: vmx102
-      ip: 10.49.102.157
-      username: "root"
-      password: "Embe1mpls"
-      openconfig_port: 32768
-      netconf_port: 830
-    - name: vmx103
-      ip: 10.49.102.151
-      username: "root"
-      password: "Embe1mpls"
-      openconfig_port: 32768
-      netconf_port: 830
-    - name: vmx104
-      ip: 10.49.102.148
-      username: "root"
-      password: "Embe1mpls"
-      openconfig_port: 32768
-      netconf_port: 830
-    - name: vmx105
-      ip: 10.49.102.142
-      username: "root"
-      password: "Embe1mpls"
-      openconfig_port: 32768
-      netconf_port: 830
-    - name: vmx106
-      ip: 10.49.102.140
-      username: "root"
-      password: "Embe1mpls"
-      openconfig_port: 32768
-      netconf_port: 830
-    - name: vmx107
-      ip: 10.49.102.136
-      username: "root"
-      password: "Embe1mpls"
-      openconfig_port: 32768
-      netconf_port: 830
+devices_list:
+    - authentication:
+          password:
+              password: "root"
+              username: "Embe1mpls"
+      description: "vmx101"
+      device-id: "vmx101"
+      host: "10.49.102.160"
+      iAgent:
+          port: 830
+      open-config:
+          port: 32768
+      system-id: "vmx101"
+    - authentication:
+          password:
+              password: "root"
+              username: "Embe1mpls"
+      description: "vmx102"
+      device-id: "vmx102"
+      host: "10.49.102.157"
+      iAgent:
+          port: 830
+      open-config:
+          port: 32768
+      system-id: "vmx102"
+    - authentication:
+          password:
+              password: "root"
+              username: "Embe1mpls"
+      description: "vmx103"
+      device-id: "vmx103"
+      host: "10.49.102.151"
+      iAgent:
+          port: 830
+      open-config:
+          port: 32768
+      system-id: "vmx103"
+    - authentication:
+          password:
+              password: "root"
+              username: "Embe1mpls"
+      description: "vmx104"
+      device-id: "vmx104"
+      host: "10.49.102.148"
+      iAgent:
+          port: 830
+      open-config:
+          port: 32768
+      system-id: "vmx104"
+    - authentication:
+          password:
+              password: "root"
+              username: "Embe1mpls"
+      description: "vmx105"
+      device-id: "vmx105"
+      host: "10.49.102.142"
+      iAgent:
+          port: 830
+      open-config:
+          port: 32768
+      system-id: "vmx105"
+    - authentication:
+          password:
+              password: "root"
+              username: "Embe1mpls"
+      description: "vmx106"
+      device-id: "vmx106"
+      host: "10.49.102.140"
+      iAgent:
+          port: 830
+      open-config:
+          port: 32768
+      system-id: "vmx106"
+    - authentication:
+          password:
+              password: "root"
+              username: "Embe1mpls"
+      description: "vmx107"
+      device-id: "vmx107"
+      host: "10.49.102.136"
+      iAgent:
+          port: 830
+      open-config:
+          port: 32768
+      system-id: "vmx107"
 
 # device groups details
 device_groups:
     - description: Group1
       device-group-name: Group1
-      devices: 
+      devices:
            - vmx101
            - vmx102
            - vmx103
@@ -65,13 +107,13 @@ device_groups:
            - vmx105
            - vmx106
            - vmx107
-      playbooks: 
-           - ast
-      notification: 
-          major: 
+      #playbooks:
+      #     - ast
+      notification:
+          major:
               - heathbot_to_saltstack
-              - another_notification 
-          minor: 
+              - another_notification
+          minor:
               - another_notification
     - description: Group2
       device-group-name: Group2
@@ -80,7 +122,7 @@ device_groups:
            - vmx104
 
 # notifications
-notifications: 
+notifications:
     - notification-name: heathbot_to_saltstack
       description: "heathbot to saltstack webhook notifications"
       http-post:
@@ -89,15 +131,5 @@ notifications:
       description: another_notification
       http-post:
           url: http://10.49.102.129:5001/healthbot
-
-
-
-
-
-
-
-   
-
-
 
 
