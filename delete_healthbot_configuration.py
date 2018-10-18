@@ -91,7 +91,7 @@ def delete_notification(notification):
 
 
 def delete_table(table):
-    r = requests.delete(url + '/files/helper-files/' + table + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    r = requests.delete(url + '/files/helper-files/' + table, auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     return r.status_code
 
 

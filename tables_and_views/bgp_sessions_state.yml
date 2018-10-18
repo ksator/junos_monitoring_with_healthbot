@@ -3,12 +3,12 @@ bgpTable:
  rpc: get-bgp-neighbor-information
  item: bgp-peer
  view: bgpView
- key: peer-id
+ key: peer-address
 
 bgpView:
  fields:
   peer_as: peer-as
   flap_count: flap-count
   peer_state: peer-state
-  peer_id: peer-id
+  peer_address: peer-address
   peer_type: peer-type
