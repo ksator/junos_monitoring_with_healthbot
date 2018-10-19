@@ -227,7 +227,7 @@ device_groups:
             rule: protocol.bgp/ast
             variable-value: 
                 - name: neighbors
-                  value: ge-0/0/*
+                  value: 11.*
 
     - description: Group2
       device-group-name: Group2
