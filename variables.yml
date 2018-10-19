@@ -1,9 +1,18 @@
-# healtbot host and credentials
+#############################################################################
+# note: update these variables, don't change the data structure. 
+#############################################################################
+
+#############################################################################
+# healthbot host and credentials
+#############################################################################
 server: "10.49.102.129"
 authuser: "admin"
 authpwd: "Embe1mpls"
 
+
+#############################################################################
 # network devices details to add to healthbot
+#############################################################################
 devices_list:
     - authentication:
           password:
@@ -91,13 +100,17 @@ devices_list:
       system-id: "vmx107"
 
 
-# tables and views to load on healthbot (from tables_adn_views directory)
+#############################################################################
+# tables and views to load on healthbot (from the directory tables_and_views)
+#############################################################################
 tables_and_views:
     - bgp_sessions_state.yml
     - ospf.yml
 
 
+#############################################################################
 # notifications to add to healthbot
+#############################################################################
 notifications:
     - notification-name: heathbot_to_saltstack
       description: "heathbot to saltstack webhook notifications"
@@ -109,14 +122,38 @@ notifications:
           url: http://10.49.102.129:5001/healthbot
 
 
+#############################################################################
 # topics to add to healthbot
+#############################################################################
 topics:
     - topic-name: protocol.bgp
       synopsis:  monitor bgp
       description: This topic is to monitors bgp details
+    - topic-name: test.test
+      synopsis:  test
+      description: test
 
 
+#############################################################################
+# playbook to add to healthbot
+#############################################################################
+playbooks:
+     - playbook-name: ast
+       description: ast
+       synopsis: ast
+       rules: 
+          - protocol.bgp/ast
+     - playbook-name: pb123
+       description: pb123
+       synopsis: pb123
+       rules: 
+          - protocol.bgp/ast
+          - protocol.bgp/check-bgp-route-flap-damping
+
+
+#############################################################################
 # device groups details to add to healthbot
+#############################################################################
 device_groups:
     - description: Group1
       device-group-name: Group1
@@ -140,7 +177,9 @@ device_groups:
           - instance-id: ast1
             playbook: ast
             rule: protocol.bgp/ast
-            #variable-value:
+            variable-value: 
+                - name: neighbors
+                  value: ge-0/0/*
 
     - description: Group2
       device-group-name: Group2

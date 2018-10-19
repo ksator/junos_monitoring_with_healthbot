@@ -94,8 +94,7 @@ def add_device_group(group):
     return r.status_code
 
 def get_device_group(group):
-    payload=json.dumps(group)
-    r = requests.get(url + '/device-group/'+ group['device-group-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    r = requests.get(url + '/device-group/'+ group + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     pprint (r.json())
     return r.status_code
 
@@ -121,8 +120,13 @@ def get_playbooks():
     return r.status_code
 
 def get_playbook(playbook):
-    r = requests.get(url + '/playbook/'+ playbook  + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    r = requests.get(url + '/playbook/'+ playbook['playbook-name']  + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     pprint (r.json())
+    return r.status_code
+
+def add_playbook(playbook):
+    payload=json.dumps(playbook)
+    r = requests.post(url + '/playbook/' + playbook['playbook-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
     return r.status_code
 
 def get_topics():
@@ -138,6 +142,7 @@ def get_topic(topic):
 def add_topic(topic):
     payload=json.dumps(topic)
     r = requests.post(url + '/topic/' + topic['topic-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+    return r.status_code
 
 def get_rules(topic):
     r = requests.get(url + '/topic/' + topic + '/rule/' , auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
@@ -217,6 +222,7 @@ get_notifications()
 # This block is to add topics to healtbot
 ######################################################
 
+print '###########  Adding topics  ############'
 
 for item in my_variables_in_yaml['topics']:
     add_topic(item)
@@ -227,6 +233,24 @@ get_topics()
 
 #for item in my_variables_in_yaml['topics']:
 #    get_topic(item)
+
+######################################################
+# This block is to add playbooks to healthbot
+######################################################
+
+print '###########  Adding playbooks  ############'
+
+
+for item in my_variables_in_yaml['playbooks']:
+    add_playbook(item)
+
+commit()
+
+get_playbooks()
+
+for item in my_variables_in_yaml['playbooks']:
+    get_playbook(item)
+
 
 
 
@@ -247,4 +271,4 @@ get_device_groups()
 
 
 for item in my_variables_in_yaml['device_groups']:
-    get_device_group(item)
+    get_device_group(item['device-group-name'])
