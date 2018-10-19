@@ -115,6 +115,12 @@ device_groups:
               - another_notification
           minor:
               - another_notification
+      variable: 
+          - instance-id: ast1
+            playbook: ast
+            rule: protocol.bgp/ast
+            #variable-value: 
+             
     - description: Group2
       device-group-name: Group2
       devices:
