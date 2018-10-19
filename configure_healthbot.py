@@ -1,24 +1,24 @@
-###########################################################################################################################
-# This script get the desired healthbot configuration from the file variables.yml, and configures heathbot using REST calls
+############################################################################################################################
+# This script get the desired healthbot configuration from the file variables.yml, and configures healthbot using REST calls
 # It configures devices, notifications, topics, rules, playbooks, device-groups. It adds tables (tables and views).
-###########################################################################################################################
+############################################################################################################################
 
 
-########################################################################################################################### 
+############################################################################################################################ 
 # requirements: pip install requests
-###########################################################################################################################
+############################################################################################################################
 
 
-###########################################################################################################################
+############################################################################################################################
 # usage:
 # vi variables.yml
 # python ./configure_healthbot.py
-###########################################################################################################################
+############################################################################################################################
 
 
-###########################################################################################################################
+############################################################################################################################
 # This block indicates the various imports
-###########################################################################################################################
+############################################################################################################################
 import os
 import json
 import yaml
@@ -29,9 +29,9 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from pprint import pprint
 
 
-###########################################################################################################################
+############################################################################################################################
 # This block defines the functions we will use
-###########################################################################################################################
+############################################################################################################################
 def import_variables_from_file():
     my_variables_file=open('variables.yml', 'r')
     my_variables_in_string=my_variables_file.read()
@@ -73,21 +73,16 @@ def get_devices_details_in_candidate_configuration():
     pprint (r.json())
     return r.status_code
 
-def commit():
-    r = requests.post(url + '/configuration', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
-    print 'healthbot configuration commited'
+def add_tables_and_views(table):
+    files = {'up_file': open('tables_and_views/' + table,'r')}
+    r=requests.post(url + '/files/helper-files/' + table, auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json' }, verify=False, files=files)
+    print "added table " + table 
     return r.status_code
 
 def get_tables_and_views(table):
     files = {'up_file': open('tables_and_views/' + table,'r')}
     r=requests.get(url + '/files/helper-files/' + table, auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json', 'Content-Type': 'multipart/form-data' }, verify=False)
     print r.content
-    return r.status_code
-
-def add_tables_and_views(table):
-    files = {'up_file': open('tables_and_views/' + table,'r')}
-    r=requests.post(url + '/files/helper-files/' + table, auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json' }, verify=False, files=files)
-    print "added table " + table 
     return r.status_code
 
 def add_device_group(group):
@@ -117,6 +112,11 @@ def get_notifications():
     pprint (r.json())
     return r.status_code
 
+def add_playbook(playbook):
+    payload=json.dumps(playbook)
+    r = requests.post(url + '/playbook/' + playbook['playbook-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+    return r.status_code
+
 def get_playbooks():
     r = requests.get(url + '/playbook/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     pprint (r.json())
@@ -127,9 +127,9 @@ def get_playbook(playbook):
     pprint (r.json())
     return r.status_code
 
-def add_playbook(playbook):
-    payload=json.dumps(playbook)
-    r = requests.post(url + '/playbook/' + playbook['playbook-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+def add_topic(topic):
+    payload=json.dumps(topic)
+    r = requests.post(url + '/topic/' + topic['topic-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
     return r.status_code
 
 def get_topics():
@@ -142,11 +142,6 @@ def get_topic(topic):
     pprint (r.json())
     return r.status_code
 
-def add_topic(topic):
-    payload=json.dumps(topic)
-    r = requests.post(url + '/topic/' + topic['topic-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
-    return r.status_code
-
 def get_rules(topic):
     r = requests.get(url + '/topic/' + topic + '/rule/' , auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     pprint (r.json())
@@ -157,10 +152,14 @@ def get_rule(topic, rule):
     pprint (r.json())
     return r.status_code
 
+def commit():
+    r = requests.post(url + '/configuration', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    print 'healthbot configuration commited'
+    return r.status_code
 
-###########################################################################################################################
+############################################################################################################################
 # Below blocks are REST calls to configure healthbot
-###########################################################################################################################
+############################################################################################################################
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 my_variables_in_yaml=import_variables_from_file()
 server = my_variables_in_yaml['server']
@@ -170,10 +169,10 @@ url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
 
-###########################################################################################################################
+############################################################################################################################
 # This block is to add devices to healthbot
-###########################################################################################################################
-print '###########  Adding devices  ############'
+############################################################################################################################
+print '****************** Adding devices to healthbot ******************'
 
 
 get_devices_name_in_running_configuration()
@@ -191,20 +190,20 @@ get_devices_name_in_running_configuration()
 
 # get_devices_details_in_running_configuration()
 
-###########################################################################################################################
+############################################################################################################################
 # This block is to add tables (tables and views) to healthbot
-###########################################################################################################################
-print '###########  Adding tables and views  ############'
+############################################################################################################################
+print '****************** Adding tables to healthbot ******************'
 
 
 for item in my_variables_in_yaml['tables_and_views']:
     add_tables_and_views(item)
     get_tables_and_views(item)
 
-###########################################################################################################################
+############################################################################################################################
 # This block is to add notifications to healtbot
-###########################################################################################################################
-print '###########  Adding notifications  ############'
+############################################################################################################################
+print '****************** Adding notifications to healthbot ******************'
 
 get_notifications()
 
@@ -216,10 +215,10 @@ commit()
 get_notifications()
 
 
-###########################################################################################################################
+############################################################################################################################
 # This block is to add topics to healtbot
-###########################################################################################################################
-print '###########  Adding topics  ############'
+############################################################################################################################
+print '****************** Adding topics to healthbot ******************'
 
 for item in my_variables_in_yaml['topics']:
     add_topic(item)
@@ -231,10 +230,10 @@ get_topics()
 #for item in my_variables_in_yaml['topics']:
 #    get_topic(item)
 
-###########################################################################################################################
+############################################################################################################################
 # This block is to add playbooks to healthbot
-###########################################################################################################################
-print '###########  Adding playbooks  ############'
+############################################################################################################################
+print '****************** Adding playbooks to healthbot ******************'
 
 
 for item in my_variables_in_yaml['playbooks']:
@@ -249,10 +248,10 @@ for item in my_variables_in_yaml['playbooks']:
 
 
 
-###########################################################################################################################
+############################################################################################################################
 # This block is to add device groups to healtbot
-###########################################################################################################################
-print '###########  Adding device groups  ############'
+############################################################################################################################
+print '****************** Adding device groups to healthbot ******************'
 
 get_device_groups()
 
@@ -266,3 +265,4 @@ get_device_groups()
 
 for item in my_variables_in_yaml['device_groups']:
     get_device_group(item['device-group-name'])
+
