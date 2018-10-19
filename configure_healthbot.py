@@ -115,6 +115,35 @@ def get_notifications():
     pprint (r.json())
     return r.status_code
 
+def get_playbooks():
+    r = requests.get(url + '/playbook/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    pprint (r.json())
+    return r.status_code
+
+def get_playbook(playbook):
+    r = requests.get(url + '/playbook/'+ playbook  + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    pprint (r.json())
+    return r.status_code
+
+def get_topics():
+    r = requests.get(url + '/topic/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    pprint (r.json())
+    return r.status_code
+
+def get_topic(topic):
+    r = requests.get(url + '/topic/'+ topic + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    pprint (r.json())
+    return r.status_code
+
+def get_rules(topic):
+    r = requests.get(url + '/topic/' + topic + '/rule/' , auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    pprint (r.json())
+    return r.status_code
+
+def get_rule(topic, rule):
+    r = requests.get(url + '/topic/' + topic + '/rule/' + rule + '/' , auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    pprint (r.json())
+    return r.status_code
 
 ######################################################
 # Below blocks are REST calls to configure healthbot
