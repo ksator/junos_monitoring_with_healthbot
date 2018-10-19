@@ -127,7 +127,8 @@ def get_rules(topic):
     return r.status_code
 
 def get_rule(topic, rule):
-    r = requests.get(url + '/topic/' + topic + '/rule/' + rule + '/' , auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    r = requests.get(url + '/topic/' + topic + '/rule/' + rule['rule-name'] + '/' , auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    print '\n****************** rule '+ topic + '/' + rule['rule-name'] + ' ******************'
     pprint (r.json())
     return r.status_code
 
@@ -159,6 +160,9 @@ get_topics()
 #for item in my_variables_in_yaml['topics']:
 #    get_topic(item)
 
+for item in my_variables_in_yaml['rules']:
+     get_rule('protocol.bgp', item)
+
 get_playbooks()
 
 for item in my_variables_in_yaml['playbooks']:
@@ -168,6 +172,5 @@ get_device_groups()
 
 for item in my_variables_in_yaml['device_groups']:
     get_device_group(item['device-group-name'])
-
 
 

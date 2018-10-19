@@ -135,6 +135,54 @@ topics:
 
 
 #############################################################################
+# rules to add to healthbot
+#############################################################################
+rules: 
+    - field: 
+        - description: peer-address
+          field-name: peer-address
+          sensor: 
+              - path: peer-address
+                sensor-name: session_state
+          type: string
+        - description: state
+          field-name: state
+          sensor: 
+              - path: peer_state
+                sensor-name: session_state
+          type: string
+      keys: 
+        - peer-address
+      rule-name: ast
+      sensor: 
+        - iAgent: 
+              file: bgp_sessions_state.yml
+              frequency: 15s
+              table: bgpTable
+          sensor-name: session_state
+      trigger: 
+        - frequency: 30s
+          term: 
+              - term-name: is-establish
+                then: 
+                    status:
+                        color: green
+                when: 
+                    matches-with: 
+                        - left-operand: $state
+                          right-operand: Established
+              - term-name: is_not_established
+                then: 
+                    status: 
+                        color: red
+          trigger-name: neighborship
+      variable: 
+        - description: Enter neighbor name or address using regular expression
+          name: neighbors
+          type: string
+          value: .*
+
+#############################################################################
 # playbook to add to healthbot
 #############################################################################
 playbooks:

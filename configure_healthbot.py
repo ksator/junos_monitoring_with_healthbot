@@ -77,6 +77,12 @@ def add_topic(topic):
     print 'loaded healthbot configuration for the topic: ' + topic['topic-name']
     return r.status_code
 
+def add_rule(topic, rule):
+    payload=json.dumps(rule)
+    r = requests.post(url + '/topic/' + topic + '/rule/' + rule['rule-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+    print 'loaded healthbot configuration for the rule: ' + topic + '/' + rule['rule-name']
+    return r.status_code
+
 def commit():
     r = requests.post(url + '/configuration', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     print 'healthbot configuration commited!'
@@ -129,6 +135,17 @@ print '****************** Adding topics to healthbot ******************'
 
 for item in my_variables_in_yaml['topics']:
     add_topic(item)
+
+
+############################################################################################################################
+# This block is to add rules to healtbot
+############################################################################################################################
+
+print '****************** Adding rules to healthbot ******************'
+
+for item in my_variables_in_yaml['rules']:
+    r=add_rule('protocol.bgp', item)
+
 
 ############################################################################################################################
 # This block is to add playbooks to healthbot
