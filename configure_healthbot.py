@@ -135,6 +135,10 @@ def get_topic(topic):
     pprint (r.json())
     return r.status_code
 
+def add_topic(topic):
+    payload=json.dumps(topic)
+    r = requests.post(url + '/topic/' + topic['topic-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+
 def get_rules(topic):
     r = requests.get(url + '/topic/' + topic + '/rule/' , auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     pprint (r.json())
@@ -208,6 +212,21 @@ for item in my_variables_in_yaml['notifications']:
 commit()
 
 get_notifications()
+
+######################################################
+# This block is to add topics to healtbot
+######################################################
+
+
+for item in my_variables_in_yaml['topics']:
+    add_topic(item)
+
+commit()
+
+get_topics()
+
+#for item in my_variables_in_yaml['topics']:
+#    get_topic(item)
 
 
 

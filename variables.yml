@@ -3,12 +3,7 @@ server: "10.49.102.129"
 authuser: "admin"
 authpwd: "Embe1mpls"
 
-# tables and views to load on healthbot (from tables_adn_views directory)
-tables_and_views:
-    - bgp_sessions_state.yml
-    - ospf.yml
-
-# network devices details
+# network devices details to add to healthbot
 devices_list:
     - authentication:
           password:
@@ -95,7 +90,33 @@ devices_list:
           port: 32768
       system-id: "vmx107"
 
-# device groups details
+
+# tables and views to load on healthbot (from tables_adn_views directory)
+tables_and_views:
+    - bgp_sessions_state.yml
+    - ospf.yml
+
+
+# notifications to add to healthbot
+notifications:
+    - notification-name: heathbot_to_saltstack
+      description: "heathbot to saltstack webhook notifications"
+      http-post:
+          url: http://10.49.102.129:5001/healthbot
+    - notification-name: another_notification
+      description: another_notification
+      http-post:
+          url: http://10.49.102.129:5001/healthbot
+
+
+# topics to add to healthbot
+topics:
+    - topic-name: protocol.bgp
+      synopsis:  monitor bgp
+      description: This topic is to monitors bgp details
+
+
+# device groups details to add to healthbot
 device_groups:
     - description: Group1
       device-group-name: Group1
@@ -115,26 +136,15 @@ device_groups:
               - another_notification
           minor:
               - another_notification
-      variable: 
+      variable:
           - instance-id: ast1
             playbook: ast
             rule: protocol.bgp/ast
-            #variable-value: 
-             
+            #variable-value:
+
     - description: Group2
       device-group-name: Group2
       devices:
            - vmx103
            - vmx104
-
-# notifications
-notifications:
-    - notification-name: heathbot_to_saltstack
-      description: "heathbot to saltstack webhook notifications"
-      http-post:
-          url: http://10.49.102.129:5001/healthbot
-    - notification-name: another_notification
-      description: another_notification
-      http-post:
-          url: http://10.49.102.129:5001/healthbot
 
