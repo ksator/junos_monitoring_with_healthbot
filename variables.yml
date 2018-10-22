@@ -204,21 +204,21 @@ device_groups:
            - vmx105
            - vmx106
            - vmx107
-#      playbooks:
-#           -  playbook_bgp
+      playbooks:
+           -  playbook_bgp
       notification:
           major:
               - heathbot_to_saltstack
               - another_webhook_listener
           minor:
               - another_webhook_listener
-#      variable:
-#          - instance-id: playbook_bgp_intance_1
-#            playbook: playbook_bgp
-#            rule: ksator.bgp/check-bgp-session-state
-#            variable-value:
-#                - name: neighbors
-#                  value: 11.*
+      variable:
+          - instance-id: playbook_bgp_intance_1
+            playbook: playbook_bgp
+            rule: ksator.bgp/check-bgp-session-state
+            variable-value:
+                - name: neighbors
+                  value: 11.*
     - description: Group2
       device-group-name: Group2
       devices:
