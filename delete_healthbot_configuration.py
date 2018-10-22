@@ -1,5 +1,7 @@
 ###################################################
-# Workflow: delete device groups, delete notifications, delete devices
+# Workflow: 
+# remove your own tables, topics, rules, playbooks
+# delete all device groups, notifications, devices
 ###################################################
 
 ###################################################
@@ -89,12 +91,21 @@ def delete_notification(notification):
     r = requests.delete(url + '/notification/' + notification + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     return r.status_code
 
-
 def delete_table(table):
     r = requests.delete(url + '/files/helper-files/' + table, auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     return r.status_code
 
+def delete_playbook(playbook):
+    r = requests.delete(url + '/playbook/' + playbook['playbook-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    return r.status_code
 
+def delete_rule(topic, rule):
+    r = requests.delete(url + '/topic/' + topic + '/rule/' + rule['rule-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    return r.status_code
+
+def delete_topic(topic):
+    r = requests.delete(url + '/topic/' + topic['topic-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    return r.status_code
 
 ######################################################
 # Below blocks are REST calls to configure healthbot
@@ -108,24 +119,51 @@ authpwd = my_variables_in_yaml['authpwd']
 url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
-
-
 ######################################################
 # This block is to remove your own tables and views from healthbot
 ######################################################
 
-print '########### Removing your tables and views  ############'
+print '########### Removing your own tables (tables and views)  ############'
 
 for item in my_variables_in_yaml['tables_and_views']:
      print "removing table " + item
      delete_table(item)
 
+######################################################
+# This block is to remove your own playbooks from healthbot
+######################################################
+
+print '########### Removing your own playbooks  ############'
+
+for item in my_variables_in_yaml['playbooks']:
+     print "removing playbook " + item['playbook-name']
+     delete_playbook(item)
+
+######################################################
+# This block is to remove your own rules from healthbot
+######################################################
+
+print '########### Removing your own rules  ############'
+
+for item in my_variables_in_yaml['rules']:
+     print "removing rule " + item['rule-name']
+     delete_rule('protocol.bgp', item)
+
+######################################################
+# This block is to remove your own topics from healthbot
+######################################################
+
+print '########### Removing your own topics  ############'
+
+for item in my_variables_in_yaml['topics']:
+     print "removing topic " + item['topic-name']
+     delete_topic(item)
 
 ######################################################
 # This block is to remove all device groups from healthbot
 ######################################################
 
-print '########### Removing device groups  ############'
+print '########### Removing all device groups  ############'
 
 
 device_group_in_running_configuration = get_device_groups()
@@ -144,7 +182,7 @@ get_device_groups()
 # This block is to remove all notifications from healthbot
 ######################################################
 
-print '###########  Removing notifications  ############'
+print '###########  Removing all notifications  ############'
 
 
 notifications_in_running_configuration = get_notifications()
@@ -165,7 +203,7 @@ get_notifications()
 # This block is to remove all devices from healthbot
 ######################################################
 
-print '###########  Removing devices  ############'
+print '###########  Removing all devices  ############'
 
 devices_name_in_running_configuration = get_devices_name_in_running_configuration()
 
