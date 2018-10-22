@@ -1,7 +1,6 @@
 ###################################################
 # About this scrit:
-# delete your own tables, topics, rules, playbooks
-# delete all device groups, notifications, devices
+# delete your own tables, topics, rules, playbooks, groups, notifications, devices
 # commit the change and display new running configuration
 ###################################################
 
@@ -11,6 +10,7 @@
 
 ###################################################
 # usage:
+# vi variables.yml
 # python ./delete_healthbot_configuration
 ###################################################
 
