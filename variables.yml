@@ -1,5 +1,5 @@
 #############################################################################
-# note: update these variables, don't change the data structure. 
+# note: update these variables, don't change the data structure.
 #############################################################################
 
 #############################################################################
@@ -119,63 +119,59 @@ notifications:
           url: http://10.49.102.128:5001/healthbot
 
 #############################################################################
-# topics to add to healthbot
+# topics and rules to add to healthbot
 #############################################################################
 topics:
-    - topic-name: ksator.bgp
-      synopsis:  monitor bgp
-      description: This topic is to monitor bgp details
     - topic-name: ksator.interfaces
-      synopsis:  ksator.interfaces
+      synopsis:  monitor interfaces
       description: This topic is to monitor interfaces
-
-#############################################################################
-# rules to add to healthbot
-#############################################################################
-rules: 
-    - field: 
-        - description: peer-address
-          field-name: peer-address
-          sensor: 
-              - path: peer-address
-                sensor-name: session_state
-          type: string
-        - description: state
-          field-name: state
-          sensor: 
-              - path: peer_state
-                sensor-name: session_state
-          type: string
-      keys: 
-        - peer-address
-      rule-name: check-bgp-session-state
-      sensor: 
-        - iAgent: 
-              file: bgp_sessions_state.yml
-              frequency: 15s
-              table: bgpTable
-          sensor-name: session_state
-      trigger: 
-        - frequency: 30s
-          term: 
-              - term-name: session_is_established
-                then: 
-                    status:
-                        color: green
-                when: 
-                    matches-with: 
-                        - left-operand: $state
-                          right-operand: Established
-              - term-name: session_is_not_established
-                then: 
-                    status: 
-                        color: red
-          trigger-name: neighborship
-      variable: 
-        - description: Enter neighbor name or address using regular expression
-          name: neighbors
-          type: string
-          value: .*
+    - topic-name: ksator.bgp
+      synopsis:  ksator.bgp
+      description: This topic is to monitor bgp details
+      rule:
+          - field:
+              - description: peer-address
+                field-name: peer-address
+                sensor:
+                    - path: peer-address
+                      sensor-name: session_state
+                type: string
+              - description: state
+                field-name: state
+                sensor:
+                    - path: peer_state
+                      sensor-name: session_state
+                type: string
+            keys:
+                - peer-address
+            rule-name: check-bgp-session-state
+            sensor:
+                - iAgent:
+                      file: bgp_sessions_state.yml
+                      frequency: 15s
+                      table: bgpTable
+                  sensor-name: session_state
+            trigger:
+                - frequency: 30s
+                  term:
+                      - term-name: session_is_established
+                        then:
+                            status:
+                                color: green
+                        when:
+                            matches-with:
+                                - left-operand: $state
+                                  right-operand: Established
+                      - term-name: session_is_not_established
+                        then:
+                            status:
+                                color: red
+                  trigger-name: neighborship
+            variable:
+                - description: Enter neighbor name or address using regular expression
+                  name: neighbors
+                  type: string
+                  value: .*
 
 #############################################################################
 # playbook to add to healthbot
@@ -184,12 +180,12 @@ playbooks:
      - playbook-name: playbook_bgp
        description: playbook_bgp
        synopsis: playbook_bgp
-       rules: 
+       rules:
           - ksator.bgp/check-bgp-session-state
      - playbook-name: pb123
        description: pb123
        synopsis: pb123
-       rules: 
+       rules:
           - protocol.bgp/check-bgp-received-routes
           - protocol.bgp/check-bgp-route-flap-damping
 
@@ -220,7 +216,7 @@ device_groups:
 #          - instance-id: playbook_bgp_intance_1
 #            playbook: playbook_bgp
 #            rule: ksator.bgp/check-bgp-session-state
-#            variable-value: 
+#            variable-value:
 #                - name: neighbors
 #                  value: 11.*
     - description: Group2

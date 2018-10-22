@@ -128,23 +128,13 @@ for item in my_variables_in_yaml['notifications']:
     add_notification(item)
 
 ############################################################################################################################
-# This block is to add topics to healtbot
+# This block is to add topics and rules to healtbot
 ############################################################################################################################
 
 print '****************** Adding topics to healthbot ******************'
 
 for item in my_variables_in_yaml['topics']:
     add_topic(item)
-
-
-############################################################################################################################
-# This block is to add rules to healtbot
-############################################################################################################################
-
-print '****************** Adding rules to healthbot ******************'
-
-for item in my_variables_in_yaml['rules']:
-    r=add_rule('ksator.bgp', item)
 
 
 ############################################################################################################################
@@ -162,7 +152,7 @@ for item in my_variables_in_yaml['playbooks']:
 
 print '****************** Adding device groups to healthbot ******************'
 
-for item in my_variables_in_yaml['device_groups']: 
+for item in my_variables_in_yaml['device_groups']:
     add_device_group(item)
 
 

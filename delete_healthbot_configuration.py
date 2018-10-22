@@ -1,7 +1,8 @@
 ###################################################
-# Workflow: 
+# About this scrit:
 # delete your own tables, topics, rules, playbooks
 # delete all device groups, notifications, devices
+# commit the change and display new running configuration
 ###################################################
 
 ###################################################
@@ -98,6 +99,12 @@ def delete_playbook(playbook):
     r = requests.delete(url + '/playbook/' + playbook['playbook-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     return r.status_code
 
+def get_playbook(playbook):
+    r = requests.get(url + '/playbook/' + playbook['playbook-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    print "here's the playbook " + playbook["playbook-name"] + " details in the running configuration"
+    pprint (r.json())
+    return (r.json())
+
 def delete_rule(topic, rule):
     r = requests.delete(url + '/topic/' + topic + '/rule/' + rule['rule-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     return r.status_code
@@ -105,6 +112,20 @@ def delete_rule(topic, rule):
 def delete_topic(topic):
     r = requests.delete(url + '/topic/' + topic['topic-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     return r.status_code
+
+def get_topics():
+    r = requests.get(url + '/topic/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    print "here's the list of topics in the running configuration"
+    pprint (r.json())
+    return (r.json())
+
+def get_topic(topic):
+    r = requests.get(url + '/topic/' + topic['topic-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
+    print "here's the topic " + topic["topic-name"] + " details in the running configuration"
+    pprint (r.json())
+    return (r.json())
+
+
 
 ######################################################
 # Below blocks are REST calls to configure healthbot
@@ -119,56 +140,6 @@ url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
 ######################################################
-# This block is to remove your own tables and views from healthbot
-######################################################
-
-print '########### Removing your own tables (tables and views)  ############'
-
-for item in my_variables_in_yaml['tables_and_views']:
-     print "removing table " + item
-     delete_table(item)
-
-commit ()
-
-######################################################
-# This block is to remove your own playbooks from healthbot
-######################################################
-
-print '########### Removing your own playbooks  ############'
-
-for item in my_variables_in_yaml['playbooks']:
-     print "removing playbook " + item['playbook-name']
-     delete_playbook(item)
-
-commit ()
-
-
-######################################################
-# This block is to remove your own rules from healthbot
-######################################################
-
-print '########### Removing your own rules  ############'
-
-for item in my_variables_in_yaml['rules']:
-     print "removing rule " + item['rule-name']
-     delete_rule('ksator.bgp', item)
-
-commit ()
-
-
-######################################################
-# This block is to remove your own topics from healthbot
-######################################################
-
-print '########### Removing your own topics  ############'
-
-for item in my_variables_in_yaml['topics']:
-     print "removing topic " + item['topic-name']
-     delete_topic(item)
-
-commit ()
-
-######################################################
 # This block is to remove all device groups from healthbot
 ######################################################
 
@@ -181,9 +152,38 @@ print "removing device groups from healthbot"
 for item in device_group_in_running_configuration:
      delete_device_group(item)
 
-commit ()
 
-get_device_groups()
+######################################################
+# This block is to remove your own tables and views from healthbot
+######################################################
+
+print '########### Removing your own tables (tables and views)  ############'
+
+for item in my_variables_in_yaml['tables_and_views']:
+     print "removing table " + item
+     delete_table(item)
+
+
+######################################################
+# This block is to remove your own playbooks from healthbot
+######################################################
+
+print '########### Removing your own playbooks  ############'
+
+for item in my_variables_in_yaml['playbooks']:
+     print "removing playbook " + item['playbook-name']
+     delete_playbook(item)
+
+
+######################################################
+# This block is to remove your own topics from healthbot
+######################################################
+
+print '########### Removing your own topics  ############'
+
+for item in my_variables_in_yaml['topics']:
+     print "removing topic " + item['topic-name']
+     delete_topic(item)
 
 
 ######################################################
@@ -196,15 +196,8 @@ notifications_in_running_configuration = get_notifications()
 
 print 'removing notifications from healthbot'
 
-
-for item in notifications_in_running_configuration: 
+for item in notifications_in_running_configuration:
     delete_notification(item)
-
-commit()
-
-get_notifications()
-
-
 
 ######################################################
 # This block is to remove all devices from healthbot
@@ -219,9 +212,25 @@ print "removing devices from healthbot"
 for dev in devices_name_in_running_configuration:
     delete_device(dev)
 
-#get_devices_name_in_candidate_configuration()
+
+######################################################
+# This block is to commit the changes and to display the running configuration
+######################################################
+
+print '###########  committing the configuration change  ############'
 
 commit()
 
+print '###########  printing running configuration  ############'
+
+for item in my_variables_in_yaml['topics']:
+     get_topic(item)
+
+for item in my_variables_in_yaml['playbooks']:
+     get_playbook(item)
+
+get_notifications()
+get_device_groups()
 get_devices_name_in_running_configuration()
+
 

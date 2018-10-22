@@ -110,8 +110,7 @@ def get_playbooks():
     return r.status_code
 
 def get_playbook(playbook):
-    r = requests.get(url + '/playbook/'+ playbook['playbook-name']  + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False
-)
+    r = requests.get(url + '/playbook/'+ playbook['playbook-name']  + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     print '\n****************** playbook ' + playbook['playbook-name'] + ' ******************'
     pprint (r.json())
     return r.status_code
@@ -165,15 +164,8 @@ get_notifications()
 for item in my_variables_in_yaml['notifications']:
     get_notification(item)
 
-get_topics()
-
 for item in my_variables_in_yaml['topics']:
     get_topic(item)
-
-for item in my_variables_in_yaml['rules']:
-     get_rule('ksator.bgp', item)
-
-get_playbooks()
 
 for item in my_variables_in_yaml['playbooks']:
     get_playbook(item)
