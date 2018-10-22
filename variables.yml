@@ -9,7 +9,6 @@ server: "10.49.102.129"
 authuser: "admin"
 authpwd: "Embe1mpls"
 
-
 #############################################################################
 # network devices details to add to healthbot
 #############################################################################
@@ -99,14 +98,12 @@ devices_list:
           port: 32768
       system-id: "vmx107"
 
-
 #############################################################################
 # tables and views to load on healthbot (from the directory tables_and_views)
 #############################################################################
 tables_and_views:
     - bgp_sessions_state.yml
     - ospf.yml
-
 
 #############################################################################
 # notifications to add to healthbot
@@ -116,23 +113,21 @@ notifications:
       description: "heathbot to saltstack webhook notifications"
       http-post:
           url: http://10.49.102.129:5001/healthbot
-    - notification-name: another_notification
-      description: another_notification
+    - notification-name: another_webhook_listener
+      description: another_webhook_listener
       http-post:
-          url: http://10.49.102.129:5001/healthbot
-
+          url: http://10.49.102.128:5001/healthbot
 
 #############################################################################
 # topics to add to healthbot
 #############################################################################
 topics:
-    - topic-name: protocol.bgp
+    - topic-name: ksator.bgp
       synopsis:  monitor bgp
-      description: This topic is to monitors bgp details
-    - topic-name: test.test
-      synopsis:  test
-      description: test
-
+      description: This topic is to monitor bgp details
+    - topic-name: ksator.interfaces
+      synopsis:  ksator.interfaces
+      description: This topic is to monitor interfaces
 
 #############################################################################
 # rules to add to healthbot
@@ -153,7 +148,7 @@ rules:
           type: string
       keys: 
         - peer-address
-      rule-name: ast
+      rule-name: check-bgp-session-state
       sensor: 
         - iAgent: 
               file: bgp_sessions_state.yml
@@ -163,7 +158,7 @@ rules:
       trigger: 
         - frequency: 30s
           term: 
-              - term-name: is-establish
+              - term-name: session_is_established
                 then: 
                     status:
                         color: green
@@ -171,7 +166,7 @@ rules:
                     matches-with: 
                         - left-operand: $state
                           right-operand: Established
-              - term-name: is_not_established
+              - term-name: session_is_not_established
                 then: 
                     status: 
                         color: red
@@ -186,16 +181,16 @@ rules:
 # playbook to add to healthbot
 #############################################################################
 playbooks:
-     - playbook-name: ast
-       description: ast
-       synopsis: ast
+     - playbook-name: playbook_bgp
+       description: playbook_bgp
+       synopsis: playbook_bgp
        rules: 
-          - protocol.bgp/ast
+          - ksator.bgp/check-bgp-session-state
      - playbook-name: pb123
        description: pb123
        synopsis: pb123
        rules: 
-          - protocol.bgp/ast
+          - protocol.bgp/check-bgp-received-routes
           - protocol.bgp/check-bgp-route-flap-damping
 
 
@@ -213,22 +208,21 @@ device_groups:
            - vmx105
            - vmx106
            - vmx107
-      playbooks:
-           - ast
+#      playbooks:
+#           -  playbook_bgp
       notification:
           major:
               - heathbot_to_saltstack
-              - another_notification
+              - another_webhook_listener
           minor:
-              - another_notification
-      variable:
-          - instance-id: ast1
-            playbook: ast
-            rule: protocol.bgp/ast
-            variable-value: 
-                - name: neighbors
-                  value: 11.*
-
+              - another_webhook_listener
+#      variable:
+#          - instance-id: playbook_bgp_intance_1
+#            playbook: playbook_bgp
+#            rule: ksator.bgp/check-bgp-session-state
+#            variable-value: 
+#                - name: neighbors
+#                  value: 11.*
     - description: Group2
       device-group-name: Group2
       devices:

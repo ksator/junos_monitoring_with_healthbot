@@ -144,7 +144,7 @@ for item in my_variables_in_yaml['topics']:
 print '****************** Adding rules to healthbot ******************'
 
 for item in my_variables_in_yaml['rules']:
-    r=add_rule('protocol.bgp', item)
+    r=add_rule('ksator.bgp', item)
 
 
 ############################################################################################################################

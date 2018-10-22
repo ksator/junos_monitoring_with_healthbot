@@ -1,6 +1,6 @@
 ###################################################
 # Workflow: 
-# remove your own tables, topics, rules, playbooks
+# delete your own tables, topics, rules, playbooks
 # delete all device groups, notifications, devices
 ###################################################
 
@@ -86,7 +86,6 @@ def get_notifications():
     pprint (r.json())
     return (r.json())
 
-
 def delete_notification(notification):
     r = requests.delete(url + '/notification/' + notification + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     return r.status_code
@@ -129,6 +128,8 @@ for item in my_variables_in_yaml['tables_and_views']:
      print "removing table " + item
      delete_table(item)
 
+commit ()
+
 ######################################################
 # This block is to remove your own playbooks from healthbot
 ######################################################
@@ -139,6 +140,9 @@ for item in my_variables_in_yaml['playbooks']:
      print "removing playbook " + item['playbook-name']
      delete_playbook(item)
 
+commit ()
+
+
 ######################################################
 # This block is to remove your own rules from healthbot
 ######################################################
@@ -147,7 +151,10 @@ print '########### Removing your own rules  ############'
 
 for item in my_variables_in_yaml['rules']:
      print "removing rule " + item['rule-name']
-     delete_rule('protocol.bgp', item)
+     delete_rule('ksator.bgp', item)
+
+commit ()
+
 
 ######################################################
 # This block is to remove your own topics from healthbot
@@ -159,12 +166,13 @@ for item in my_variables_in_yaml['topics']:
      print "removing topic " + item['topic-name']
      delete_topic(item)
 
+commit ()
+
 ######################################################
 # This block is to remove all device groups from healthbot
 ######################################################
 
 print '########### Removing all device groups  ############'
-
 
 device_group_in_running_configuration = get_device_groups()
 
@@ -183,7 +191,6 @@ get_device_groups()
 ######################################################
 
 print '###########  Removing all notifications  ############'
-
 
 notifications_in_running_configuration = get_notifications()
 

@@ -90,6 +90,13 @@ def get_device_groups():
     pprint (r.json())
     return r.status_code
 
+def get_notification(notification):
+    r = requests.get(url + '/notification/'+ notification['notification-name']  + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False
+)
+    print '\n****************** notification ' + notification['notification-name'] + ' ******************'
+    pprint (r.json())
+    return r.status_code
+
 def get_notifications():
     r = requests.get(url + '/notification/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     print '\n****************** list of notifications in running configuration ******************'
@@ -155,13 +162,16 @@ for item in my_variables_in_yaml['tables_and_views']:
 
 get_notifications()
 
+for item in my_variables_in_yaml['notifications']:
+    get_notification(item)
+
 get_topics()
 
-#for item in my_variables_in_yaml['topics']:
-#    get_topic(item)
+for item in my_variables_in_yaml['topics']:
+    get_topic(item)
 
 for item in my_variables_in_yaml['rules']:
-     get_rule('protocol.bgp', item)
+     get_rule('ksator.bgp', item)
 
 get_playbooks()
 
