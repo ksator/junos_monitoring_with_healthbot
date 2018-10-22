@@ -81,6 +81,15 @@ def delete_device_group(group):
     r = requests.delete(url + '/device-group/'+ group + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     return r.status_code
 
+def update_device_group(group):
+    if 'playbooks' in group:
+        del group['playbooks']
+    if 'variable' in group:
+        del group['variable']
+    payload=json.dumps(group)
+    r = requests.post(url + '/device-group/' + group['device-group-name'] + '/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False, data=payload)
+    return r.status_code
+
 def get_notifications():
     r = requests.get(url + '/notification/', auth=HTTPBasicAuth(authuser, authpwd), headers=headers, verify=False)
     print "here's the notifications in the ruuning configuration "
@@ -140,17 +149,23 @@ url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
 ######################################################
-# This block is to remove all device groups from healthbot
+# This block is to remove your own device groups from healthbot
 ######################################################
 
-print '########### Removing all device groups  ############'
+print '########### Removing playbook instances and variables from your own device groups  ############'
 
-device_group_in_running_configuration = get_device_groups()
+for item in my_variables_in_yaml['device_groups']:
+    print "updating device group " + item['device-group-name']
+    update_device_group(item)
 
-print "removing device groups from healthbot"
+print "commiting the change"
+commit()
 
-for item in device_group_in_running_configuration:
-     delete_device_group(item)
+print '########### Removing your own device groups  ############'
+
+for item in my_variables_in_yaml['device_groups']:
+    print "removing device group " + item['device-group-name']
+    delete_device_group(item['device-group-name'])
 
 
 ######################################################
@@ -176,10 +191,10 @@ for item in my_variables_in_yaml['playbooks']:
 
 
 ######################################################
-# This block is to remove your own topics from healthbot
+# This block is to remove your own topics and rule from healthbot
 ######################################################
 
-print '########### Removing your own topics  ############'
+print '########### Removing your own topics and rules ############'
 
 for item in my_variables_in_yaml['topics']:
      print "removing topic " + item['topic-name']
@@ -190,27 +205,21 @@ for item in my_variables_in_yaml['topics']:
 # This block is to remove all notifications from healthbot
 ######################################################
 
-print '###########  Removing all notifications  ############'
+print '###########  Removing your own notifications  ############'
 
-notifications_in_running_configuration = get_notifications()
-
-print 'removing notifications from healthbot'
-
-for item in notifications_in_running_configuration:
-    delete_notification(item)
+for item in my_variables_in_yaml['notifications']:
+    print "removing notification " + item['notification-name']
+    delete_notification(item['notification-name'])
 
 ######################################################
-# This block is to remove all devices from healthbot
+# This block is to remove your own devices from healthbot
 ######################################################
 
-print '###########  Removing all devices  ############'
+print '###########  Removing your own devices  ############'
 
-devices_name_in_running_configuration = get_devices_name_in_running_configuration()
-
-print "removing devices from healthbot"
-
-for dev in devices_name_in_running_configuration:
-    delete_device(dev)
+for item in my_variables_in_yaml['devices_list']:
+    print "removing device " + item['device-id']
+    delete_device( item['device-id'])
 
 
 ######################################################
