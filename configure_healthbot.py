@@ -131,7 +131,7 @@ for item in my_variables_in_yaml['notifications']:
 # This block is to add topics and rules to healtbot
 ############################################################################################################################
 
-print '****************** Adding topics to healthbot ******************'
+print '****************** Adding topics and rules to healthbot ******************'
 
 for item in my_variables_in_yaml['topics']:
     add_topic(item)
