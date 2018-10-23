@@ -157,7 +157,7 @@ topics:
                         then: 
                             status: 
                                 color: green
-                                message: BGP neighbor $bgpPeerState is in ESTABLISHED state
+                                message: BGP neighbor $bgpPeerRemoteAddr is in ESTABLISHED state
                         when: 
                             equal-to: 
                                 - left-operand: $bgpPeerState
@@ -166,7 +166,7 @@ topics:
                         then: 
                             status: 
                                 color: red
-                                message: BGP neighbor $bgpPeerState is NOT in ESTABLISHED state
+                                message: BGP neighbor $bgpPeerRemoteAddr is NOT in ESTABLISHED state
                   trigger-name: state
           - field:
               - description: peer-address
