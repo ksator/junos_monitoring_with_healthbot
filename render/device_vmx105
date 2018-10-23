@@ -1,8 +1,8 @@
 {
     "authentication": {
         "password": {
-            "password": "root",
-            "username": "Embe1mpls"
+            "password": "Embe1mpls",
+            "username": "root"
         }
     },
     "description": "vmx105",

@@ -1,7 +1,7 @@
 ---
 name: vmx102
 ip: 10.49.102.157
-username: Embe1mpls 
-password: root
+username: root 
+password: Embe1mpls
 openconfig_port: 32768
 netconf_port: 830
