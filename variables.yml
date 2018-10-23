@@ -129,6 +129,45 @@ topics:
       synopsis:  ksator.bgp
       description: This topic is to monitor bgp details
       rule:
+          - field: 
+              - field-name: bgpPeerLocalAddr
+                description: bgpPeerLocalAddr
+                sensor: 
+                    - path: bgpPeerLocalAddr
+                      sensor-name: bgpPeerTable
+                type: string
+              - field-name: bgpPeerState
+                description: bgpPeerState
+                sensor: 
+                    - path: bgpPeerState
+                      sensor-name: bgpPeerTable
+                type: integer
+            keys: 
+                - bgpPeerLocalAddr
+            rule-name: check-bgp-session-state-using-snmp
+            sensor: 
+                - sensor-name: bgpPeerTable                     
+                  snmp: 
+                      frequency: 15s
+                      table: 1.3.6.1.2.1.15.3
+            trigger: 
+                - frequency: 30s
+                  term: 
+                      - term-name: session_is_established
+                        then: 
+                            status: 
+                                color: green
+                                message: BGP neighbor $bgpPeerLocalAddr is in ESTABLISHED state
+                        when: 
+                            equal-to: 
+                                - left-operand: $bgpPeerState
+                                  right-operand: 6
+                      - term-name: session_is_not_established
+                        then: 
+                            status: 
+                                color: red
+                                message: BGP neighbor $bgpPeerLocalAddr is NOT in ESTABLISHED state
+                  trigger-name: state
           - field:
               - description: peer-address
                 field-name: peer-address
@@ -144,7 +183,7 @@ topics:
                 type: string
             keys:
                 - peer-address
-            rule-name: check-bgp-session-state
+            rule-name: check-bgp-session-state-using-netconf
             sensor:
                 - iAgent:
                       file: bgp_sessions_state.yml
@@ -177,17 +216,16 @@ topics:
 # playbook to add to healthbot
 #############################################################################
 playbooks:
-     - playbook-name: playbook_bgp
-       description: playbook_bgp
-       synopsis: playbook_bgp
+     - playbook-name: playbook_bgp_using_netconf
+       description: playbook_bgp_using_netconf
+       synopsis: playbook_bgp_using_netconf
        rules:
-          - ksator.bgp/check-bgp-session-state
-     - playbook-name: pb123
-       description: pb123
-       synopsis: pb123
+          - ksator.bgp/check-bgp-session-state-using-netconf
+     - playbook-name: playbook_bgp_using_snmp
+       description: playbook_bgp_using_snmp
+       synopsis: playbook_bgp_using_snmp
        rules:
-          - protocol.bgp/check-bgp-received-routes
-          - protocol.bgp/check-bgp-route-flap-damping
+          - ksator.bgp/check-bgp-session-state-using-snmp
 
 
 #############################################################################
@@ -205,7 +243,7 @@ device_groups:
            - vmx106
            - vmx107
       playbooks:
-           -  playbook_bgp
+           -  playbook_bgp_using_netconf
       notification:
           major:
               - heathbot_to_saltstack
@@ -213,9 +251,9 @@ device_groups:
           minor:
               - another_webhook_listener
       variable:
-          - instance-id: playbook_bgp_intance_1
-            playbook: playbook_bgp
-            rule: ksator.bgp/check-bgp-session-state
+          - instance-id: playbook_bgp_using_netconf_intance_1
+            playbook: playbook_bgp_using_netconf
+            rule: ksator.bgp/check-bgp-session-state-using-netconf
             variable-value:
                 - name: neighbors
                   value: 11.*
@@ -224,4 +262,14 @@ device_groups:
       devices:
            - vmx103
            - vmx104
+      playbooks:
+          -  playbook_bgp_using_snmp
+      variable:
+          - instance-id: playbook_bgp_using_snmp_intance_1
+            playbook: playbook_bgp_using_snmp
+            rule: ksator.bgp/check-bgp-session-state-using-snmp
+
+
+
+
 
