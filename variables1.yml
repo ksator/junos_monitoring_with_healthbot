@@ -161,7 +161,7 @@ topics:
                         when: 
                             equal-to: 
                                 - left-operand: $bgpPeerState
-                                  right-operand: "6"
+                                  right-operand: 6
                       - term-name: session_is_not_established
                         then: 
                             status: 
