@@ -130,10 +130,10 @@ topics:
       description: This topic is to monitor bgp details
       rule:
           - field: 
-              - field-name: bgpPeerLocalAddr
-                description: bgpPeerLocalAddr
+              - field-name: bgpPeerRemoteAddr
+                description: bgpPeerRemoteAddr
                 sensor: 
-                    - path: bgpPeerLocalAddr
+                    - path: bgpPeerRemoteAddr
                       sensor-name: bgpPeerTable
                 type: string
               - field-name: bgpPeerState
@@ -143,7 +143,7 @@ topics:
                       sensor-name: bgpPeerTable
                 type: integer
             keys: 
-                - bgpPeerLocalAddr
+                - bgpPeerRemoteAddr
             rule-name: check-bgp-session-state-using-snmp
             sensor: 
                 - sensor-name: bgpPeerTable                     
