@@ -112,7 +112,7 @@ notifications:
     - notification-name: heathbot_to_saltstack
       description: "heathbot to saltstack webhook notifications"
       http-post:
-          url: http://10.49.102.129:5001/healthbot
+          url: http://10.49.102.131:5001/healthbot
     - notification-name: another_webhook_listener
       description: another_webhook_listener
       http-post:
