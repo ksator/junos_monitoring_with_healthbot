@@ -122,11 +122,14 @@ notifications:
 # topics and rules to add to healthbot
 #############################################################################
 topics:
-    - topic-name: ksator.interfaces
+    - topic-name: interfaces
       synopsis:  monitor interfaces
       description: This topic is to monitor interfaces
-    - topic-name: ksator.bgp
-      synopsis:  ksator.bgp
+    - topic-name: ospf
+      synopsis:  monitor ospf
+      description: This topic is to monitor ospf
+    - topic-name: bgp
+      synopsis:  bgp
       description: This topic is to monitor bgp details
       rule:
           - field: 
@@ -144,7 +147,7 @@ topics:
                 type: integer
             keys: 
                 - bgpPeerRemoteAddr
-            rule-name: check-bgp-session-state-using-snmp
+            rule-name: check-state-using-snmp
             sensor: 
                 - sensor-name: bgpPeerTable                     
                   snmp: 
@@ -183,7 +186,7 @@ topics:
                 type: string
             keys:
                 - peer-address
-            rule-name: check-bgp-session-state-using-netconf
+            rule-name: check-state-using-netconf
             sensor:
                 - iAgent:
                       file: bgp_sessions_state.yml
@@ -197,6 +200,7 @@ topics:
                         then:
                             status:
                                 color: green
+                                message: BGP neighbor $peer-address is in $state state
                         when:
                             matches-with:
                                 - left-operand: $state
@@ -205,6 +209,7 @@ topics:
                         then:
                             status:
                                 color: red
+                                message: BGP neighbor $peer-address is in $state state
                   trigger-name: neighborship
             variable:
                 - description: Enter neighbor name or address using regular expression
@@ -216,16 +221,16 @@ topics:
 # playbook to add to healthbot
 #############################################################################
 playbooks:
-     - playbook-name: playbook_bgp_using_netconf
-       description: playbook_bgp_using_netconf
-       synopsis: playbook_bgp_using_netconf
+     - playbook-name: bgp-using-netconf
+       description: bgp
+       synopsis: bgp
        rules:
-          - ksator.bgp/check-bgp-session-state-using-netconf
-     - playbook-name: playbook_bgp_using_snmp
-       description: playbook_bgp_using_snmp
-       synopsis: playbook_bgp_using_snmp
+          - bgp/check-state-using-netconf
+     - playbook-name: bgp-using-snmp
+       description: bgp
+       synopsis: bgp
        rules:
-          - ksator.bgp/check-bgp-session-state-using-snmp
+          - bgp/check-state-using-snmp
 
 
 #############################################################################
@@ -243,7 +248,7 @@ device_groups:
            - vmx106
            - vmx107
       playbooks:
-           -  playbook_bgp_using_netconf
+           -  bgp-using-netconf
       notification:
           major:
               - heathbot_to_saltstack
@@ -251,9 +256,9 @@ device_groups:
           minor:
               - another_webhook_listener
       variable:
-          - instance-id: playbook_bgp_using_netconf_intance_1
-            playbook: playbook_bgp_using_netconf
-            rule: ksator.bgp/check-bgp-session-state-using-netconf
+          - instance-id: bgp_using_netconf_intance_1
+            playbook: bgp-using-netconf
+            rule: bgp/check-state-using-netconf
             variable-value:
                 - name: neighbors
                   value: 11.*
@@ -263,11 +268,11 @@ device_groups:
            - vmx103
            - vmx104
       playbooks:
-          -  playbook_bgp_using_snmp
+          -  bgp-using-snmp
       variable:
-          - instance-id: playbook_bgp_using_snmp_intance_1
-            playbook: playbook_bgp_using_snmp
-            rule: ksator.bgp/check-bgp-session-state-using-snmp
+          - instance-id: bgp_using_snmp_intance_1
+            playbook: bgp-using-snmp
+            rule: bgp/check-state-using-snmp
 
 
 
