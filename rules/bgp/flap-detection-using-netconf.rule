@@ -33,6 +33,7 @@ iceberg {
                 description state;
             }
             trigger flap {
+                frequency 60s;
                 term flapped {
                     when {
                         increasing-at-least-by-value "$flap-count" {
