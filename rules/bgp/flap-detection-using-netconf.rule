@@ -35,9 +35,9 @@ iceberg {
             trigger session_flapped {
                 term flapped {
                     when {
-                        increasing-at-least-by-rate "$flap-count" {
+                        increasing-at-least-by-value "$flap-count" {
                             value 1;
-                            per minute;
+                            time-range 60s;
                         }
                     }
                     then {
