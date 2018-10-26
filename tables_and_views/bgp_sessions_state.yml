@@ -12,3 +12,6 @@ bgpView:
   peer_state: peer-state
   peer_address: peer-address
   peer_type: peer-type
+  flap_count: flap-count 
+
+

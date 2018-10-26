@@ -1,0 +1,63 @@
+iceberg {
+    topic bgp {
+        description "This topic is to monitor bgp details";
+        synopsis bgp;
+        rule flap-detection-using-netconf {
+            keys peer-address;
+            sensor bgp {
+                iAgent {
+                    file bgp_sessions_state.yml;
+                    table bgpTable;
+                    frequency 15s;
+                }
+            }
+            field flap-count {
+                sensor bgp {
+                    path flap_count;
+                }
+                type integer;
+                description flap_count;
+            }
+            field peer-address {
+                sensor bgp {
+                    path peer-address;
+                }
+                type string;
+                description peer-address;
+            }
+            field state {
+                sensor bgp {
+                    path peer_state;
+                }
+                type string;
+                description state;
+            }
+            trigger session_flapped {
+                term flapped {
+                    when {
+                        increasing-at-least-by-rate "$flap-count" {
+                            value 1;
+                            per minute;
+                        }
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "Session with BGP neighbor $peer-address flapped. Flap count is $flap-count. Session state is $state state";
+                        }
+                    }
+                }
+                term session_is_not_flapping {
+                    then {
+                        status {
+                            color green;
+                            message "Session with BGP neighbor $peer-address is not flapping. Flap count is $flap-count. Session state is $state state";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
