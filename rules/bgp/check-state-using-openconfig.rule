@@ -1,0 +1,58 @@
+iceberg {
+    topic bgp {
+        description "This topic is to monitor bgp details";
+        synopsis bgp;
+        rule check-state-with-openconfig {
+            keys neighbor-address;
+            sensor bgp-sensor {
+                open-config {
+                    sensor-name /network-instances/network-instance/protocols/protocol;
+                    frequency 10s;
+                }
+            }
+            field neighbor-address {
+                sensor bgp-sensor {
+                    where "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/@neighbor-address =~ /{{neighbors}}/";
+                    path "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/@neighbor-address";
+                }
+                type string;
+                description neighbor-address;
+            }
+            field session-state {
+                sensor bgp-sensor {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/session-status;
+                }
+                type string;
+                description session-state;
+            }
+            trigger neighbor-state {
+                frequency 30s;
+                term is_established {
+                    when {
+                        equal-to "$session-state" ESTABLISHED;
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "$neighbor-address $session-state";
+                        }
+                    }
+                }
+                term is_not_established {
+                    then {
+                        status {
+                            color red;
+                            message "$neighbor-address $session-state";
+                        }
+                    }
+                }
+            }
+            variable neighbors {
+                value .*;
+                description neighbors;
+                type string;
+            }
+        }
+    }
+}
+

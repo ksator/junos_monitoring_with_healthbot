@@ -1,0 +1,57 @@
+iceberg {
+    topic bgp {
+        description "This topic is to monitor bgp details";
+        synopsis bgp;
+        rule check-state-with-openconfig-bgp-path {
+            keys neighbor-address;
+            sensor bgp {
+                open-config {
+                    sensor-name /bgp/neighbors/neighbor;
+                    frequency 10s;
+                }
+            }
+            field neighbor-address {
+                sensor bgp {
+                    where "/bgp/neighbors/neighbor/@neighbor-address =~ /{{neighbors}}/";
+                    path "/bgp/neighbors/neighbor/@neighbor-address";
+                }
+                type string;
+                description neighbor-address;
+            }
+            field session-status {
+                sensor bgp {
+                    path /bgp/neighbors/neighbor/state/session-status;
+                }
+                type string;
+                description session-status;
+            }
+            trigger session-state {
+                frequency 30s;
+                term is_established {
+                    when {
+                        equal-to "$session-status" ESTABLISHED;
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "@neighbor-address is $session-status ";
+                        }
+                    }
+                }
+                term is_not_established {
+                    then {
+                        status {
+                            color red;
+                            message "@neighbor-address is $session-status ";
+                        }
+                    }
+                }
+            }
+            variable neighbors {
+                value .*;
+                description neighbors;
+                type string;
+            }
+        }
+    }
+}
