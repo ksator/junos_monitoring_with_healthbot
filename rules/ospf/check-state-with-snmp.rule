@@ -1,0 +1,51 @@
+iceberg {
+    topic ospf {
+        description "This topic is to monitor ospf details";
+        synopsis ospf;
+        rule check-state-with-snmp {
+            keys ospfNbrIpAddr;
+            sensor ospfNbrTable {
+                snmp {
+                    table .1.3.6.1.2.1.14.10;
+                    frequency 10s;
+                }
+            }
+            field ospfNbrIpAddr {
+                sensor ospfNbrTable {
+                    path ospfNbrIpAddr;
+                }
+                type string;
+                description ospfNbrIpAddr;
+            }
+            field ospfNbrState {
+                sensor ospfNbrTable {
+                    path ospfNbrState;
+                }
+                type integer;
+                description ospfNbrState;
+            }
+            trigger check-ospf-status {
+                frequency 30s;
+                term is_full {
+                    when {
+                        equal-to "$ospfNbrState" 8;
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "OSPF neighbor $ospfNbrIpAddr is in FULL state";
+                        }
+                    }
+                }
+                term is_not_full {
+                    then {
+                        status {
+                            color red;
+                            message "OSPF neighbor $ospfNbrIpAddr is not in FULL state but in $ospfNbrState";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

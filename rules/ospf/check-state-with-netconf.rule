@@ -1,0 +1,59 @@
+iceberg {
+    topic ospf {
+        description "This topic is to monitor ospf details";
+        synopsis ospf;
+        rule check-state-with-netconf {
+            keys neighbor-address;
+            sensor ospf {
+                iAgent {
+                    file ospf.yml;
+                    table OspfNeighborTable;
+                    frequency 15s;
+                }
+            }
+            field interface_name {
+                sensor ospf {
+                    path interface_name;
+                }
+                type string;
+                description interface_name;
+            }
+            field neighbor-address {
+                sensor ospf {
+                    path neighbor-address;
+                }
+                type string;
+                description neighbor-address;
+            }
+            field ospf_neighbor_state {
+                sensor ospf {
+                    path ospf_neighbor_state;
+                }
+                type string;
+                description ospf_neighbor_state;
+            }
+            trigger ospf-state {
+                frequency 30s;
+                term is_full {
+                    when {
+                        matches-with "$ospf_neighbor_state" Full;
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "$neighbor_address $ospf_neighbor_state";
+                        }
+                    }
+                }
+                term is_not_full {
+                    then {
+                        status {
+                            color red;
+                            message "$neighbor_address $ospf_neighbor_state";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
