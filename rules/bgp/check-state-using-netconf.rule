@@ -1,0 +1,58 @@
+iceberg {
+    topic bgp {
+        description "This topic is to monitor bgp details";
+        synopsis bgp;
+        rule check-state-using-netconf {
+            keys peer-address;
+            sensor session_state {
+                iAgent {
+                    file bgp_sessions_state.yml;
+                    table bgpTable;
+                    frequency 15s;
+                }
+            }
+            field peer-address {
+                sensor session_state {
+                    path peer-address;
+                }
+                type string;
+                description peer-address;
+            }
+            field state {
+                sensor session_state {
+                    path peer_state;
+                }
+                type string;
+                description state;
+            }
+            trigger neighborship {
+                frequency 30s;
+                term session_is_established {
+                    when {
+                        matches-with "$state" Established;
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "BGP neighbor $peer-address is in $state state";
+                        }
+                    }
+                }
+                term session_is_not_established {
+                    then {
+                        status {
+                            color red;
+                            message "BGP neighbor $peer-address is in $state state";
+                        }
+                    }
+                }
+            }
+            variable neighbors {
+                value .*;
+                description "Enter neighbor name or address using regular expression";
+                type string;
+            }
+        }
+    }
+}
+
