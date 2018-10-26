@@ -222,13 +222,13 @@ topics:
 #############################################################################
 playbooks:
      - playbook-name: bgp-using-netconf
-       description: bgp
-       synopsis: bgp
+       description: playbook to monitor bgp using netconf
+       synopsis: playbook to monitor bgp using netconf
        rules:
           - bgp/check-state-using-netconf
      - playbook-name: bgp-using-snmp
-       description: bgp
-       synopsis: bgp
+       description: playbook to monitor bgp using snmp
+       synopsis: playbook to monitor bgp using snmp
        rules:
           - bgp/check-state-using-snmp
 
