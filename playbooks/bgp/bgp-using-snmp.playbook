@@ -1,0 +1,8 @@
+iceberg {
+    playbook bgp-using-snmp {
+        rules [ bgp/check-state-using-snmp ];
+        description "playbook to monitor bgp using snmp";
+        synopsis "playbook to monitor bgp using snmp";
+    }
+}
+
