@@ -32,7 +32,7 @@ iceberg {
                 type string;
                 description state;
             }
-            trigger session_flapped {
+            trigger flap {
                 term flapped {
                     when {
                         increasing-at-least-by-value "$flap-count" {
