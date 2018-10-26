@@ -1,0 +1,78 @@
+iceberg {
+    topic interfaces {
+        description "This topic is to monitor interfaces";
+        synopsis "monitor interfaces";
+                rule check-status-with-snmp {
+            keys ifIndex;
+            sensor iftable {
+                snmp {
+                    table .1.3.6.1.2.1.2.2;
+                    frequency 15s;
+                }
+            }
+            field ifAdminStatus {
+                sensor iftable {
+                    path ifAdminStatus;
+                }
+                type integer;
+                description ifAdminStatus;
+            }
+            field ifDescr {
+                sensor iftable {
+                    path ifDescr;
+                }
+                type string;
+                description ifDescr;
+            }
+            field ifInUcastPkts {
+                sensor iftable {
+                    path ifInUcastPkts;
+                }
+                type integer;
+                description ifInUcastPkts;
+            }
+            field ifIndex {
+                sensor iftable {
+                    path ifIndex;
+                }
+                type string;
+                description ifIndex;
+            }
+            field ifOperStatus {
+                sensor iftable {
+                    path ifOperStatus;
+                }
+                type integer;
+                description ifOperStatus;
+            }
+            trigger check-interface-status {
+                frequency 30s;
+                term up_up {
+                    when {
+                        equal-to "$ifOperStatus" 1;
+                        equal-to "$ifAdminStatus" 1;
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "ifindex $ifIndex is up/up - $ifDescr";
+                        }
+                    }
+                }
+                term up_down {
+                    when {
+                        equal-to "$ifAdminStatus" 1;
+                        equal-to "$ifOperStatus" 2;
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "ifindex $ifIndex is up/down - $ifDescr";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

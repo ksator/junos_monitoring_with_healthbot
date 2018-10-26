@@ -1,0 +1,65 @@
+iceberg {
+        topic interfaces {
+        description "This topic is to monitor interfaces";
+        synopsis "monitor interfaces";
+        rule check-status-with-openconfig {
+            keys interface-name;
+            sensor interfaces {
+                open-config {
+                    sensor-name /interfaces;
+                    frequency 15s;
+                }
+            }
+            field admin-status {
+                sensor interfaces {
+                    path /interfaces/interface/state/admin-status;
+                }
+                type string;
+                description admin-status;
+            }
+            field interface-name {
+                sensor interfaces {
+                    where "/interfaces/interface/@name =~ /{{interface_name}}/";
+                    path "/interfaces/interface/@name";
+                }
+                type string;
+                description interface-name;
+            }
+            field oper-status {
+                sensor interfaces {
+                    path /interfaces/interface/state/oper-status;
+                }
+                type string;
+                description "oper-status\n";
+            }
+            trigger link-state {
+                frequency 30s;
+                term up_down {
+                    when {
+                        matches-with "$admin-status" UP;
+                        matches-with "$oper-status" DOWN;
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "$interface-name is admin $admin-status and oper $oper-status";
+                        }
+                    }
+                }
+                term up_up_or_down_down {
+                    then {
+                        status {
+                            color green;
+                            message "$interface-name is admin $admin-status and oper $oper-status";
+                        }
+                    }
+                }
+            }
+            variable interface_name {
+                value .*;
+                description interface_name;
+                type string;
+            }
+        }
+    }
+}
