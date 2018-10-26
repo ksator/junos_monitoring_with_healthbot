@@ -2,7 +2,7 @@ iceberg {
         topic interfaces {
         description "This topic is to monitor interfaces";
         synopsis "monitor interfaces";
-        rule check-status-with-openconfig {
+        rule check-status-using-openconfig {
             keys interface-name;
             sensor interfaces {
                 open-config {

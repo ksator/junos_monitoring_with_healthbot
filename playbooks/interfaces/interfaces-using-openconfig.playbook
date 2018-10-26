@@ -1,6 +1,6 @@
 iceberg {
-    playbook interfaces-with-openconfig {
-        rules [ interfaces/check-status-with-openconfig ];
+    playbook interfaces-using-openconfig {
+        rules [ interfaces/check-status-using-openconfig ];
         description "playbook to monitor interfaces using openconfig";
         synopsis "playbook to monitor interfaces using openconfig";
     }

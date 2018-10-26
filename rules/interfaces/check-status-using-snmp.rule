@@ -2,7 +2,7 @@ iceberg {
     topic interfaces {
         description "This topic is to monitor interfaces";
         synopsis "monitor interfaces";
-            rule check-status-with-snmp {
+            rule check-status-using-snmp {
             keys ifIndex;
             sensor iftable {
                 snmp {
