@@ -1,0 +1,8 @@
+iceberg {
+    playbook ospf-using-snmp {
+        rules [ ospf/check-state-with-snmp ];
+        description "playbook to monitor ospf using snmp";
+        synopsis "playbook to monitor ospf using snmp";
+    }
+}
+
