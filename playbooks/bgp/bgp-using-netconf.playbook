@@ -1,6 +1,6 @@
 iceberg {
     playbook bgp-using-netconf {
-        rules [ bgp/check-state-using-netconf bgp/flap-detection-using-netconf];
+        rules [ bgp/check-bgp-state-using-netconf bgp/bgp-flap-detection-using-netconf];
         description "playbook to monitor bgp using netconf";
         synopsis "playbook to monitor bgp using netconf";
     }

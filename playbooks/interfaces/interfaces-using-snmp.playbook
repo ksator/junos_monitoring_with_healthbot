@@ -1,6 +1,6 @@
 iceberg {
     playbook interfaces-using-snmp {
-        rules [ interfaces/check-status-using-snmp ];
+        rules [ interfaces/check-interfaces-status-using-snmp ];
         description "playbook to monitor interfaces using snmp";
         synopsis "playbook to monitor interfaces using snmp";
     }

@@ -1,6 +1,6 @@
 iceberg {
     playbook ospf-using-netconf {
-        rules [ ospf/check-state-using-netconf ];
+        rules [ ospf/check-ospf-state-using-netconf ];
         description "playbook to monitor ospf using netconf";
         synopsis "playbook to monitor ospf using netconf";
     }
