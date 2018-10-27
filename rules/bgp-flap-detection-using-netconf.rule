@@ -34,7 +34,7 @@ iceberg {
             }
             trigger flap {
                 frequency 60s;
-                term flapped {
+                term session_flapped {
                     when {
                         increasing-at-least-by-value "$flap-count" {
                             value 1;
