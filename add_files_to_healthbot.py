@@ -4,19 +4,11 @@ import requests
 from requests.auth import HTTPBasicAuth
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-def import_variables_from_file():
-    my_variables_file=open('variables.yml', 'r')
-    my_variables_in_string=my_variables_file.read()
-    my_variables_in_yaml=yaml.load(my_variables_in_string)
-    my_variables_file.close()
-    return my_variables_in_yaml
-
 def add_tables_and_views(file_name):
     files = {'up_file': open('tables_and_views/' + file_name,'r')}
     r=requests.post(url + '/files/helper-files/' + file_name, auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json' }, verify=False, files=files)
     print file_name
     return r.status_code
-
 
 def add_rule(file_name):
     files = {'topics': open('rules/' + file_name,'r')}
@@ -38,10 +30,9 @@ def commit():
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-my_variables_in_yaml=import_variables_from_file()
-server = my_variables_in_yaml['server']
-authuser = my_variables_in_yaml['authuser']
-authpwd = my_variables_in_yaml['authpwd']
+server = "10.49.102.129"
+authuser = "admin"
+authpwd = "Embe1mpls"
 url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
