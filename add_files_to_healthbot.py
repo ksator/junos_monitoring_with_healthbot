@@ -17,16 +17,16 @@ def add_tables_and_views(file_name):
     print file_name
     return r.status_code
 
+
 def add_rule(file_name):
-    files = {'up_file': open('rules/' + file_name,'r')}
-    r=requests.post(url + '/topics/helper-files/' + file_name, auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json', 'Content-type': 'multipart/form-data' }, verify=False, files=files)
+    files = {'topics': open('rules/' + file_name,'r')}
+    r=requests.post(url + '/topics/', auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json'}, verify=False, files=files)
     print file_name
-    print r.status_code
     return r.status_code
 
 def add_playbook(file_name):
-    files = {'up_file': open('playbooks/' + file_name,'r')}
-    r=requests.post(url + '/playbooks/helper-files/' + file_name, auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json' }, verify=False, files=files)
+    files = {'playbooks': open('playbooks/' + file_name,'r')}
+    r=requests.post(url + '/playbooks/', auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json' }, verify=False, files=files)
     print file_name 
     return r.status_code
 
