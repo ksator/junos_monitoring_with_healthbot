@@ -2,7 +2,7 @@ iceberg {
     topic bgp {
         description "This topic is to monitor bgp details";
         synopsis bgp;
-        rule check-state-using-snmp {
+        rule check-bgp-state-using-snmp {
             keys bgpPeerRemoteAddr;
             sensor bgpPeerTable {
                 snmp {

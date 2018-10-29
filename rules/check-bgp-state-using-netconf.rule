@@ -2,7 +2,7 @@ iceberg {
     topic bgp {
         description "This topic is to monitor bgp details";
         synopsis bgp;
-        rule check-state-using-netconf {
+        rule check-bgp-state-using-netconf {
             keys peer-address;
             sensor session_state {
                 iAgent {

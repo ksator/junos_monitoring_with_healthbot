@@ -2,7 +2,7 @@ iceberg {
     topic bgp {
         description "This topic is to monitor bgp details";
         synopsis bgp;
-        rule check-state-using-openconfig-bgp-path {
+        rule check-bgp-state-using-openconfig-bgp-path {
             keys neighbor-address;
             sensor bgp {
                 open-config {

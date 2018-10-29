@@ -2,7 +2,7 @@ iceberg {
     topic bgp {
         description "This topic is to monitor bgp details";
         synopsis bgp;
-        rule flap-detection-using-netconf {
+        rule bgp-flap-detection-using-netconf {
             keys peer-address;
             sensor bgp {
                 iAgent {

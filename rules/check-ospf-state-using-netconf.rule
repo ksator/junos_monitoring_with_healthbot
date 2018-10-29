@@ -2,7 +2,7 @@ iceberg {
     topic ospf {
         description "This topic is to monitor ospf details";
         synopsis ospf;
-        rule check-state-using-netconf {
+        rule check-ospf-state-using-netconf {
             keys neighbor-address;
             sensor ospf {
                 iAgent {
