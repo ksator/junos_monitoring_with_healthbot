@@ -8,7 +8,7 @@
 
 ############################################################################################################################
 # usage:
-# vi variables.yml
+# vi python_input.yml
 # python ./audit_healthbot_configuration.py
 ############################################################################################################################
 
@@ -30,7 +30,7 @@ from pprint import pprint
 ############################################################################################################################
 
 def import_variables_from_file():
-    my_variables_file=open('variables.yml', 'r')
+    my_variables_file=open('python_input.yml', 'r')
     my_variables_in_string=my_variables_file.read()
     my_variables_in_yaml=yaml.load(my_variables_in_string)
     my_variables_file.close()

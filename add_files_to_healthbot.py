@@ -1,3 +1,20 @@
+############################################################################################################################
+# This script add to heathbot the files located to the directories rules and playbooks and tables_and_views 
+############################################################################################################################
+
+############################################################################################################################
+# requirements: pip install requests
+############################################################################################################################
+
+############################################################################################################################
+# usage:
+# ls rules
+# ls playbooks
+# ls tables_and_views
+# vi add_files_to_healthbot.py
+# python ./add_files_to_healthbot.py
+############################################################################################################################
+
 import os
 import yaml
 import requests
@@ -30,6 +47,7 @@ def commit():
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+# update this section with your healthbot ip address
 server = "10.49.102.129"
 authuser = "admin"
 authpwd = "Embe1mpls"
