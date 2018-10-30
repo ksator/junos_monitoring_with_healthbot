@@ -103,7 +103,6 @@ devices_list:
 #############################################################################
 tables_and_views:
     - bgp_sessions_state.yml
-    - ospf.yml
 
 #############################################################################
 # notifications to add to healthbot
@@ -113,21 +112,11 @@ notifications:
       description: "heathbot to saltstack webhook notifications"
       http-post:
           url: http://10.49.102.131:5001/healthbot
-    - notification-name: another_webhook_listener
-      description: another_webhook_listener
-      http-post:
-          url: http://10.49.102.128:5001/healthbot
 
 #############################################################################
 # topics and rules to add to healthbot
 #############################################################################
 topics:
-    - topic-name: interfaces
-      synopsis:  monitor interfaces
-      description: This topic is to monitor interfaces
-    - topic-name: ospf
-      synopsis:  monitor ospf
-      description: This topic is to monitor ospf
     - topic-name: bgp
       synopsis:  bgp
       description: This topic is to monitor bgp details
@@ -147,7 +136,7 @@ topics:
                 type: integer
             keys: 
                 - bgpPeerRemoteAddr
-            rule-name: check-state-using-snmp
+            rule-name: check-bgp-state-using-snmp
             sensor: 
                 - sensor-name: bgpPeerTable                     
                   snmp: 
@@ -186,7 +175,7 @@ topics:
                 type: string
             keys:
                 - peer-address
-            rule-name: check-state-using-netconf
+            rule-name: check-bgp-state-using-netconf
             sensor:
                 - iAgent:
                       file: bgp_sessions_state.yml
@@ -225,12 +214,12 @@ playbooks:
        description: playbook to monitor bgp using netconf
        synopsis: playbook to monitor bgp using netconf
        rules:
-          - bgp/check-state-using-netconf
+          - bgp/check-bgp-state-using-netconf
      - playbook-name: bgp-using-snmp
        description: playbook to monitor bgp using snmp
        synopsis: playbook to monitor bgp using snmp
        rules:
-          - bgp/check-state-using-snmp
+          - bgp/check-bgp-state-using-snmp
 
 
 #############################################################################
@@ -252,13 +241,12 @@ device_groups:
       notification:
           major:
               - heathbot_to_saltstack
-              - another_webhook_listener
           minor:
-              - another_webhook_listener
+              - heathbot_to_saltstack
       variable:
           - instance-id: bgp_using_netconf_intance_1
             playbook: bgp-using-netconf
-            rule: bgp/check-state-using-netconf
+            rule: bgp/check-bgp-state-using-netconf
             variable-value:
                 - name: neighbors
                   value: 11.*
@@ -272,7 +260,7 @@ device_groups:
       variable:
           - instance-id: bgp_using_snmp_intance_1
             playbook: bgp-using-snmp
-            rule: bgp/check-state-using-snmp
+            rule: bgp/check-bgp-state-using-snmp
 
 
 
