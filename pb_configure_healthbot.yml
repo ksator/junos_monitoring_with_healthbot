@@ -12,8 +12,7 @@
        path: "{{playbook_dir}}/{{item}}"
        state: directory
       with_items: 
-         - render 
-         - ansible-output
+         - ansible_output
 
  - name: render healthbot configuration for devices, and update healthbot candidate configuration
    hosts: junos_devices
@@ -25,7 +24,7 @@
        local_action:
         module: template
         src: "{{playbook_dir}}/templates/devices.j2" 
-        dest: "{{playbook_dir}}/render/device_{{ name }}" 
+        dest: "{{playbook_dir}}/ansible_output/device_{{ name }}" 
 
      - name: make rest calls to healthbot to add devices
        local_action:
@@ -38,7 +37,7 @@
         HEADER_Accept: "application/json"
         force_basic_auth: yes
         validate_certs: no
-        body: "{{ lookup('file','{{playbook_dir}}/render/device_{{name}}') }}"
+        body: "{{ lookup('file','{{playbook_dir}}/ansible_output/device_{{name}}') }}"
         body_format: json
 
  - name: commit candidate configuration and verify running configuration
@@ -69,7 +68,7 @@
        HEADER_Accept: "application/json"
        force_basic_auth: yes
        validate_certs: no
-       dest: "{{playbook_dir}}/ansible-output/healthbot_running_config_for_devices.json"
+       dest: "{{playbook_dir}}/ansible_output/healthbot_running_config_for_devices.json"
 
 
 
