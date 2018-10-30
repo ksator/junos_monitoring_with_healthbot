@@ -1,6 +1,6 @@
 #############################################
 # usage:
-# vi variables.yml
+# vi ansible_input.yml
 # python ./generate_vars_for_ansible.py
 #############################################
 
@@ -9,7 +9,7 @@ import yaml
 from jinja2 import Template
 
 def import_variables_from_file():
-    my_variables_file=open('variables.yml', 'r')
+    my_variables_file=open('ansible_input.yml', 'r')
     my_variables_in_string=my_variables_file.read()
     my_variables_in_string=my_variables_in_string.replace('device-id', 'device_id')
     my_variables_in_string=my_variables_in_string.replace('open-config', 'open_config')

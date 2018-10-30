@@ -13,7 +13,7 @@
        state: directory
       with_items: 
          - render 
-         - output
+         - ansible-output
 
  - name: render healthbot configuration for devices, and update healthbot candidate configuration
    hosts: junos_devices
@@ -69,7 +69,7 @@
        HEADER_Accept: "application/json"
        force_basic_auth: yes
        validate_certs: no
-       dest: "{{playbook_dir}}/output/healthbot_running_config_for_devices.json"
+       dest: "{{playbook_dir}}/ansible-output/healthbot_running_config_for_devices.json"
 
 
 
