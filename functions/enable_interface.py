@@ -13,5 +13,5 @@ def enable_interface(dev, int):
     cfg.commit()
     device.close()
 
-enable_interface('10.49.102.160', 'ge-0/0/5')
+# enable_interface('10.49.102.160', 'ge-0/0/5')
 
