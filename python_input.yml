@@ -5,9 +5,9 @@
 #############################################################################
 # healthbot host and credentials
 #############################################################################
-server: "10.49.102.129"
-authuser: "admin"
-authpwd: "Embe1mpls"
+server: 10.49.102.129
+authuser: admin
+authpwd: Embe1mpls
 
 #############################################################################
 # network devices details to add to healthbot
