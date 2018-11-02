@@ -1,5 +1,5 @@
 ############################################################################################################################
-# This script add to heathbot the files located to the directories rules and playbooks and tables_and_views 
+# This script add to heathbot the files located to the directories: rules, playbooks, tables_and_views 
 ############################################################################################################################
 
 ############################################################################################################################
@@ -23,6 +23,12 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 def add_tables_and_views(file_name):
     files = {'up_file': open('tables_and_views/' + file_name,'r')}
+    r=requests.post(url + '/files/helper-files/' + file_name, auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json' }, verify=False, files=files)
+    print file_name
+    return r.status_code
+
+def add_function(file_name):
+    files = {'up_file': open('functions/' + file_name,'r')}
     r=requests.post(url + '/files/helper-files/' + file_name, auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json' }, verify=False, files=files)
     print file_name
     return r.status_code
@@ -57,11 +63,17 @@ headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 rules_list=os.listdir('rules')
 playbooks_list=os.listdir('playbooks')
 tables_and_views_list=os.listdir('tables_and_views')
+functions_list=os.listdir('functions')
 
 print '**************** adding tables and views ************************'
 
 for table in tables_and_views_list: 
     add_tables_and_views(table)
+
+print '**************** adding functions  ************************'
+
+for function in functions_list: 
+    add_function(function)
 
 print '**************** adding rules ************************'
 
@@ -73,6 +85,7 @@ print '**************** adding playbooks ************************'
 
 for playbook in playbooks_list: 
     add_playbook(playbook)
+
 
 
 
