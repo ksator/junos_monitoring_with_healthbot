@@ -1,5 +1,5 @@
 ############################################################################################################################
-# This script add to heathbot the files located to the directories rules and playbooks and tables_and_views 
+# This script add to heathbot the files located to the directories: rules, playbooks, tables_and_views 
 ############################################################################################################################
 
 ############################################################################################################################
