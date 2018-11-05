@@ -87,6 +87,6 @@ for playbook in playbooks_list:
     add_playbook(playbook)
 
 
-
-
+print '**************** committing changeset **********************'
+commit()
 
