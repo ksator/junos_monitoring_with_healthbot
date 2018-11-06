@@ -1,0 +1,90 @@
+iceberg {
+    topic interfaces {
+        rule enforce-interfaces-state {
+            keys interface-name;
+            function enable_a_disabled_interface {
+                path enable_a_disabled_interface.py;
+                method enable_interface;
+                argument int {
+                    mandatory;
+                }
+            }
+            sensor interfaces {
+                open-config {
+                    sensor-name /interfaces;
+                    frequency 15s;
+                }
+            }
+            field admin-status {
+                sensor interfaces {
+                    path /interfaces/interface/state/admin-status;
+                }
+                type string;
+                description admin-status;
+            }
+            field interface-name {
+                sensor interfaces {
+                    where "/interfaces/interface/@name =~ /{{interface_name}}/";
+                    path "/interfaces/interface/@name";
+                }
+                type string;
+                description interface-name;
+            }
+            field oper-status {
+                sensor interfaces {
+                    path /interfaces/interface/state/oper-status;
+                }
+                type string;
+                description "oper-status";
+            }
+            trigger link-state {
+                frequency 30s;
+                term up_up {
+                    when {
+                        matches-with "$admin-status" UP;
+                        matches-with "$oper-status" UP;
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "$interface-name is admin $admin-status and oper $oper-status";
+                        }
+                    }
+                }
+                term up_down {
+                    when {
+                        matches-with "$admin-status" UP;
+                        matches-with "$oper-status" DOWN;
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "$interface-name is admin $admin-status and oper $oper-status";
+                        }
+                    }
+                }
+                term down_down {
+                    when {
+                        matches-with "$admin-status" DOWN;
+                        matches-with "$oper-status" DOWN;
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "$interface-name is admin $admin-status and oper $oper-status";
+                        }
+                        user-defined-action enable_a_disabled_interface {
+                            argument int "$interface-name";
+                        }
+                    }
+                }
+            }
+            variable interface_name {
+                value .*;
+                description interface_name;
+                type string;
+            }
+        }
+    }
+}
+

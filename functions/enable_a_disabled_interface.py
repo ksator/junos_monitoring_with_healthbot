@@ -11,12 +11,12 @@ def get_junos_details(dev):
 	healthbot_pwd = 'jfit'
 	healthbot_server = '10.209.18.74'
 	headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
-	url = 'https://'+ healthbot_server + ':8080/api/v1/device/device_id/'
+	url = 'https://'+ healthbot_server + ':8080/api/v1/device/' + dev +'/'
 	r = requests.get(url, auth=HTTPBasicAuth(healthbot_user, healthbot_pwd), headers=headers, verify=False)
 	return r.json()
 
-def enable_interface(dev, int):
-	junos_details = get_junos_details(dev)
+def enable_interface(int):
+	junos_details = get_junos_details('device_id')
 	junos_host = junos_details['host']
 	junos_user = junos_details['authentication']['password']['username']
 	# junos_password = junos_details['authentication']['password']['password']
