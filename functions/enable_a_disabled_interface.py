@@ -7,9 +7,9 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 def get_junos_details(dev):
 	requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-	healthbot_user = 'root'
-	healthbot_pwd = 'jfit'
-	healthbot_server = '10.209.18.74'
+	healthbot_user = 'admin'
+	healthbot_pwd = 'Embe1mpls'
+	healthbot_server = '10.49.102.129'
 	headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 	url = 'https://'+ healthbot_server + ':8080/api/v1/device/' + dev +'/'
 	r = requests.get(url, auth=HTTPBasicAuth(healthbot_user, healthbot_pwd), headers=headers, verify=False)
