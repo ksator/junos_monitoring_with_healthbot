@@ -15,8 +15,8 @@ def get_junos_details(dev):
 	r = requests.get(url, auth=HTTPBasicAuth(healthbot_user, healthbot_pwd), headers=headers, verify=False)
 	return r.json()
 
-def enable_interface(int):
-	junos_details = get_junos_details('device_id')
+def enable_interface(int, **kwargs):
+	junos_details = get_junos_details(kwargs['device_id'])
 	junos_host = junos_details['host']
 	junos_user = junos_details['authentication']['password']['username']
 	# junos_password = junos_details['authentication']['password']['password']
