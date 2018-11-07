@@ -1,0 +1,169 @@
+iceberg {
+    topic interfaces {
+        rule monitor-interfaces-errors-using-openconfig {
+            keys interface-name;
+            sensor interfaces {
+                open-config {
+                    sensor-name /interfaces;
+                    frequency 15s;
+                }
+            }
+            field interface-name {
+                sensor interfaces {
+                    where "/interfaces/interface/@name =~ /{{interface_name}}/";
+                    path "/interfaces/interface/@name";
+                }
+                type string;
+                description "interface-name";
+            }
+            field admin-status {
+                sensor interfaces {
+                    path /interfaces/interface/state/admin-status;
+                }
+                type string;
+                description "admin-status";
+            }
+            field oper-status {
+                sensor interfaces {
+                    path /interfaces/interface/state/oper-status;
+                }
+                type string;
+                description "oper-status";
+            }
+            field last-change {
+                sensor interfaces {
+                    path /interfaces/interface/state/last-change;
+                }
+                type integer;
+                description "last-change";
+            }
+            field in-discards {
+                sensor interfaces {
+                    path /interfaces/interface/state/counters/in-discards;
+                }
+                type integer;
+                description "in-discards";
+            }
+            field in-errors {
+                sensor interfaces {
+                    path /interfaces/interface/state/counters/in-errors;
+                }
+                type integer;
+                description "in-errors";
+            }
+            field in-fcs-errors {
+                sensor interfaces {
+                    path /interfaces/interface/state/counters/in-fcs-errors;
+                }
+                type integer;
+                description "in-fcs-errors";
+            }
+            field out-discards {
+                sensor interfaces {
+                    path /interfaces/interface/state/counters/out-discards;
+                }
+                type integer;
+                description "out-discards";
+            }
+            field out-errors {
+                sensor interfaces {
+                    path /interfaces/interface/state/counters/out-errors;
+                }
+                type integer;
+                description "out-errors";
+            }
+            field carrier-transitions {
+                sensor interfaces {
+                    path /interfaces/interface/state/counters/carrier-transitions;
+                }
+                type integer;
+                description "carrier-transitions";
+            }
+            field last-clear {
+                sensor interfaces {
+                    path /interfaces/interface/state/counters/last-clear;
+                }
+                type integer;
+                description "carrier-transitions";
+            }
+            trigger errors {
+                frequency 30s;
+                term in-discards-increased {
+                    when {
+                        increasing-at-least-by-value "$in-discards" {
+                            value 1;
+                            time-range 60s;
+                        }
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "$interface-name in-discards increased to $in-discards";
+                        }
+                    }
+                }
+                term in-errors-increased {
+                    when {
+                        increasing-at-least-by-value "$in-errors" {
+                            value 1;
+                            time-range 60s;
+                        }
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "$interface-name in-errors increased to $in-errors";
+                        }
+                    }
+                }
+                term out-discards-increased {
+                    when {
+                        increasing-at-least-by-value "$out-discards" {
+                            value 1;
+                            time-range 60s;
+                        }
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "$interface-name out-discards increased to $out-discards";
+                        }
+                    }
+                }
+                term out-errors-increased {
+                    when {
+                        increasing-at-least-by-value "$out-errors" {
+                            value 1;
+                            time-range 60s;
+                        }
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "$interface-name out-errors increased to $out-errors";
+                        }
+                    }
+                }
+                term in-fcs-errors-increased {
+                    when {
+                        increasing-at-least-by-value "$in-fcs-errors" {
+                            value 1;
+                            time-range 60s;
+                        }
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "$interface-name in-fcs-errors increased to $in-fcs-errors";
+                        }
+                    }
+                }
+            }
+            variable interface_name {
+                value .*;
+                description interface_name;
+                type string;
+            }
+        }
+    }
+}
