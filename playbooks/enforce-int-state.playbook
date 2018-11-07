@@ -1,0 +1,7 @@
+iceberg {
+    playbook enforce-int-state {
+        rules [ interfaces/enforce-interfaces-state ];
+        description "playbook to enable a disabled interface using UDA";
+        synopsis "playbook to enable a disabled interface using UDA";
+    }
+}
