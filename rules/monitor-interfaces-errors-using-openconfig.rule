@@ -86,7 +86,7 @@ iceberg {
                 type integer;
                 description "carrier-transitions";
             }
-            trigger errors {
+            trigger in-discards {
                 frequency 30s;
                 term in-discards-increased {
                     when {
@@ -102,6 +102,17 @@ iceberg {
                         }
                     }
                 }
+                term in-discards-stable {
+                    then {
+                        status {
+                            color green;
+                            message "$interface-name in-discards stable: $in-discards";
+                        }
+                    }
+                }
+            }
+            trigger in-errors {
+                frequency 30s;
                 term in-errors-increased {
                     when {
                         increasing-at-least-by-value "$in-errors" {
@@ -116,6 +127,17 @@ iceberg {
                         }
                     }
                 }
+                term in-errors-stable {
+                    then {
+                        status {
+                            color green;
+                            message "$interface-name in-errors stable: $in-errors";
+                        }
+                    }
+                }
+            }
+            trigger out-discards {
+                frequency 30s;
                 term out-discards-increased {
                     when {
                         increasing-at-least-by-value "$out-discards" {
@@ -130,6 +152,17 @@ iceberg {
                         }
                     }
                 }
+                term out-discards-stable {
+                    then {
+                        status {
+                            color green;
+                            message "$interface-name out-discards stable: $out-discards";
+                        }
+                    }
+                }
+            }
+            trigger out-errors {
+                frequency 30s;
                 term out-errors-increased {
                     when {
                         increasing-at-least-by-value "$out-errors" {
@@ -144,6 +177,17 @@ iceberg {
                         }
                     }
                 }
+                term out-errors-stable {
+                    then {
+                        status {
+                            color green;
+                            message "$interface-name out-errors stable: $out-errors";
+                        }
+                    }
+                }
+            }
+            trigger in-fcs-errors {
+                frequency 30s;
                 term in-fcs-errors-increased {
                     when {
                         increasing-at-least-by-value "$in-fcs-errors" {
@@ -155,6 +199,14 @@ iceberg {
                         status {
                             color red;
                             message "$interface-name in-fcs-errors increased to $in-fcs-errors";
+                        }
+                    }
+                }
+                term in-fcs-errors-stable {
+                    then {
+                        status {
+                            color green;
+                            message "$interface-name in-fcs-errors stable: $in-fcs-errors";
                         }
                     }
                 }
