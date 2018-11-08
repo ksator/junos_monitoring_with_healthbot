@@ -211,6 +211,31 @@ iceberg {
                     }
                 }
             }
+            trigger carrier-transitions {
+                frequency 30s;
+                term carrier-transitions-increased {
+                    when {
+                        increasing-at-least-by-value "$carrier-transitions" {
+                            value 1;
+                            time-range 60s;
+                        }
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "$interface-name carrier-transitions increased to $carrier-transitions";
+                        }
+                    }
+                }
+                term carrier-transitions-stable {
+                    then {
+                        status {
+                            color green;
+                            message "$interface-name carrier-transitions stable: $carrier-transitions";
+                        }
+                    }
+                }
+            }
             variable interface_name {
                 value .*;
                 description interface_name;
