@@ -236,6 +236,31 @@ iceberg {
                     }
                 }
             }
+            trigger last-change {
+                frequency 30s;
+                term last-change-increased {
+                    when {
+                        increasing-at-least-by-value "$last-change" {
+                            value 1;
+                            time-range 60s;
+                        }
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "$interface-name last-change increased to $last-change";
+                        }
+                    }
+                }
+                term last-change-stable {
+                    then {
+                        status {
+                            color green;
+                            message "$interface-name last-change stable: $last-change";
+                        }
+                    }
+                }
+            }
             variable interface_name {
                 value .*;
                 description interface_name;
