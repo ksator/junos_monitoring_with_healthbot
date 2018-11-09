@@ -17,9 +17,5 @@ clone this repository
 ```
 git clone https://github.com/ksator/junos_monitoring_with_healthbot.git
 ```
-clone the wiki
-```
-git clone https://github.com/ksator/junos_monitoring_with_healthbot.wiki.git
-```
 Visit the repository [**wiki**](https://github.com/ksator/junos_monitoring_with_healthbot/wiki)
 
