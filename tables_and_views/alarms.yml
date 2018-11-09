@@ -10,3 +10,4 @@ AlarmView:
         alarm-time: alarm-time
         alarm-class: alarm-class
         alarm-short-description: alarm-short-description
+        active-alarm-count: parent::*/alarm-summary/active-alarm-count
