@@ -14,9 +14,6 @@ It describes some of the heathbot components.
 ### Instructions to use this repository 
 
 - install heathbot  
-- clone this repository
-```
-git clone https://github.com/ksator/junos_monitoring_with_healthbot.git
-```
+- clone this repository ```git clone https://github.com/ksator/junos_monitoring_with_healthbot.git```
 - Visit the repository [**wiki**](https://github.com/ksator/junos_monitoring_with_healthbot/wiki)
 
