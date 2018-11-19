@@ -20,7 +20,7 @@ iceberg {
             }
             field session-state {
                 sensor bgp-sensor {
-                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/session-status;
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/session-state;
                 }
                 type string;
                 description session-state;
@@ -29,7 +29,7 @@ iceberg {
                 frequency 30s;
                 term is_established {
                     when {
-                        equal-to "$session-state" ESTABLISHED;
+                        matches-with "$session-state" ESTABLISHED;
                     }
                     then {
                         status {
