@@ -5,6 +5,7 @@ iceberg {
         rule check-bgp-state-using-openconfig {
             keys neighbor-address;
             sensor bgp-sensor {
+                description "OC BGP sensor from JUNOS 17.3";
                 open-config {
                     sensor-name /network-instances/network-instance/protocols/protocol;
                     frequency 10s;
