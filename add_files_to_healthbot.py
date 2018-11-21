@@ -11,6 +11,7 @@
 # ls rules
 # ls playbooks
 # ls tables_and_views
+# ls functions
 # vi add_files_to_healthbot.py
 # python ./add_files_to_healthbot.py
 ############################################################################################################################
