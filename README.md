@@ -11,6 +11,13 @@ This repository is about Junos monitoring with healthbot.
 It has healthbot automation examples and healthbot configuration examples.  
 It describes some of the heathbot components.    
 
+This repository has been tested with healthbot version 1.0  
+```
+$ healthbot version
+Healthbot vhealthbot-1.0.0
+```
+
+
 ### Instructions to use this repository 
 
 - install heathbot  
