@@ -58,7 +58,7 @@ iceberg {
                     }
                     then {
                         status {
-                            color red;
+                            color yellow;
                             message "$interface-name is admin $admin-status and oper $oper-status";
                         }
                     }
