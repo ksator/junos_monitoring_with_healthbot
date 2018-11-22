@@ -7,9 +7,9 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 def get_junos_details(dev):
 	requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-	healthbot_user = 'admin'
-	healthbot_pwd = 'Embe1mpls'
-	healthbot_server = '10.49.102.129'
+	healthbot_user = 'jcluser'
+	healthbot_pwd = 'Juniper!1'
+	healthbot_server = '100.123.35.0'
 	headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 	url = 'https://'+ healthbot_server + ':8080/api/v1/device/' + dev +'/'
 	r = requests.get(url, auth=HTTPBasicAuth(healthbot_user, healthbot_pwd), headers=headers, verify=False)
@@ -20,7 +20,7 @@ def enable_interface(int, **kwargs):
 	junos_host = junos_details['host']
 	junos_user = junos_details['authentication']['password']['username']
 	# junos_password = junos_details['authentication']['password']['password']
-	junos_password = 'MaRtInI'
+	junos_password = 'Juniper!1'
 	device=Device(host=junos_host, user=junos_user, password=junos_password)
 	device.open()
 	cfg=Config(device)
