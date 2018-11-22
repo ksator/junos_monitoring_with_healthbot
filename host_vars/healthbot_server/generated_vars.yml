@@ -1,4 +1,4 @@
 ---
-ansible_host: 10.49.102.129 
-authuser: admin 
-authpwd: Embe1mpls
+ansible_host: 100.123.35.0 
+authuser: jcluser 
+authpwd: Juniper!1
