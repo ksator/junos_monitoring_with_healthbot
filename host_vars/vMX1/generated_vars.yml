@@ -1,0 +1,7 @@
+---
+name: vMX1
+ip: 100.123.1.0
+username: jcluser 
+password: Juniper!1
+openconfig_port: 32768
+netconf_port: 830

@@ -55,9 +55,9 @@ def commit():
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # update this section with your healthbot ip address
-server = "10.49.102.129"
-authuser = "admin"
-authpwd = "Embe1mpls"
+server = "100.123.35.0"
+authuser = "jcluser"
+authpwd = "Juniper!1"
 url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 

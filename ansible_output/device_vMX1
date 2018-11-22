@@ -1,0 +1,20 @@
+{
+    "authentication": {
+        "password": {
+            "password": "Juniper!1",
+            "username": "jcluser"
+        }
+    },
+    "description": "vMX1",
+    "device-id": "vMX1",
+    "host": "100.123.1.0",
+    "iAgent": {
+        "port": 830
+    },
+    "open-config": {
+        "port": 32768
+    },
+    "system-id": "vMX1"
+}
+
+

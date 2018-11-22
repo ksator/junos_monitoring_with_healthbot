@@ -4,11 +4,11 @@
 healthbot_server 
 
 [junos_devices]
-vmx101
-vmx102
-vmx103
-vmx104
-vmx105
-vmx106
-vmx107
+vMX1
+vMX2
+vMX3
+vMX4
+vMX5
+vMX6
+vMX7
 

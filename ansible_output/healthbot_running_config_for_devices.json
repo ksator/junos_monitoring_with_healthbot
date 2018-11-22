@@ -3,121 +3,121 @@
     {
       "authentication": {
         "password": {
-          "password": "Embe1mpls",
-          "username": "root"
+          "password": "$9$5zn90BEevLApvLxNY25QFn69Ap0",
+          "username": "jcluser"
         }
       },
-      "device-id": "vmx106",
-      "host": "10.49.102.140",
+      "device-id": "vMX1",
+      "host": "100.123.1.0",
       "iAgent": {
         "port": 830
       },
       "open-config": {
         "port": 32768
       },
-      "system-id": "vmx106"
+      "system-id": "vMX1"
     },
     {
       "authentication": {
         "password": {
-          "password": "Embe1mpls",
-          "username": "root"
+          "password": "$9$1OnESl8X-24ZKM4ZUjPf1RhSylKM8",
+          "username": "jcluser"
         }
       },
-      "device-id": "vmx107",
-      "host": "10.49.102.136",
+      "device-id": "vMX2",
+      "host": "100.123.1.1",
       "iAgent": {
         "port": 830
       },
       "open-config": {
         "port": 32768
       },
-      "system-id": "vmx107"
+      "system-id": "vMX2"
     },
     {
       "authentication": {
         "password": {
-          "password": "Embe1mpls",
-          "username": "root"
+          "password": "$9$km5z9A0hSe36SevW-dk.P5Tz369",
+          "username": "jcluser"
         }
       },
-      "device-id": "vmx101",
-      "host": "10.49.102.160",
+      "device-id": "vMX3",
+      "host": "100.123.1.2",
       "iAgent": {
         "port": 830
       },
       "open-config": {
         "port": 32768
       },
-      "system-id": "vmx101"
+      "system-id": "vMX3"
     },
     {
       "authentication": {
         "password": {
-          "password": "Embe1mpls",
-          "username": "root"
+          "password": "$9$RVWcrKX7V4aUM8aUjH5TRhSrlKM8X",
+          "username": "jcluser"
         }
       },
-      "device-id": "vmx102",
-      "host": "10.49.102.157",
+      "device-id": "vMX4",
+      "host": "100.123.1.3",
       "iAgent": {
         "port": 830
       },
       "open-config": {
         "port": 32768
       },
-      "system-id": "vmx102"
+      "system-id": "vMX4"
     },
     {
       "authentication": {
         "password": {
-          "password": "Embe1mpls",
-          "username": "root"
+          "password": "$9$BDpRcrWLNYgJevgJGDmPBIEcSrevW",
+          "username": "jcluser"
         }
       },
-      "device-id": "vmx103",
-      "host": "10.49.102.151",
+      "device-id": "vMX5",
+      "host": "100.123.1.4",
       "iAgent": {
         "port": 830
       },
       "open-config": {
         "port": 32768
       },
-      "system-id": "vmx103"
+      "system-id": "vMX5"
     },
     {
       "authentication": {
         "password": {
-          "password": "Embe1mpls",
-          "username": "root"
+          "password": "$9$eWwML7wYojHm-VHmfT/9evWLX7-Vw",
+          "username": "jcluser"
         }
       },
-      "device-id": "vmx104",
-      "host": "10.49.102.148",
+      "device-id": "vMX6",
+      "host": "100.123.1.5",
       "iAgent": {
         "port": 830
       },
       "open-config": {
         "port": 32768
       },
-      "system-id": "vmx104"
+      "system-id": "vMX6"
     },
     {
       "authentication": {
         "password": {
-          "password": "Embe1mpls",
-          "username": "root"
+          "password": "$9$3-g//AuRhr8X-O1X-VwaJ369AtuO1R",
+          "username": "jcluser"
         }
       },
-      "device-id": "vmx105",
-      "host": "10.49.102.142",
+      "device-id": "vMX7",
+      "host": "100.123.1.6",
       "iAgent": {
         "port": 830
       },
       "open-config": {
         "port": 32768
       },
-      "system-id": "vmx105"
+      "system-id": "vMX7"
     }
   ]
 }
