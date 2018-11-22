@@ -5,9 +5,9 @@
 #############################################################################
 # healthbot host and credentials
 #############################################################################
-server: 10.49.102.129
-authuser: admin
-authpwd: Embe1mpls
+server: 100.123.35.0
+authuser: jcluser
+authpwd: Juniper!1
 
 #############################################################################
 # network devices details to add to healthbot
@@ -15,88 +15,88 @@ authpwd: Embe1mpls
 devices_list:
     - authentication:
           password:
-              password: Embe1mpls
-              username: root
-      description: vmx101
-      device-id: vmx101
-      host: 10.49.102.160
+              password: Juniper!1
+              username: jcluser
+      description: vMX1
+      device-id: vMX1
+      host: 100.123.1.0
       iAgent:
           port: 830
       open-config:
           port: 32768
-      system-id: vmx101
+      system-id: vMX1
     - authentication:
           password:
-              password: Embe1mpls
-              username: root
-      description: vmx102
-      device-id: vmx102
-      host: 10.49.102.157
+              password: Juniper!1
+              username: jcluser
+      description: vMX2
+      device-id: vMX2
+      host: 100.123.1.1
       iAgent:
           port: 830
       open-config:
           port: 32768
-      system-id: vmx102
+      system-id: vMX2
     - authentication:
           password:
-              password: Embe1mpls
-              username: root
-      description: vmx103
-      device-id: vmx103
-      host: 10.49.102.151
+              password: Juniper!1
+              username: jcluser
+      description: vMX3
+      device-id: vMX3
+      host: 100.123.1.2
       iAgent:
           port: 830
       open-config:
           port: 32768
-      system-id: vmx103
+      system-id: vMX3
     - authentication:
           password:
-              password: Embe1mpls
-              username: root
-      description: vmx104
-      device-id: vmx104
-      host: 10.49.102.148
+              password: Juniper!1
+              username: jcluser
+      description: vMX4
+      device-id: vMX4
+      host: 100.123.1.3
       iAgent:
           port: 830
       open-config:
           port: 32768
-      system-id: vmx104
+      system-id: vMX4
     - authentication:
           password:
-              password: Embe1mpls
-              username: root
-      description: vmx105
-      device-id: vmx105
-      host: 10.49.102.142
+              password: Juniper!1
+              username: jcluser
+      description: vMX5
+      device-id: vMX5
+      host: 100.123.1.4
       iAgent:
           port: 830
       open-config:
           port: 32768
-      system-id: vmx105
+      system-id: vMX5
     - authentication:
           password:
-              password: Embe1mpls
-              username: root
-      description: vmx106
-      device-id: vmx106
-      host: 10.49.102.140
+              password: Juniper!1
+              username: jcluser
+      description: vMX6
+      device-id: vMX6
+      host: 100.123.1.5
       iAgent:
           port: 830
       open-config:
           port: 32768
-      system-id: vmx106
+      system-id: vMX6
     - authentication:
           password:
-              password: Embe1mpls
-              username: root
-      description: vmx107
-      device-id: vmx107
-      host: 10.49.102.136
+              password: Juniper!1
+              username: jcluser
+      description: vMX7
+      device-id: vMX7
+      host: 100.123.1.6
       iAgent:
           port: 830
       open-config:
           port: 32768
-      system-id: vmx107
+      system-id: vMX7
 
 #############################################################################
 # tables and views to load on healthbot (from the directory tables_and_views)
@@ -229,13 +229,13 @@ device_groups:
     - description: Group1
       device-group-name: Group1
       devices:
-           - vmx101
-           - vmx102
-           - vmx103
-           - vmx104
-           - vmx105
-           - vmx106
-           - vmx107
+           - vMX1
+           - vMX2
+           - vMX3
+           - vMX4
+           - vMX5
+           - vMX6
+           - vMX7
       playbooks:
            -  bgp-using-netconf
       notification:
@@ -253,14 +253,15 @@ device_groups:
     - description: Group2
       device-group-name: Group2
       devices:
-           - vmx103
-           - vmx104
+           - vMX3
+           - vMX4
       playbooks:
           -  bgp-using-snmp
       variable:
           - instance-id: bgp_using_snmp_intance_1
             playbook: bgp-using-snmp
             rule: bgp/check-bgp-state-using-snmp
+
 
 
 
