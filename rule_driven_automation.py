@@ -41,24 +41,24 @@ def commit():
 
 
 # update this section with your healthbot ip address
-server = "10.209.18.74"
-authuser = "root"
-authpwd = "jfit"
+server = "100.123.35.0"
+authuser = "jcluser"
+authpwd = "Juniper!1"
 url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
 # update this section with your devices details
 devices = """[
     {
-        "device-id": "abr1r",
-        "host": "10.221.129.147",
+        "device-id": "vMX1",
+        "host": "100.123.1.0",
         "open-config": {
-            "port": 32767
+            "port": 32768
         },
         "authentication": {
             "password": {
-                "username": "regress",
-                "password": "MaRtInI"
+                "username": "jcluser",
+                "password": "Juniper!1"
             }
         },
         "variable" : [
@@ -76,28 +76,28 @@ devices = """[
         ]
     },
     {
-        "device-id": "abr2r",
-        "host": "10.221.129.144",
+        "device-id": "vMX2",
+        "host": "100.123.1.1",
         "open-config": {
-            "port": 32767
+            "port": 32768
         },
         "authentication": {
             "password": {
-                "username": "regress",
-                "password": "MaRtInI"
+                "username": "jcluser",
+                "password": "Juniper!1"
             }
         }
     },
     {
-        "device-id": "abr3r",
-        "host": "10.221.129.141",
+        "device-id": "vMX3",
+        "host": "100.123.1.2",
         "open-config": {
-            "port": 32767
+            "port": 32768
         },
         "authentication": {
             "password": {
-                "username": "regress",
-                "password": "MaRtInI"
+                "username": "jcluser",
+                "password": "Juniper!1"
             }
         },
         "variable" : [
@@ -118,9 +118,9 @@ devices = """[
 
 # update this section with your device group details
 device_group = """{
-                "device-group-name" : "abr",
-                "description" : "abr",
-                "devices" : ["abr1r", "abr2r", "abr3r"],
+                "device-group-name" : "vmx",
+                "description" : "vmx",
+                "devices" : ["vMX1", "vMX2", "vMX3"],
                 "playbooks" : ["enforce-int-state"],
                 "variable" : [
                 {
