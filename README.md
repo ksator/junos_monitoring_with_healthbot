@@ -1,6 +1,6 @@
 ### About healthbot
 
-You can use Heathbot to:
+You can use Healthbot to:
  - collect data from the network
  - store the data collected
  - process the data collected
