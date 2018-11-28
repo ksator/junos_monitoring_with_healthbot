@@ -20,7 +20,8 @@ Healthbot vhealthbot-1.0.0
 
 ### Instructions to use this repository 
 
-- install heathbot  
+- Download Healthbot https://support.juniper.net/support/downloads/ 
+- Install Heathbot  
 - clone this repository ```git clone https://github.com/ksator/junos_monitoring_with_healthbot.git```
 - Visit the repository [**wiki**](https://github.com/ksator/junos_monitoring_with_healthbot/wiki)
 
