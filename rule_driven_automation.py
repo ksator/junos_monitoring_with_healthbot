@@ -226,7 +226,7 @@ devices = """[
             "variable-value" : [
             {
                 "name" : "interface_name",
-                "value" : "ge-0/0/0|ge-0/0/1|ge-0/0/2|ge-0/0/3"
+                "value" : "ge-0/0/0|ge-0/0/1|ge-0/0/2"
             }
             ]
         }
