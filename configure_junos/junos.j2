@@ -40,4 +40,24 @@ replace:
 snmp {
     community public;
 }
+system {
+    services {
+        extension-service {
+            request-response {
+                grpc {
+                    clear-text {
+                        port 32768;
+                    }
+                    skip-authentication;
+                }
+            }
+            notification {
+                allow-clients {
+                address 0.0.0.0/0;
+                }
+            }
+        }
+    }
+}
+
 
