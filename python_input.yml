@@ -249,7 +249,7 @@ device_groups:
             rule: bgp/check-bgp-state-using-netconf
             variable-value:
                 - name: neighbors
-                  value: 11.*
+                  value: 192.*
     - description: Group2
       device-group-name: Group2
       devices:
