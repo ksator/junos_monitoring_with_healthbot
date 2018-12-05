@@ -243,6 +243,8 @@ device_groups:
               - healthbot_to_saltstack
           minor:
               - healthbot_to_saltstack
+          enable: 
+              - null
       variable:
           - instance-id: bgp_using_netconf_intance_1
             playbook: bgp-using-netconf
