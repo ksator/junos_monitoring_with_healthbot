@@ -108,10 +108,10 @@ tables_and_views:
 # notifications to add to healthbot
 #############################################################################
 notifications:
-    - notification-name: heathbot_to_saltstack
-      description: "heathbot to saltstack webhook notifications"
+    - notification-name: healthbot_to_saltstack
+      description: "healthbot to saltstack webhook notifications"
       http-post:
-          url: http://10.49.102.131:5001/healthbot
+          url: http://100.123.35.1:5001/healthbot
 
 #############################################################################
 # topics and rules to add to healthbot
@@ -240,9 +240,9 @@ device_groups:
            -  bgp-using-netconf
       notification:
           major:
-              - heathbot_to_saltstack
+              - healthbot_to_saltstack
           minor:
-              - heathbot_to_saltstack
+              - healthbot_to_saltstack
       variable:
           - instance-id: bgp_using_netconf_intance_1
             playbook: bgp-using-netconf
