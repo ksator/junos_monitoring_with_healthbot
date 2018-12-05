@@ -48,6 +48,7 @@ url = 'https://'+ server + ':8080/api/v1'
 headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
 # update this section with your devices details
+
 devices = """[
     {
         "device-id": "vMX1",
@@ -69,7 +70,7 @@ devices = """[
             "variable-value" : [
             {
                 "name" : "interface_name",
-                "value" : "ge-0/0/0"
+                "value" : "ge-0/0/0|ge-0/0/1|ge-0/0/2|ge-0/0/3"
             }
             ]
         }
@@ -86,7 +87,20 @@ devices = """[
                 "username": "jcluser",
                 "password": "Juniper!1"
             }
+        },
+        "variable" : [
+        {
+            "instance-id" : "enforce-int-state-instance-1",
+            "playbook" : "enforce-int-state",
+            "rule" : "interfaces/enforce-interfaces-state",
+            "variable-value" : [
+            {
+                "name" : "interface_name",
+                "value" : "ge-0/0/0|ge-0/0/1|ge-0/0/2|ge-0/0/3"
+            }
+            ]
         }
+        ]
     },
     {
         "device-id": "vMX3",
@@ -108,7 +122,111 @@ devices = """[
             "variable-value" : [
             {
                 "name" : "interface_name",
-                "value" : "ge-*|xe-*"
+                "value" : "ge-0/0/0|ge-0/0/1|ge-0/0/2|ge-0/0/3"
+            }
+            ]
+        }
+        ]
+    },
+    {
+        "device-id": "vMX4",
+        "host": "100.123.1.3",
+        "open-config": {
+            "port": 32768
+        },
+        "authentication": {
+            "password": {
+                "username": "jcluser",
+                "password": "Juniper!1"
+            }
+        },
+        "variable" : [
+        {
+            "instance-id" : "enforce-int-state-instance-1",
+            "playbook" : "enforce-int-state",
+            "rule" : "interfaces/enforce-interfaces-state",
+            "variable-value" : [
+            {
+                "name" : "interface_name",
+                "value" : "ge-0/0/0|ge-0/0/1|ge-0/0/2"
+            }
+            ]
+        }
+        ]
+    },
+    {
+        "device-id": "vMX5",
+        "host": "100.123.1.4",
+        "open-config": {
+            "port": 32768
+        },
+        "authentication": {
+            "password": {
+                "username": "jcluser",
+                "password": "Juniper!1"
+            }
+        },
+        "variable" : [
+        {
+            "instance-id" : "enforce-int-state-instance-1",
+            "playbook" : "enforce-int-state",
+            "rule" : "interfaces/enforce-interfaces-state",
+            "variable-value" : [
+            {
+                "name" : "interface_name",
+                "value" : "ge-0/0/0|ge-0/0/1|ge-0/0/2"
+            }
+            ]
+        }
+        ]
+    },
+    {
+        "device-id": "vMX6",
+        "host": "100.123.1.5",
+        "open-config": {
+            "port": 32768
+        },
+        "authentication": {
+            "password": {
+                "username": "jcluser",
+                "password": "Juniper!1"
+            }
+        },
+        "variable" : [
+        {
+            "instance-id" : "enforce-int-state-instance-1",
+            "playbook" : "enforce-int-state",
+            "rule" : "interfaces/enforce-interfaces-state",
+            "variable-value" : [
+            {
+                "name" : "interface_name",
+                "value" : "ge-0/0/0|ge-0/0/1|ge-0/0/2"
+            }
+            ]
+        }
+        ]
+    },
+    {
+        "device-id": "vMX7",
+        "host": "100.123.1.6",
+        "open-config": {
+            "port": 32768
+        },
+        "authentication": {
+            "password": {
+                "username": "jcluser",
+                "password": "Juniper!1"
+            }
+        },
+        "variable" : [
+        {
+            "instance-id" : "enforce-int-state-instance-1",
+            "playbook" : "enforce-int-state",
+            "rule" : "interfaces/enforce-interfaces-state",
+            "variable-value" : [
+            {
+                "name" : "interface_name",
+                "value" : "ge-0/0/0|ge-0/0/1|ge-0/0/2|ge-0/0/3"
             }
             ]
         }
@@ -116,11 +234,12 @@ devices = """[
     }
 ]"""
 
+
 # update this section with your device group details
 device_group = """{
                 "device-group-name" : "vmx",
                 "description" : "vmx",
-                "devices" : ["vMX1", "vMX2", "vMX3"],
+                "devices" : ["vMX1", "vMX2", "vMX3", "vMX4", "vMX5", "vMX6", "vMX7"],
                 "playbooks" : ["enforce-int-state"],
                 "variable" : [
                 {
