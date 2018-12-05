@@ -1,0 +1,43 @@
+interfaces {
+{% for neighbor in neighbors %}
+    replace:
+    {{ neighbor.interface }} {
+        unit 0 {
+            family inet {
+                address {{ neighbor.local_ip }}/31;
+            }
+        }
+    }
+{% endfor %}
+}
+protocols {
+    replace:
+    bgp {
+        group underlay {
+            import bgp-in;
+            export bgp-out;
+            type external;
+            local-as {{ local_asn }};
+            multipath multiple-as;
+{% for neighbor in neighbors %}
+            neighbor {{ neighbor.peer_ip }} {
+                peer-as {{ neighbor.asn }};
+            }
+{% endfor %}
+        }
+    }
+}    
+replace:
+policy-options {
+    policy-statement bgp-in {
+        then accept;
+    }
+    policy-statement bgp-out {
+        then accept;
+    }
+}
+replace: 
+snmp {
+    community public;
+}
+
