@@ -34,6 +34,9 @@ Healthbot vhealthbot-1.0.0
 - Start Healthbot
   - ```$ healthbot start```  
 - clone this repository
-  - ```$ git clone https://github.com/ksator/junos_monitoring_with_healthbot.git```
-  - ```$ cd junos_monitoring_with_healthbot```
+   ```
+   $ cd 
+   $ git clone https://github.com/ksator/junos_monitoring_with_healthbot.git
+   $ cd junos_monitoring_with_healthbot
+   ```
 - Visit the repository wiki to get the instructions https://github.com/ksator/junos_monitoring_with_healthbot/wiki
