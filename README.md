@@ -21,8 +21,16 @@ Healthbot vhealthbot-1.0.0
 
 ### Instructions to use this repository 
 
+- Install Docker (Docker is required before to install Healthbot)
 - Download Healthbot from https://support.juniper.net/support/downloads/  
-- Install Healthbot  
+- Install Healthbot 
+  - example with ```healthbot-1.0.0.tar.gz``` file
+   ```
+   $ tar xvf healthbot-1.0.0.tar.gz
+   $ cd healthbot-1.0.0
+   $ sudo ./install
+   ```
+
 - Start Healthbot
   - ```$ healthbot start```  
 - clone this repository
