@@ -1,0 +1,46 @@
+devices_list:
+    - authentication:
+          password:
+              password: Juniper!1
+              username: jcluser
+      host: 100.123.1.0
+      device-id: vMX1
+    - authentication:
+          password:
+              password: Juniper!1
+              username: jcluser
+      host: 100.123.1.1
+      device-id: vMX2
+    - authentication:
+          password:
+              password: Juniper!1
+              username: jcluser
+      host: 100.123.1.2
+      device-id: vMX3
+    - authentication:
+          password:
+              password: Juniper!1
+              username: jcluser
+      host: 100.123.1.3
+      device-id: vMX4
+    - authentication:
+          password:
+              password: Juniper!1
+              username: jcluser
+      host: 100.123.1.4
+      device-id: vMX5
+    - authentication:
+          password:
+              password: Juniper!1
+              username: jcluser
+      host: 100.123.1.5
+      device-id: vMX6
+    - authentication:
+          password:
+              password: Juniper!1
+              username: jcluser
+      host: 100.123.1.6
+      device-id: vMX7
+
+
+

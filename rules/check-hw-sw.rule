@@ -1,0 +1,85 @@
+iceberg {
+    topic inventory {
+        description "Rules to check inventory";
+        synopsis "Product name and software version analyzer";
+        rule check-hw-sw {
+            description "Validates the product name and Junos version";
+            keys host-name;
+            sensor product-and-junos-version {
+                description "Netconf rpc get-software-information to collect data from network device";
+                iAgent {
+                    file version.yml;
+                    table SoftwareVersionTable;
+                    frequency 60s;
+                }
+            }
+            field configured-product-value {
+               description "Product model like MX240"; 
+                constant {
+                    value "{{product-value}}";
+                }
+            }
+            field configured-software-version-value {
+               description "Software version like 18.2R1.9";
+                constant {
+                    value "{{software-version-value}}";
+                }
+            }
+            trigger product-name {
+                frequency 60s;
+                term is-product-model-valid {
+                    when {
+                        matches-with "$product" "$configured-product-value";
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "Device product model is valid ($configured-product-value)";
+                        }
+                    }
+                }
+                term unauthorized-product-model-used {
+                    then {
+                        status {
+                            color red;
+                            message "Unauthorized product ($product) is being used";
+                        }
+                    }
+                }
+            }
+            trigger software-version {
+                frequency 60s;
+                term is-junos-version-correct {
+                    when {
+                        matches-with "$version" "$configured-software-version-value";
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "Junos version $configured-software-version-value is being used";
+                        }
+                    }
+                }
+                term unauthorized-junos-version-used {
+                    then {
+                        status {
+                            color red;
+                            message "Unauthorized Junos version ($version) is being used";
+                        }
+                    }
+                }
+            }
+            variable product-value {
+                value vmx;
+                description "Product model the system should be";
+                type string;
+            }
+            variable software-version-value {
+                value 18.2R1.9;
+                description "Software Version the system should have";
+                type string;
+            }
+        }
+    }
+}
+

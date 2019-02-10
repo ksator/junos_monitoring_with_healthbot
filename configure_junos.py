@@ -9,7 +9,7 @@ my_template = Template(f.read())
 f.close()
 
 # get devices list. each item has an ip, name, username, password.
-f=open('python_input.yml', 'r')
+f=open('inventory.yml', 'r')
 devices_list = load(f.read())['devices_list']
 f.close()
 

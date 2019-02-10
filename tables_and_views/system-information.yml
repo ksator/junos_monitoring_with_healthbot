@@ -1,0 +1,10 @@
+SystemInformationTable:
+    rpc: get-system-information
+    item: .
+    key: host-name 
+    view: SystemInformationView
+SystemInformationView:
+    fields:
+        hardware-model: hardware-model
+        os-version: os-version
+        serial-number: serial-number

@@ -1,0 +1,84 @@
+iceberg {
+    topic inventory {
+        description "Rules to check inventory";
+        synopsis "Product name and software version analyzer";
+        rule check-system-info {
+            description "Validates system info";
+            keys host-name;
+            sensor information {
+                iAgent {
+                    file system-information.yml;
+                    table SystemInformationTable;
+                    frequency 20s;
+                }
+            }
+            field configured-hardware-value {
+               description "System product model like MX240 or MX480";
+                constant {
+                    value "{{hardware-value}}";
+                }
+            }
+            field configured-os-value {
+               description "System software version like 18.2R1.9";
+                constant {
+                    value "{{os-value}}";
+                }
+            }
+            trigger check-hw-model {
+                frequency 30s;
+                term product-model-is-valid {
+                    when {
+                        matches-with "$hardware-model" "$configured-hardware-value";
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "Device product model is valid ($hardware-model) - SN is $serial-number";
+                        }
+                    }
+                }
+                term unauthorized-product-model-used {
+                    then {
+                        status {
+                            color red;
+                            message "Unauthorized product model ($hardware-model) is being used - SN is $serial-number";
+                        }
+                    }
+                }
+            }
+            trigger check-version {
+                frequency 30s;
+                term version-is-correct {
+                    when {
+                        matches-with "$os-version" "$configured-os-value";
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "Junos version is valid ($os-version)";
+                        }
+                    }
+                }
+                term version-is-not-correct {
+                    then {
+                        status {
+                            color red;
+                            message "Unauthorized Junos version ($os-version)";
+                        }
+                    }
+                }
+            }
+            variable hardware-value {
+                value vmx;
+                description "Product model the system should be";
+                type string;
+            }
+            variable os-value {
+                value 18.2R1.9;
+                description "Software Version the system should have";
+                type string;
+            }
+        }
+    }
+}
+

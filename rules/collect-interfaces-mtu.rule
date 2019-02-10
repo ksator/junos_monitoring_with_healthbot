@@ -1,0 +1,34 @@
+iceberg {
+    topic interfaces {
+        description "This topic is to monitor interfaces";
+        synopsis "monitor interfaces";
+        rule collect-interfaces-mtu {
+            keys interface-name;
+            sensor interface {
+                open-config {
+                    sensor-name /interfaces;
+                    frequency 10s;
+                }
+            }
+            field interface-name {
+                sensor interface {
+                    where "/interfaces/interface/@name =~ /{{interface-name-variable}}/";
+                    path "/interfaces/interface/@name";
+                }
+                type string;
+                description interface-name;
+            }
+            field mtu-value {
+                sensor interface {
+                    path /interfaces/interface/state/mtu;
+                }
+                type integer;
+                description mtu;
+            }
+            variable interface-name-variable {
+                value "ge-0/0/0|ge-0/0/1|ge-0/0/2|ge-0/0/3";
+                type string;
+            }
+        }
+    }
+}

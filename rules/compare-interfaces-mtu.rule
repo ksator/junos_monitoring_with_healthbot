@@ -1,0 +1,141 @@
+iceberg {
+    topic interfaces {
+        description "This topic is to monitor interfaces";
+        synopsis "monitor interfaces";
+        rule compare-interfaces-mtu {
+            rule-frequency 20s;
+            network-rule;
+            function add_config {
+                path change-mtu-config.py;
+                method add_config;
+                argument interface {
+                    mandatory;
+                }
+                argument mtu {
+                    mandatory;
+                }
+                argument router {
+                    mandatory;
+                }
+            }
+            field device1-group {
+                constant {
+                    value "{{device1-group-variable}}";
+                }
+                type string;
+                description "device group";
+            }
+            field device1-interface {
+                constant {
+                    value "{{device1-inter-variable}}";
+                }
+                type string;
+            }
+            field device1-mtu {
+                reference {
+                    path "/device-group[device-group-name={{device1-group-variable}}]/device[device-id={{device1-name-variable}}]/topic[topic-name='interfaces']/rule[rule-name=collect-interfaces-mtu]/field[interface-name='{{device1-inter-variable}}']/mtu-value";
+                    time-range 30s;
+                }
+                type integer;
+            }
+            field device1-name {
+                constant {
+                    value "{{device1-name-variable}}";
+                }
+                type string;
+            }
+            field device2-group {
+                constant {
+                    value "{{device2-group-variable}}";
+                }
+                type string;
+            }
+            field device2-interface {
+                constant {
+                    value "{{device2-inter-variable}}";
+                }
+                type string;
+            }
+            field device2-mtu {
+                reference {
+                    path "/device-group[device-group-name={{device2-group-variable}}]/device[device-id={{device2-name-variable}}]/topic[topic-name='interfaces']/rule[rule-name=collect-interfaces-mtu]/field[interface-name='{{device2-inter-variable}}']/mtu-value";
+                    time-range 30s;
+                }
+                type integer;
+            }
+            field device2-name {
+                constant {
+                    value "{{device2-name-variable}}";
+                }
+                type string;
+            }
+            trigger check-mtu-mismatch {
+                term Term_1 {
+                    when {
+                        equal-to "$device1-mtu" "$device2-mtu";
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "MTU match - $device1-name $device1-interface $device1-mtu - $device2-name $device2-interface $device2-mtu";
+                        }
+                    }
+                }
+                term Term_2 {
+                    when {
+                        greater-than "$device1-mtu" "$device2-mtu";
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "MTU mismatch. Changing $device1-name MTU value";
+                        }
+                        user-defined-action add_config {
+                            argument router "$device1-name";
+                            argument mtu "$device2-mtu";
+                            argument interface "$device1-interface";
+                        }
+                    }
+                }
+                term Term_3 {
+                    then {
+                        status {
+                            color red;
+                            message "MTU mismatch. Changing $device2-name MTU value";
+                        }
+                        user-defined-action add_config {
+                            argument router "$device2-name";
+                            argument mtu "$device1-mtu";
+                            argument interface "$device2-interface";
+                        }
+                    }
+                }
+            }
+            variable device1-group-variable {
+                value vmx;
+                type device-group;
+            }
+            variable device1-inter-variable {
+                value ge-0/0/2;
+                type string;
+            }
+            variable device1-name-variable {
+                value vMX1;
+                type device;
+            }
+            variable device2-group-variable {
+                value vmx;
+                type device-group;
+            }
+            variable device2-inter-variable {
+                value ge-0/0/0;
+                type string;
+            }
+            variable device2-name-variable {
+                value vMX6;
+                type device;
+            }
+        }
+    }
+}
+

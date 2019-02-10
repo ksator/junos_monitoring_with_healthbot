@@ -1,0 +1,83 @@
+iceberg {
+    topic bgp {
+        description "This topic is to monitor bgp details";
+        synopsis bgp;
+        rule check-bgp-routes-with-3-sigma {
+            keys neighbor-address;
+            sensor oc {
+                open-config {
+                    sensor-name /network-instances/network-instance/protocols/protocol;
+                    frequency 20s;
+                }
+            }
+            field neighbor-address {
+                sensor oc {
+                    where "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/@neighbor-address =~ /{{neighbors}}/";
+                    path "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/@neighbor-address";
+                }
+                type string;
+                description "BGP neighbor addresses to monitor";
+            }
+            field received-routes {
+                sensor oc {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/received;
+                }
+                type integer;
+                description "Number of received routes";
+            }
+            field received-routes-3-sigma {
+                formula {
+                    dynamic-threshold {
+                        algorithm 3sigma;
+                        learning-period 6d;
+                        pattern-periodicity 1m;
+                        field-name "$received-routes";
+                    }
+                }
+                type integer;
+            }
+            trigger received-routes-3-sigma {
+                frequency 30s;
+                term need-more-datapoints {
+                    when {
+                        matches-with "$received-routes-3-sigma" -1;
+                    }
+                    then {
+                        status {
+                            color yellow;
+                            message "need more datapoints. wait the end of the learning period";
+                        }
+                    }
+                }
+                term anormal {
+                    when {
+                        matches-with "$received-routes-3-sigma" 1;
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "Number of routes received is anormal ";
+                        }
+                    }
+                }
+                term normal {
+                    when {
+                        matches-with "$received-routes-3-sigma" 0;
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "Number of routes received is normal ";
+                        }
+                    }
+                }
+            }
+            variable neighbors {
+                value .*;
+                description "BGP neighbor addresses to monitor, regular expression, e.g. '172.16.*'";
+                type string;
+            }
+        }
+    }
+}
+

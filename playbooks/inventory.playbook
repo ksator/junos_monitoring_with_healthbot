@@ -1,0 +1,7 @@
+iceberg {
+    playbook inventory {
+        rules [ inventory/check-system-info  ];
+        description "various rules to monitor inventory";
+        synopsis "various rules to monitor inventory";
+    }
+}

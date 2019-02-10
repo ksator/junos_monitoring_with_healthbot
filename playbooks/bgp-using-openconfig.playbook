@@ -1,6 +1,6 @@
 iceberg {
     playbook bgp-using-openconfig {
-        rules [ bgp/check-bgp-state-using-openconfig ];
+        rules [ bgp/check-bgp-state-using-openconfig bgp/check-bgp-routes];
         description "playbook to monitor bgp using openconfig";
         synopsis "playbook to monitor bgp using openconfig";
     }

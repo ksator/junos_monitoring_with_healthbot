@@ -3,7 +3,7 @@ from yaml import load
 from jnpr.junos import Device
 from jnpr.junos.utils.config import Config
 
-f=open('python_input.yml', 'r')
+f=open('inventory.yml', 'r')
 devices_list = load(f.read())['devices_list']
 f.close()
 

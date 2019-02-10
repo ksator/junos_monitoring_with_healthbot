@@ -1,0 +1,87 @@
+iceberg {
+    topic bgp {
+        description "This topic is to monitor bgp details";
+        synopsis bgp;
+        rule check-bgp-routes {
+            keys neighbor-address;
+            sensor oc {
+                open-config {
+                    sensor-name /network-instances/network-instance/protocols/protocol;
+                    frequency 20s;
+                }
+            }
+            field accepted-routes {
+                sensor oc {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/accepted;
+                }
+                type integer;
+            }
+            field installed-routes {
+                sensor oc {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/installed;
+                }
+                type integer;
+            }
+            field neighbor-address {
+                sensor oc {
+                    where "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/@neighbor-address =~ /{{neighbors}}/";
+                    path "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/@neighbor-address";
+                }
+                type string;
+                description "BGP neighbor addresses to monitor";
+            }
+            field received-route-threshold {
+                constant {
+                    value "{{max-received}}";
+                }
+                type integer;
+                description "max received routes threshold";
+            }
+            field received-routes {
+                sensor oc {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/received;
+                }
+                type integer;
+                description "Number of received routes";
+            }
+            field sent-routes {
+                sensor oc {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/sent;
+                }
+            }
+            trigger received-routes {
+                frequency 30s;
+                term rcvd-routes-above-max {
+                    when {
+                        greater-than-or-equal-to "$received-routes" "$received-route-threshold";
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "Received $received-routes routes from $neighbor-address - above threshold";
+                        }
+                    }
+                }
+                term rcvd-routes-is-normal {
+                    then {
+                        status {
+                            color green;
+                            message "Received $received-routes routes from $neighbor-address - below threshold";
+                        }
+                    }
+                }
+            }
+            variable max-received {
+                value 130;
+                description "max received routes threshold per BGP neighbor";
+                type int;
+            }
+            variable neighbors {
+                value .*;
+                description "BGP neighbor addresses to monitor, regular expression, e.g. '172.16.*'";
+                type string;
+            }
+        }
+    }
+}
+

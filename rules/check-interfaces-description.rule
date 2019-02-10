@@ -1,0 +1,70 @@
+iceberg {
+    topic interfaces {
+        description "This topic is to monitor interfaces";
+        synopsis "monitor interfaces";
+        rule check-interfaces-description {
+            keys interface-name;
+            sensor interfaces {
+                open-config {
+                    sensor-name /interfaces;
+                    frequency 15s;
+                }
+            }
+            field description {
+                sensor interfaces {
+                    path /interfaces/interface/state/description;
+                }
+                type string;
+            }
+            field desired-description {
+                constant {
+                    value ".+";
+                }
+                type string;
+                description "";
+            }
+            field interface-name {
+                sensor interfaces {
+                    where "/interfaces/interface/@name =~ /{{interface_name}}/";
+                    path "/interfaces/interface/@name";
+                }
+                type string;
+                description name;
+            }
+            trigger check-description {
+                frequency 30s;
+                term descript_not_configured {
+                    when {
+                        does-not-match-with "$description" "$desired-description";
+                    }
+                    then {
+                        status {
+                            color red;
+                            message "no interface description configured on $interface-name";
+                        }
+                    }
+                }
+                term a_descript_is_configured {
+                    when {
+                        matches-with "$description" "$desired-description";
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "an interface description is configured on $interface-name";
+                        }
+                    }
+                }
+            }
+            variable interface_name {
+                value "ge-0/0/0|ge-0/0/1|ge-0/0/2|ge-0/0/3";
+                description "";
+                type string;
+            }
+        }
+    }
+}
+
+
+
+

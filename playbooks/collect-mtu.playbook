@@ -1,0 +1,8 @@
+iceberg {
+    playbook collect-mtu {
+        rules interfaces/collect-interfaces-mtu;
+        description mtu;
+        synopsis "collect mtu";
+    }
+}
+

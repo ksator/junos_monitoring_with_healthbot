@@ -1,0 +1,7 @@
+iceberg {
+    playbook compare-mtu {
+        rules interfaces/compare-interfaces-mtu;
+        description "";
+        synopsis "";
+    }
+}
