@@ -1,6 +1,3 @@
-# from __future__ import print_function
-# import re
-# import sys
 from jnpr.junos.device import Device
 from jnpr.junos.utils.config import Config
 import requests
