@@ -1,4 +1,4 @@
-You can use HealthBot to collect data from the network (using SNMP, NETCONF, OpenConfig telemetry ...), store the data collected in it's database, process the data collected.
+You can use HealthBot to collect data from the network (using SNMP, NETCONF, OpenConfig telemetry ...), store the data collected, process the data collected.
 
 This repository has HealthBot configuration examples and HealthBot automation examples.  
 
