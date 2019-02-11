@@ -1,4 +1,4 @@
-# This script loads a new configuration file on a Junos device every 60 secondes
+# This script loads a new configuration file on a Junos device every 60 secondes, regardless the commit time
 
 from jnpr.junos import Device
 from jnpr.junos.utils.config import Config
