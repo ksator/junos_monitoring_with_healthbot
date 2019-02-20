@@ -37,6 +37,13 @@ iceberg {
                 type string;
                 description "oper-status";
             }
+            field last-change {
+                sensor interfaces {
+                    path /interfaces/interface/state/last-change;
+                }
+                type integer;
+            }
+
             trigger link-state {
                 frequency 30s;
                 term up_up {
@@ -47,7 +54,7 @@ iceberg {
                     then {
                         status {
                             color green;
-                            message "$interface-name is admin $admin-status and oper $oper-status";
+                            message "$interface-name is admin $admin-status and oper $oper-status - last-change $last-change";
                         }
                     }
                 }
@@ -59,7 +66,7 @@ iceberg {
                     then {
                         status {
                             color yellow;
-                            message "$interface-name is admin $admin-status and oper $oper-status";
+                            message "$interface-name is admin $admin-status and oper $oper-status - last-change $last-change";
                         }
                     }
                 }
@@ -71,7 +78,7 @@ iceberg {
                     then {
                         status {
                             color red;
-                            message "$interface-name is admin $admin-status and oper $oper-status";
+                            message "$interface-name is admin $admin-status and oper $oper-status - last-change $last-change";
                         }
                         user-defined-action enable_a_disabled_interface {
                             argument int "$interface-name";
