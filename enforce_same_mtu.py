@@ -253,11 +253,74 @@ device_group = """{
             }"""
 
 # update this section with your device group details
+
 network_group = """{
                 "network-group-name" : "MTU",
                 "description" : "compare mtu",
                 "playbooks" : ["compare-mtu"],
                 "variable" : [
+                {
+                    "instance-id" : "vMX1-ge000-vMX4-ge000",
+                    "playbook" : "compare-mtu",
+                    "rule" : "interfaces/compare-interfaces-mtu",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-inter-variable",
+                        "value" : "ge-0/0/0"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX1"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-inter-variable",
+                        "value" : "ge-0/0/0"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX4"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vMX1-ge001-vMX5-ge000",
+                    "playbook" : "compare-mtu",
+                    "rule" : "interfaces/compare-interfaces-mtu",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-inter-variable",
+                        "value" : "ge-0/0/1"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX1"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-inter-variable",
+                        "value" : "ge-0/0/0"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX5"
+                    }
+                    ]
+                },
                 {
                     "instance-id" : "vMX1-ge002-vMX6-ge000",
                     "playbook" : "compare-mtu",
@@ -290,7 +353,7 @@ network_group = """{
                     ]
                 },
                 {
-                    "instance-id" : "vMX1-ge000-vMX4-ge000",
+                    "instance-id" : "vMX1-ge003-vMX7-ge000",
                     "playbook" : "compare-mtu",
                     "rule" : "interfaces/compare-interfaces-mtu",
                     "variable-value" : [
@@ -300,7 +363,7 @@ network_group = """{
                     },
                     {
                         "name" : "device1-inter-variable",
-                        "value" : "ge-0/0/0"
+                        "value" : "ge-0/0/3"
                     },
                     {
                         "name" : "device1-name-variable",
@@ -316,10 +379,258 @@ network_group = """{
                     },
                     {
                         "name" : "device2-name-variable",
+                        "value" : "vMX7"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vMX2-ge000-vMX4-ge001",
+                    "playbook" : "compare-mtu",
+                    "rule" : "interfaces/compare-interfaces-mtu",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-inter-variable",
+                        "value" : "ge-0/0/0"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-inter-variable",
+                        "value" : "ge-0/0/1"
+                    },
+                    {
+                        "name" : "device2-name-variable",
                         "value" : "vMX4"
                     }
                     ]
-                }
+                },
+                {
+                    "instance-id" : "vMX2-ge001-vMX5-ge001",
+                    "playbook" : "compare-mtu",
+                    "rule" : "interfaces/compare-interfaces-mtu",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-inter-variable",
+                        "value" : "ge-0/0/1"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-inter-variable",
+                        "value" : "ge-0/0/1"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX5"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vMX2-ge002-vMX6-ge001",
+                    "playbook" : "compare-mtu",
+                    "rule" : "interfaces/compare-interfaces-mtu",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-inter-variable",
+                        "value" : "ge-0/0/2"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-inter-variable",
+                        "value" : "ge-0/0/1"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX6"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vMX2-ge003-vMX7-ge001",
+                    "playbook" : "compare-mtu",
+                    "rule" : "interfaces/compare-interfaces-mtu",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-inter-variable",
+                        "value" : "ge-0/0/3"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-inter-variable",
+                        "value" : "ge-0/0/1"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX7"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vMX3-ge000-vMX4-ge002",
+                    "playbook" : "compare-mtu",
+                    "rule" : "interfaces/compare-interfaces-mtu",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-inter-variable",
+                        "value" : "ge-0/0/0"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-inter-variable",
+                        "value" : "ge-0/0/2"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX4"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vMX3-ge001-vMX5-ge002",
+                    "playbook" : "compare-mtu",
+                    "rule" : "interfaces/compare-interfaces-mtu",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-inter-variable",
+                        "value" : "ge-0/0/1"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-inter-variable",
+                        "value" : "ge-0/0/2"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX5"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vMX3-ge002-vMX6-ge002",
+                    "playbook" : "compare-mtu",
+                    "rule" : "interfaces/compare-interfaces-mtu",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-inter-variable",
+                        "value" : "ge-0/0/2"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-inter-variable",
+                        "value" : "ge-0/0/2"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX6"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vMX3-ge003-vMX7-ge002",
+                    "playbook" : "compare-mtu",
+                    "rule" : "interfaces/compare-interfaces-mtu",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-inter-variable",
+                        "value" : "ge-0/0/3"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-inter-variable",
+                        "value" : "ge-0/0/2"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX7"
+                    }
+                    ]
+                }                
                 ]
             }"""
 
