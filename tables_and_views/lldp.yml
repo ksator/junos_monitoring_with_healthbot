@@ -1,0 +1,14 @@
+--- 
+LldpNeighborTable: 
+    rpc: get-lldp-neighbors-information 
+    item: lldp-neighbor-information 
+    key: lldp-local-port-id 
+    view: LldpNeighborView 
+
+
+LldpNeighborView: 
+    fields: 
+        local_port: lldp-local-port-id 
+        remote_port: lldp-remote-port-description 
+        remote_name: lldp-remote-system-name
+

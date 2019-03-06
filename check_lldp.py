@@ -6,6 +6,11 @@ import requests
 from requests.auth import HTTPBasicAuth
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+def add_tables_and_views(file_name):
+    files = {'up_file': open('tables_and_views/' + file_name,'r')}
+    r=requests.post(url + '/files/helper-files/' + file_name, auth=HTTPBasicAuth(authuser, authpwd), headers={ 'Accept' : 'application/json' }, verify=False,
+ files=files)
+    print "loaded table and view " + file_name
 
 def add_rule(file_name):
     files = {'topics': open('rules/' + file_name,'r')}
@@ -188,6 +193,8 @@ network_group = """{
 
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+add_tables_and_views('lldp.yml')
 
 add_rule('collect-lldp.rule')
 
