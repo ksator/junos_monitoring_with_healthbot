@@ -1,0 +1,82 @@
+iceberg {
+    topic lldp {
+        rule check-lldp {
+            rule-frequency 20s;
+            network-rule;
+            field expected_local_name {
+                constant {
+                    value "{{localname}}";
+                }
+                type string;
+            }
+            field expected_local_port {
+                constant {
+                    value "{{localport}}";
+                }
+                type string;
+            }
+            field expected_remote_name {
+                constant {
+                    value "{{remotename}}";
+                }
+                type string;
+            }
+            field expected_remote_port {
+                constant {
+                    value "{{remoteport}}";
+                }
+                type string;
+            }
+            field collected_remote_hostname {
+                reference {
+                    path "/device-group[device-group-name={{devicegroup}}]/device[device-id={{localname}}]/topic[topic-name='lldp']/rule[rule-name=collect-lldp]/field[local_port_name='{{localport}}']/remote_hostname";
+                }
+                type string;
+            }
+            field collected_remote_port {
+                reference {
+                    path "/device-group[device-group-name={{devicegroup}}]/device[device-id={{localname}}]/topic[topic-name='lldp']/rule[rule-name=collect-lldp]/field[local_port_name='{{localport}}']/remote_port_name";
+                }
+                type string;
+            }
+            trigger test {
+                frequency 20s;
+                term Term_1 {
+                    when {
+                        matches-with "$expected_remote_port" "$collected_remote_port";
+                        matches-with "$expected_remote_name" "$collected_remote_hostname";
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "$expected_local_name $expected_local_port -- desired $expected_remote_port $expected_remote_name -- actual $collected_remote_port $collected_remote_hostname";
+                        }
+                    }
+                }
+                term Term_2 {
+                    then {
+                        status {
+                            color red;
+                            message "$expected_local_name $expected_local_port -- desired $expected_remote_port $expected_remote_name -- actual $collected_remote_port $collected_remote_hostname";
+                        }
+                    }
+                }
+            }
+            variable devicegroup {
+                type device-group;
+            }
+            variable localname {
+                type device;
+            }
+            variable localport {
+                type string;
+            }
+            variable remotename {
+                type device;
+            }
+            variable remoteport {
+                type string;
+            }
+        }
+    }
+}

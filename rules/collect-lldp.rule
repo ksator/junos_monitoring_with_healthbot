@@ -1,0 +1,33 @@
+iceberg {
+    topic lldp {
+        rule collect-lldp {
+            keys local_port_name;
+            sensor lldpcollection {
+                iAgent {
+                    file lldp.yml;
+                    table LldpNeighborTable;
+                    frequency 15s;
+                }
+            }
+            field local_port_name {
+                sensor lldpcollection {
+                    path local_port;
+                }
+                type string;
+            }
+            field remote_hostname {
+                sensor lldpcollection {
+                    path remote_name;
+                }
+                type string;
+            }
+            field remote_port_name {
+                sensor lldpcollection {
+                    path remote_port;
+                }
+                type string;
+            }
+        }
+    }
+}
+

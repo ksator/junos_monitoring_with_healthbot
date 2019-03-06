@@ -1,0 +1,7 @@
+iceberg {
+    playbook collect-lldp {
+        rules lldp/collect-lldp;
+        description "collect lldp";
+        synopsis "";
+    }
+}

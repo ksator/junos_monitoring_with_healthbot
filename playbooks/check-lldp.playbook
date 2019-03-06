@@ -1,0 +1,7 @@
+iceberg {
+    playbook check-lldp {
+        rules lldp/check-lldp;
+        description "";
+        synopsis "";
+    }
+}
