@@ -202,8 +202,8 @@ add_device_group(my_group)
 
 commit()
 
-print 'wait 6 sec'
-time.sleep(6)
+print 'wait 60 sec'
+time.sleep(60)
 
 add_rule('check-lldp.rule')
 
