@@ -49,7 +49,7 @@ iceberg {
                     then {
                         status {
                             color green;
-                            message "$expected_local_name $expected_local_port -- desired $expected_remote_port $expected_remote_name -- actual $collected_remote_port $collected_remote_hostname";
+                            message "link is OK: $expected_local_name $expected_local_port -- $expected_remote_port $expected_remote_name";
                         }
                     }
                 }
@@ -57,7 +57,7 @@ iceberg {
                     then {
                         status {
                             color red;
-                            message "$expected_local_name $expected_local_port -- desired $expected_remote_port $expected_remote_name -- actual $collected_remote_port $collected_remote_hostname";
+                            message "$expected_local_name $expected_local_port -- expecting $expected_remote_port $expected_remote_name -- getting $collected_remote_port $collected_remote_hostname";
                         }
                     }
                 }

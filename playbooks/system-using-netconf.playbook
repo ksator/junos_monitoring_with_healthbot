@@ -1,8 +1,0 @@
-iceberg {
-    playbook system-using-netconf {
-        rules [ system/check-alarms ];
-        description "playbook to monitor system information using netconf";
-        synopsis "playbook to monitor system information using netconf";
-    }
-}
-
