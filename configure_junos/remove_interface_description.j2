@@ -1,0 +1,12 @@
+interfaces {
+{% for neighbor in neighbors %}
+    replace:
+    {{ neighbor.interface }} {
+        unit 0 {
+            family inet {
+                address {{ neighbor.local_ip }}/31;
+            }
+        }
+    }
+{% endfor %}
+}

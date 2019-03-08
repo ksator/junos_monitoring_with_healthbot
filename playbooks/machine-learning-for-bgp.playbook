@@ -1,6 +1,6 @@
 iceberg {
     playbook machine-learning-for-bgp {
-        rules [ bgp/check-bgp-routes bgp/check-bgp-routes-with-k-means bgp/check-bgp-routes-with-3-sigma ];
+        rules [ bgp/check-bgp-state-using-openconfig bgp/check-bgp-routes bgp/check-bgp-routes-with-k-means bgp/check-bgp-routes-with-3-sigma ];
         description "monitor bgp prefixes received using ML";
         synopsis "monitor bgp prefixes received using ML";
     }

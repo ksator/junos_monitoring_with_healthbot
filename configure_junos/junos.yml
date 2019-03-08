@@ -2,18 +2,22 @@ vMX1:
   local_asn: 101
   neighbors:
    - interface: ge-0/0/0
+     interface_description: "to leaf vMX4"
      asn: 104
      peer_ip: 192.168.1.1 
      local_ip: 192.168.1.0
    - interface: ge-0/0/1
+     interface_description: "to leaf vMX5"
      asn: 105
      peer_ip: 192.168.1.3 
      local_ip: 192.168.1.2
    - interface: ge-0/0/2
+     interface_description: "to leaf vMX6"
      asn: 106
      peer_ip: 192.168.1.5 
      local_ip: 192.168.1.4
    - interface: ge-0/0/3
+     interface_description: "to leaf vMX7"
      asn: 107
      peer_ip: 192.168.1.7 
      local_ip: 192.168.1.6
@@ -21,18 +25,22 @@ vMX2:
   local_asn: 102
   neighbors:
    - interface: ge-0/0/0
+     interface_description: "to leaf vMX4"
      asn: 104
      peer_ip: 192.168.2.1 
      local_ip: 192.168.2.0
    - interface: ge-0/0/1
+     interface_description: "to leaf vMX5"
      asn: 105
      peer_ip: 192.168.2.3 
      local_ip: 192.168.2.2
    - interface: ge-0/0/2
+     interface_description: "to leaf vMX6"
      asn: 106
      peer_ip: 192.168.2.5 
      local_ip: 192.168.2.4
    - interface: ge-0/0/3
+     interface_description: "to leaf vMX7"
      asn: 107
      peer_ip: 192.168.2.7 
      local_ip: 192.168.2.6
@@ -40,18 +48,22 @@ vMX3:
   local_asn: 103
   neighbors:
    - interface: ge-0/0/0
+     interface_description: "to leaf vMX4"
      asn: 104
      peer_ip: 192.168.3.1 
      local_ip: 192.168.3.0
    - interface: ge-0/0/1
+     interface_description: "to leaf vMX5"
      asn: 105
      peer_ip: 192.168.3.3 
      local_ip: 192.168.3.2
    - interface: ge-0/0/2
+     interface_description: "to leaf vMX6"
      asn: 106
      peer_ip: 192.168.3.5 
      local_ip: 192.168.3.4
    - interface: ge-0/0/3
+     interface_description: "to leaf vMX7"
      asn: 107
      peer_ip: 192.168.3.7 
      local_ip: 192.168.3.6
@@ -59,14 +71,17 @@ vMX4:
   local_asn: 104
   neighbors:
    - interface: ge-0/0/0
+     interface_description: "to spine vMX1"
      asn: 101
      peer_ip: 192.168.1.0 
      local_ip: 192.168.1.1
    - interface: ge-0/0/1
+     interface_description: "to spine vMX2"
      asn: 102
      peer_ip: 192.168.2.0 
      local_ip: 192.168.2.1
    - interface: ge-0/0/2
+     interface_description: "to spine vMX3"
      asn: 103
      peer_ip: 192.168.3.0 
      local_ip: 192.168.3.1
@@ -74,14 +89,17 @@ vMX5:
   local_asn: 105
   neighbors:
    - interface: ge-0/0/0
+     interface_description: "to spine vMX1"
      asn: 101
      peer_ip: 192.168.1.2 
      local_ip: 192.168.1.3
    - interface: ge-0/0/1
+     interface_description: "to spine vMX2"
      asn: 102
      peer_ip: 192.168.2.2 
      local_ip: 192.168.2.3
    - interface: ge-0/0/2
+     interface_description: "to spine vMX3"
      asn: 103
      peer_ip: 192.168.3.2 
      local_ip: 192.168.3.3
@@ -89,14 +107,17 @@ vMX6:
   local_asn: 106
   neighbors:
    - interface: ge-0/0/0
+     interface_description: "to spine vMX1"
      asn: 101
      peer_ip: 192.168.1.4 
      local_ip: 192.168.1.5
    - interface: ge-0/0/1
+     interface_description: "to spine vMX2"
      asn: 102
      peer_ip: 192.168.2.4 
      local_ip: 192.168.2.5
    - interface: ge-0/0/2
+     interface_description: "to spine vMX3"
      asn: 103
      peer_ip: 192.168.3.4 
      local_ip: 192.168.3.5
@@ -104,14 +125,17 @@ vMX7:
   local_asn: 107
   neighbors:
    - interface: ge-0/0/0
+     interface_description: "to spine vMX1"
      asn: 101
      peer_ip: 192.168.1.6 
      local_ip: 192.168.1.7
    - interface: ge-0/0/1
+     interface_description: "to spine vMX2"
      asn: 102
      peer_ip: 192.168.2.6 
      local_ip: 192.168.2.7
    - interface: ge-0/0/2
+     interface_description: "to spine vMX3"
      asn: 103
      peer_ip: 192.168.3.6 
      local_ip: 192.168.3.7
