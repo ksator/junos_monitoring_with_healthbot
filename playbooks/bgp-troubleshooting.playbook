@@ -1,6 +1,6 @@
 iceberg {
     playbook bgp-troubleshooting {
-        rules bgp/compare-peer-type;
+        rules [ bgp/compare-peer-type bgp/compare-as ];
         description "bgp troubleshooting";
         synopsis "bgp troubleshooting";
     }
