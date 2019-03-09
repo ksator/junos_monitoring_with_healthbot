@@ -9,7 +9,7 @@ iceberg {
             keys neighbor-address;
             sensor bgp-sensor {
                 open-config {
-                    sensor-name /network-instances/network-instance/protocols/protocol;
+                    sensor-name /network-instances/network-instance/protocols/protocol/bgp;
                     frequency 20s;
                 }
             }
@@ -39,6 +39,24 @@ iceberg {
                     path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/last-established;
                 }
                 type integer;
+            }
+            field local-as {
+                sensor bgp-sensor {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/local-as;
+                }
+                type integer;
+            }
+            field peer-as {
+                sensor bgp-sensor {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/peer-as;
+                }
+                type integer;
+            }
+            field peer-type {
+                sensor bgp-sensor {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/peer-type;
+                }
+                type string;
             }
             trigger neighbor-state {
                 frequency 30s;

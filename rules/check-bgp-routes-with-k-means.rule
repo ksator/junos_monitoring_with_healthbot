@@ -6,7 +6,7 @@ iceberg {
             keys neighbor-address;
             sensor oc {
                 open-config {
-                    sensor-name /network-instances/network-instance/protocols/protocol;
+                    sensor-name /network-instances/network-instance/protocols/protocol/bgp;
                     frequency 20s;
                 }
             }
