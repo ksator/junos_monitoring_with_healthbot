@@ -27,6 +27,12 @@ iceberg {
                 }
                 type string;
             }
+            field device2-local-as {
+                reference {
+                    path "/device-group[device-group-name={{device2-group-variable}}]/device[device-id={{device2-name-variable}}]/topic[topic-name='bgp']/rule[rule-name=check-bgp-state-using-openconfig]/field[neighbor-address='{{device2-peer-variable}}']/local-as";
+                }
+                type string;
+            }
             field device2-group {
                 constant {
                     value "{{device2-group-variable}}";
@@ -50,7 +56,13 @@ iceberg {
                 }
                 type string;
             }
-            trigger check-as-mismatch {
+            field device1-peer-as {
+                reference {
+                    path "/device-group[device-group-name={{device1-group-variable}}]/device[device-id={{device1-name-variable}}]/topic[topic-name='bgp']/rule[rule-name=check-bgp-state-using-openconfig]/field[neighbor-address='{{device1-peer-variable}}']/peer-as";
+                }
+                type string;
+            }
+            trigger check-as-mismatch-device1 {
                 frequency 30s;
                 term Term_1 {
                     when {
@@ -68,6 +80,28 @@ iceberg {
                         status {
                             color red;
                             message "as mismatch: dev $device1-name local-as $device1-local-as -- peer $device2-name remote-as $device2-peer-as";
+                        }
+                    }
+                }
+            }
+            trigger check-as-mismatch-device2 {
+                frequency 30s;
+                term Term_1 {
+                    when {
+                        matches-with "$device2-local-as" "$device1-peer-as";
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "dev $device2-name local-as $device2-local-as -- peer $device1-name remote-as $device1-peer-as";
+                        }
+                    }
+                }
+                term Term_2 {
+                    then {
+                        status {
+                            color red;
+                            message "as mismatch: dev $device2-name local-as $device2-local-as -- peer $device1-name remote-as $device1-peer-as";
                         }
                     }
                 }
@@ -99,4 +133,5 @@ iceberg {
         }
     }
 }
+
 
