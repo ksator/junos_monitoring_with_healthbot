@@ -59,7 +59,7 @@ iceberg {
                     then {
                         status {
                             color green;
-                            message "dev $device1-name peer $device1-peer type is $device1-peer-type -- dev $device2-name peer $device2-peer type is $device2-peer-type";
+                            message "same peer type configured ($device2-peer-type): device $device1-name peer $device1-peer -- device $device2-name peer $device2-peer";
                         }
                     }
                 }
@@ -67,7 +67,7 @@ iceberg {
                     then {
                         status {
                             color red;
-                            message "peer type mismatch: dev $device1-name peer $device1-peer type is $device1-peer-type -- dev $device2-name peer $device2-peer type is $device2-peer-type";
+                            message "peer type mismatch: device $device1-name peer $device1-peer type is $device1-peer-type -- device $device2-name peer $device2-peer type is $device2-peer-type";
                         }
                     }
                 }
@@ -99,4 +99,5 @@ iceberg {
         }
     }
 }
+
 

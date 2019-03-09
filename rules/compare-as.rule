@@ -71,7 +71,7 @@ iceberg {
                     then {
                         status {
                             color green;
-                            message "dev $device1-name local-as $device1-local-as -- peer $device2-name remote-as $device2-peer-as";
+                            message "device $device1-name has local-as $device1-local-as -- device $device2-name uses remote-as $device2-peer-as";
                         }
                     }
                 }
@@ -79,8 +79,7 @@ iceberg {
                     then {
                         status {
                             color red;
-                            message "as mismatch: dev $device1-name local-as $device1-local-as -- peer $device2-name remote-as $device2-peer-as";
-                        }
+                            message "AS mismatch: device $device1-name has local-as $device1-local-as -- device $device2-name uses remote-as $device2-peer-as";                        }
                     }
                 }
             }
@@ -93,7 +92,7 @@ iceberg {
                     then {
                         status {
                             color green;
-                            message "dev $device2-name local-as $device2-local-as -- peer $device1-name remote-as $device1-peer-as";
+                            message "device $device2-name has local-as $device2-local-as -- device $device1-name uses remote-as $device1-peer-as";
                         }
                     }
                 }
@@ -101,7 +100,7 @@ iceberg {
                     then {
                         status {
                             color red;
-                            message "as mismatch: dev $device2-name local-as $device2-local-as -- peer $device1-name remote-as $device1-peer-as";
+                            message "AS mismatch: device $device2-name has local-as $device2-local-as -- device $device1-name uses remote-as $device1-peer-as";
                         }
                     }
                 }
