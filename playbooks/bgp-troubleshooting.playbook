@@ -1,0 +1,8 @@
+iceberg {
+    playbook bgp-troubleshooting {
+        rules bgp/compare-peer-type;
+        description "bgp troubleshooting";
+        synopsis "bgp troubleshooting";
+    }
+}
+
