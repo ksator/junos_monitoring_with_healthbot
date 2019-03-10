@@ -174,6 +174,626 @@ network_group = """{
                         "value" : "192.168.1.2"
                     }
                     ]
+                },
+                {
+                    "instance-id" : "vmx1-vmx6",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-peer-type",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX1"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.1.5"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX6"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.1.4"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx1-vmx6",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-as",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX1"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.1.5"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX6"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.1.4"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx1-vmx7",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-peer-type",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX1"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.1.7"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX7"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.1.6"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx1-vmx7",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-as",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX1"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.1.7"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX7"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.1.6"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx2-vmx4",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-peer-type",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.2.1"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX4"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.2.0"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx2-vmx4",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-as",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.2.1"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX4"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.2.0"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx2-vmx5",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-peer-type",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.2.3"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX5"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.2.2"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx2-vmx5",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-as",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.2.3"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX5"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.2.2"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx2-vmx6",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-peer-type",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.2.5"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX6"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.2.4"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx2-vmx6",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-as",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.2.5"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX6"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.2.4"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx2-vmx7",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-peer-type",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.2.7"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX7"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.2.6"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx2-vmx7",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-as",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX2"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.2.7"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX7"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.2.6"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx3-vmx4",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-peer-type",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.3.1"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX4"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.3.0"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx3-vmx4",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-as",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.3.1"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX4"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.3.0"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx3-vmx5",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-peer-type",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.3.3"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX5"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.3.2"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx3-vmx5",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-as",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.3.3"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX5"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.3.2"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx3-vmx6",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-peer-type",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.3.5"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX6"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.3.4"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx3-vmx6",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-as",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.3.5"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX6"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.3.4"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx3-vmx7",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-peer-type",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.3.7"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX7"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.3.6"
+                    }
+                    ]
+                },
+                {
+                    "instance-id" : "vmx3-vmx7",
+                    "playbook" : "bgp-troubleshooting",
+                    "rule" : "bgp/compare-as",
+                    "variable-value" : [
+                    {
+                        "name" : "device1-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device1-name-variable",
+                        "value" : "vMX3"
+                    },
+                    {
+                        "name" : "device1-peer-variable",
+                        "value" : "192.168.3.7"
+                    },
+                    {
+                        "name" : "device2-group-variable",
+                        "value" : "vmx"
+                    },
+                    {
+                        "name" : "device2-name-variable",
+                        "value" : "vMX7"
+                    },
+                    {
+                        "name" : "device2-peer-variable",
+                        "value" : "192.168.3.6"
+                    }
+                    ]
                 }
                 ]
             }"""
@@ -191,5 +811,6 @@ my_network_group=yaml.load(network_group)
 add_network_group(my_network_group)
 
 commit()
+
 
 
