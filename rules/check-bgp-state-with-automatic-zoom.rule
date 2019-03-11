@@ -1,0 +1,98 @@
+/*
+* OC BGP sensor from JUNOS 17.3
+*/
+iceberg {
+    topic bgp {
+        description "This topic is to monitor bgp details";
+        synopsis bgp;
+        rule check-bgp-state-with-automatic-zoom {
+            keys neighbor-address;
+            sensor bgp-sensor {
+                open-config {
+                    sensor-name /network-instances/network-instance/protocols/protocol/bgp;
+                    frequency 20s;
+                }
+            }
+            function zoom_in {
+                description "bgp troubleshooting";
+                path bgp_zoom_in.py;
+                method troubleshoot_bgp;
+            }
+            field neighbor-address {
+                sensor bgp-sensor {
+                    where "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/@neighbor-address =~ /{{neighbors}}/";
+                    path "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/@neighbor-address";
+                }
+                type string;
+                description neighbor-address;
+            }
+            field session-state {
+                sensor bgp-sensor {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/session-state;
+                }
+                type string;
+                description session-state;
+            }
+            field established-transitions {
+                sensor bgp-sensor {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/established-transitions;
+                }
+                type integer;
+            }
+            field last-established {
+                sensor bgp-sensor {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/last-established;
+                }
+                type integer;
+            }
+            field local-as {
+                sensor bgp-sensor {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/local-as;
+                }
+                type integer;
+            }
+            field peer-as {
+                sensor bgp-sensor {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/peer-as;
+                }
+                type integer;
+            }
+            field peer-type {
+                sensor bgp-sensor {
+                    path /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/peer-type;
+                }
+                type string;
+            }
+            trigger neighbor-state {
+                frequency 30s;
+                term is_established {
+                    when {
+                        matches-with "$session-state" ESTABLISHED;
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "session to $neighbor-address is $session-state - established-transitions $established-transitions - last-established $last-established";
+                        }
+                    }
+                }
+                term is_not_established {
+                    then {
+                        status {
+                            color red;
+                            message "session to $neighbor-address is $session-state - established-transitions $established-transitions last-established $last-established";
+                        }
+                        user-defined-action zoom_in;
+                    }
+                }
+            }
+            variable neighbors {
+                value .*;
+                description neighbors;
+                type string;
+            }
+        }
+    }
+}
+
+

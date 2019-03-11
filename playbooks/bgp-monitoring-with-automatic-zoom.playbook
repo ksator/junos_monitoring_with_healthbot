@@ -1,0 +1,8 @@
+iceberg {
+    playbook bgp-monitoring-with-automatic-zoom {
+        rules [ bgp/check-bgp-state-with-automatic-zoom ];
+        description "bgp monitoring with zoom";
+        synopsis "bgp monitoring with zoom";
+    }
+}
+

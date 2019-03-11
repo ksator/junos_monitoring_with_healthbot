@@ -1,0 +1,102 @@
+iceberg {
+    topic bgp {
+        rule troubleshooting-peer-type {
+            rule-frequency 20s;
+            network-rule;
+            field device1-group {
+                constant {
+                    value "{{device1-group-variable}}";
+                }
+                type string;
+            }
+            field device1-name {
+                constant {
+                    value "{{device1-name-variable}}";
+                }
+                type string;
+            }
+            field device1-peer {
+                constant {
+                    value "{{device1-peer-variable}}";
+                }
+                type string;
+            }
+            field device1-peer-type {
+                reference {
+                    path "/device-group[device-group-name={{device1-group-variable}}]/device[device-id={{device1-name-variable}}]/topic[topic-name='bgp']/rule[rule-name=check-bgp-state-with-automatic-zoom]/field[neighbor-address='{{device1-peer-variable}}']/peer-type";
+                }
+                type string;
+            }
+            field device2-group {
+                constant {
+                    value "{{device2-group-variable}}";
+                }
+                type string;
+            }
+            field device2-name {
+                constant {
+                    value "{{device2-name-variable}}";
+                }
+            }
+            field device2-peer {
+                constant {
+                    value "{{device2-peer-variable}}";
+                }
+                type string;
+            }
+            field device2-peer-type {
+                reference {
+                    path "/device-group[device-group-name={{device2-group-variable}}]/device[device-id={{device2-name-variable}}]/topic[topic-name='bgp']/rule[rule-name=check-bgp-state-with-automatic-zoom]/field[neighbor-address='{{device2-peer-variable}}']/peer-type";
+                }
+                type string;
+            }
+            trigger check-peer-type-mismatch {
+                frequency 30s;
+                term Term_1 {
+                    when {
+                        matches-with "$device2-peer-type" "$device1-peer-type";
+                    }
+                    then {
+                        status {
+                            color green;
+                            message "same peer type configured ($device2-peer-type): device $device1-name peer $device1-peer -- device $device2-name peer $device2-peer";
+                        }
+                    }
+                }
+                term Term_2 {
+                    then {
+                        status {
+                            color red;
+                            message "peer type mismatch: device $device1-name peer $device1-peer type is $device1-peer-type -- device $device2-name peer $device2-peer type is $device2-peer-type";
+                        }
+                    }
+                }
+            }
+            variable device1-group-variable {
+                value vmx;
+                type device-group;
+            }
+            variable device1-name-variable {
+                value vMX1;
+                type device;
+            }
+            variable device1-peer-variable {
+                description "ip address";
+                type string;
+            }
+            variable device2-group-variable {
+                value vmx;
+                type device-group;
+            }
+            variable device2-name-variable {
+                value vMX4;
+                type device;
+            }
+            variable device2-peer-variable {
+                description "ip address";
+                type string;
+            }
+        }
+    }
+}
+

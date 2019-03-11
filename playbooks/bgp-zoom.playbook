@@ -1,0 +1,8 @@
+iceberg {
+    playbook bgp-zoom {
+        rules [ bgp/troubleshooting-peer-type bgp/troubleshooting-as ];
+        description "zoom for bgp troubleshooting";
+        synopsis "zoom bgp for troubleshooting";
+    }
+}
+

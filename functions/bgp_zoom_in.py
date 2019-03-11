@@ -12,13 +12,13 @@ headers = { 'Accept' : 'application/json', 'Content-Type' : 'application/json' }
 
 network_group = """{
                 "network-group-name" : "BGP",
-                "description" : "BGP troubleshooting",
-                "playbooks" : ["bgp-troubleshooting"],
+                "description" : "zoom for BGP troubleshooting",
+                "playbooks" : ["bgp-zoom"],
                 "variable" : [
                 {
                     "instance-id" : "vmx1-vmx4",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -48,8 +48,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx1-vmx4",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -79,8 +79,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx1-vmx5",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -110,8 +110,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx1-vmx5",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -141,8 +141,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx1-vmx6",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -172,8 +172,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx1-vmx6",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -203,8 +203,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx1-vmx7",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -234,8 +234,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx1-vmx7",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -265,8 +265,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx2-vmx4",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -296,8 +296,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx2-vmx4",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -327,8 +327,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx2-vmx5",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -358,8 +358,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx2-vmx5",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -389,8 +389,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx2-vmx6",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -420,8 +420,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx2-vmx6",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -451,8 +451,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx2-vmx7",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -482,8 +482,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx2-vmx7",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -513,8 +513,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx3-vmx4",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -544,8 +544,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx3-vmx4",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -575,8 +575,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx3-vmx5",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -606,8 +606,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx3-vmx5",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -637,8 +637,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx3-vmx6",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -668,8 +668,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx3-vmx6",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -699,8 +699,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx3-vmx7",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-peer-type",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-peer-type",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
@@ -730,8 +730,8 @@ network_group = """{
                 },
                 {
                     "instance-id" : "vmx3-vmx7",
-                    "playbook" : "bgp-troubleshooting",
-                    "rule" : "bgp/compare-as",
+                    "playbook" : "bgp-zoom",
+                    "rule" : "bgp/troubleshooting-as",
                     "variable-value" : [
                     {
                         "name" : "device1-group-variable",
